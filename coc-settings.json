@@ -1,0 +1,10 @@
+{
+"coc.preferences.formatOnSaveFiletypes": ["css", "html", "markdown"],
+"python.jediEnabled": false,
+"python.jediEnabled": true,
+"python.jediPath": "~/Documents/anaconda3/lib/python3.8/site-packages/",
+"suggest.timeout": 1000,
+"suggest.triggerCompletionWait": 300,
+"translator.engines": ["google"],
+"translator.toLang": "pt"
+}
