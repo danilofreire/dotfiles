@@ -1,15 +1,15 @@
 # Reminder: install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Then also install a few plugins:
+# brew cask install font-fira-code
+# brew cask install font-firacode-nerd-font
 # brew install autojump
 # brew install fzf
 # brew install gh
-# brew install jesseduffield/lazygit/lazygit
 # brew install lazygit
-# curl -fsSL https://starship.rs/install.sh | zsh
+# brew install thefuck
 # brew tap homebrew/cask-fonts
-# brew cask install font-fira-code
-# brew cask install font-firacode-nerd-font
+# curl -fsSL https://starship.rs/install.sh | zsh
 # https://github.com/morhetz/gruvbox-contrib
 
 # Miniconda
@@ -112,7 +112,7 @@ alias python=/usr/local/bin/python3
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/USERNAME/.oh-my-zsh"
+export ZSH="/Users/politicaltheory/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -192,15 +192,24 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   autojump
+  catimg
   command-not-found
+  copyfile
+  dircycle
+  docker
+  docker-compose
+  docker-machine
   fzf 
   git
+  gitfast
   gitignore
   osx
+  thefuck
   themes
   vi-mode
   virtualenv
   web-search
+  zsh-interactive-cd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -248,4 +257,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
 
