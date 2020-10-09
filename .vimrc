@@ -102,14 +102,14 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
 
 " Nvim-R
+Plug 'gaalcaras/ncm-R'
 Plug 'jalvesaq/Nvim-R'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
 
 " Pandoc
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-
-" Polyglot
-Plug 'sheerun/vim-polyglot'
 
 " PythonSense
 Plug 'jeetsukumaran/vim-pythonsense'
@@ -526,7 +526,7 @@ nmap <Leader>mp :MarkdownPreview<CR>
 nmap <Leader>ms :MarkdownPreviewStop<CR>
 
 " Format
-nmap Q gq}
+nmap Q {gq}
 nmap QQ gggqG
 
 " Vimtex Config
