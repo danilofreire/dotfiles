@@ -54,9 +54,6 @@ Plug 'mattn/webapi-vim'
 " GitGutter
 Plug 'airblade/vim-gitgutter'
 
-" Gotham theme
-Plug 'whatyouhide/vim-gotham'
-
 " Goyo
 Plug 'junegunn/goyo.vim'
 
@@ -236,21 +233,18 @@ let g:gruvbox_material_background             = 'medium'
 let g:gruvbox_material_better_performance     = 1
 let g:gruvbox_material_disable_italic_comment = 1
 let g:gruvbox_material_enable_bold            = 1
-let g:gruvbox_material_palette                = 'original'
-" colors gruvbox-material
+let g:gruvbox_material_palette                = 'material'
+colors gruvbox-material
 
 " Sonokai theme
 let g:sonokai_style                           = 'espresso'
 let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
-colors sonokai
-
-" Gotham theme
-" colors gotham
+" colors sonokai
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'sonokai',
+      \ 'colorscheme': 'gruvbox_material',
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
@@ -472,17 +466,17 @@ nmap <Leader>wr :GrammarousReset<CR>
 
 " Git
 nmap <leader>ga :Gwrite<CR>
-nmap <leader>gam :Gcommit --amend<CR>
-nmap <leader>gb :Gblame<CR>
+nmap <leader>gam :Git commit --amend<CR>
+nmap <leader>gb :Git blame<CR>
 nmap <leader>gbr :Git branch<Space>
-nmap <leader>gc :Gcommit<CR>
+nmap <leader>gc :Git commit<CR>
 nmap <leader>gco :Gcheckout<Space>
-nmap <leader>gd :Gdelete<CR>
+nmap <leader>gd :GDelete<CR>
 nmap <leader>gf :Gfetch<CR>
 nmap <leader>gl :silent! Glog<CR>
-nmap <leader>gm :Gmerge<CR>
-nmap <leader>gpl :Gpull<CR>
-nmap <leader>gps :Gpush<CR>
+nmap <leader>gm :Git merge<CR>
+nmap <leader>gpl :Git pull<CR>
+nmap <leader>gps :Git push<CR>
 nmap <leader>gr :Gread<CR>
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gv :Gvdiffsplit<CR>
