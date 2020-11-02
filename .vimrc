@@ -194,17 +194,16 @@ set showtabline=2                          " Show tablines
 set smartcase                              " Enable smart-case search
 set smartindent                            " Smart indentation
 set smarttab                               " Enable smart-tabs
-set softtabstop=0 noexpandtab              " Tab
+set softtabstop=2                          " Tab
 set spelllang=en_gb,pt_br                  " British English
 set splitright                             " Always split right
-set tabstop=4                              " Number of spaces per Tab
+set tabstop=2                              " Number of spaces per Tab
 set tw=0                                   " Textwidth
 set undolevels=1000                        " Number of undo levels
 set visualbell                             " Use visual bell (no beeping)
 set wildmenu                               " Show menu autocomplete options
 set wildmode=longest,list,full             " Options for wildmenu
 syntax enable                              " Syntax highlighting
-
 " Spelling
 au FileType rmd,md,markdown,pandoc,tex,latex syntax spell toplevel
 au FileType rmd,md,markdown,pandoc,tex,latex,bib,bibtex setl spl=en_gb,pt_br spell
