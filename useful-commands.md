@@ -147,6 +147,7 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<Leader>gf` git fetch (custom)
 * `<Leader>gl` git log (custom)
 * `<Leader>gm` git merge (custom)
+* `<Leader>gpb` git pull --rebase (custom)
 * `<Leader>gpl` git pull (custom)
 * `<Leader>gps` git push (custom)
 * `<Leader>gr` git read (custom)

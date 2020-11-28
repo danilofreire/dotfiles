@@ -101,6 +101,7 @@ Plug 'scrooloose/nerdtree'
 " Nvim-R
 Plug 'gaalcaras/ncm-R'
 Plug 'jalvesaq/Nvim-R'
+Plug 'jalvesaq/R-Vim-runtime'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 
@@ -233,17 +234,17 @@ let g:gruvbox_material_better_performance     = 1
 let g:gruvbox_material_disable_italic_comment = 1
 let g:gruvbox_material_enable_bold            = 1
 let g:gruvbox_material_palette                = 'material'
-colors gruvbox-material
+" colors gruvbox-material
 
 " Sonokai theme
 let g:sonokai_style                           = 'espresso'
 let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
-" colors sonokai
+colors sonokai
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox_material',
+      \ 'colorscheme': 'sonokai',
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
@@ -474,6 +475,7 @@ nmap <leader>gd :GDelete<CR>
 nmap <leader>gf :Gfetch<CR>
 nmap <leader>gl :silent! Glog<CR>
 nmap <leader>gm :Git merge<CR>
+nmap <leader>gpb :Git pull --rebase<CR>
 nmap <leader>gpl :Git pull<CR>
 nmap <leader>gps :Git push<CR>
 nmap <leader>gr :Gread<CR>
@@ -591,6 +593,7 @@ let R_app              = "radian"
 let R_bracketed_paste  = 1
 let R_cmd              = "R"
 let R_hl_term          = 0
+let g:R_hi_fun         = 1
 let R_min_editor_width = 30
 let R_nvimpager        = "horizontal"
 let R_rconsole_width   = 55
