@@ -466,10 +466,11 @@ nmap <Leader>wr :GrammarousReset<CR>
 
 " Git
 nmap <leader>ga :Gwrite<CR>
-nmap <leader>gam :Git commit --amend<CR>
 nmap <leader>gb :Git blame<CR>
 nmap <leader>gbr :Git branch<Space>
 nmap <leader>gc :Git commit<CR>
+nmap <leader>gca :Git commit --amend<CR>
+nmap <leader>gcam :Git commit --amend --no-edit<CR>
 nmap <leader>gco :Gcheckout<Space>
 nmap <leader>gd :GDelete<CR>
 nmap <leader>gf :Gfetch<CR>

@@ -138,10 +138,11 @@ Here is a list of commands that I regularly use. Some of them are customised.
 ## Git
 
 * `<Leader>ga` git add (custom)
-* `<Leader>gam` git amend (custom)
 * `<Leader>gb` shows `git blame` output (custom)
 * `<Leader>gbr` git branch (custom)
 * `<Leader>gc` git commit, close the tab to push (custom)
+* `<Leader>gca` git amend (custom)
+* `<Leader>gcam` git amend --no-edit (custom)
 * `<Leader>gco` git checkout (custom)
 * `<Leader>gd` git remove (custom)
 * `<Leader>gf` git fetch (custom)
