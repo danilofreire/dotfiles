@@ -205,6 +205,7 @@ set visualbell                             " Use visual bell (no beeping)
 set wildmenu                               " Show menu autocomplete options
 set wildmode=longest,list,full             " Options for wildmenu
 syntax enable                              " Syntax highlighting
+
 " Spelling
 au FileType rmd,md,markdown,pandoc,tex,latex syntax spell toplevel
 au FileType rmd,md,markdown,pandoc,tex,latex,bib,bibtex setl spl=en_gb,pt_br spell
@@ -289,14 +290,6 @@ let g:gitgutter_max_signs = 500
 
 " fzf
 nmap <Leader><S-F> :FZF ~/<CR>
-
-" n always searches forward, N always backward
-nnoremap <expr> n  'Nn'[v:searchforward]
-xnoremap <expr> n  'Nn'[v:searchforward]
-onoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
-xnoremap <expr> N  'nN'[v:searchforward]
-onoremap <expr> N  'nN'[v:searchforward]
 
 " Highlight yanks
 let g:highlightedyank_highlight_duration = -1
