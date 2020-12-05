@@ -309,10 +309,9 @@ let g:rainbow_active = 1
 
 " Floaterm
 " Install Python 3 support: pip3 install pynvim --upgrade 
-" Install radian with: pip install radian
 nmap <Leader>t :FloatermNew --position=center<CR>
 nmap <F7> :FloatermNew --wintype=normal --position=right<CR>
-nmap <F8> :FloatermNew --wintype=normal --position=right radian<CR>
+nmap <F8> :FloatermNew --wintype=normal --position=right R<CR>
 nmap <F9> :FloatermNew --wintype=normal --position=right python3<CR>
 let g:floaterm_keymap_next   = '<F10>'
 let g:floaterm_keymap_toggle = '<F11>'
@@ -590,7 +589,7 @@ au BufNewFile,BufRead *.Rmd :call pandoc#bibliographies#Init()
 :tnoremap <Esc> <C-\><C-n>
 
 " nvim-R
-let R_app              = "radian"
+let R_app              = "R"
 let R_bracketed_paste  = 1
 let R_cmd              = "R"
 let R_hl_term          = 0
