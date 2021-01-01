@@ -304,7 +304,7 @@ let g:rainbow_active = 1
 " Install Python 3 support: pip3 install pynvim --upgrade 
 nmap <Leader>t :FloatermNew --position=center<CR>
 nmap <F7> :FloatermNew --wintype=normal --position=right<CR>
-nmap <F8> :FloatermNew --wintype=normal --position=right R<CR>
+nmap <F8> :FloatermNew --wintype=normal --position=right radian<CR>
 nmap <F9> :FloatermNew --wintype=normal --position=right python3<CR>
 let g:floaterm_keymap_next   = '<F10>'
 let g:floaterm_keymap_toggle = '<F11>'
@@ -582,14 +582,16 @@ au BufNewFile,BufRead *.Rmd :call pandoc#bibliographies#Init()
 :tnoremap <Esc> <C-\><C-n>
 
 " nvim-R
-let R_app              = "R"
+" Install radian: pip3 install radian
+let R_app              = "radian"
+let R_args             = []
 let R_bracketed_paste  = 1
 let R_cmd              = "R"
 let R_hl_term          = 0
-let g:R_hi_fun         = 1
 let R_min_editor_width = 30
 let R_nvimpager        = "horizontal"
 let R_rconsole_width   = 55
+let g:R_hi_fun         = 1
 let r_syntax_folding   = 0
 
 " Some shortcuts for easymotion:
