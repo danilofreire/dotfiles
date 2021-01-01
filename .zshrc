@@ -111,6 +111,9 @@ alias vim='nvim'
 # python3
 alias python=/usr/local/bin/python3
 
+# radian
+alias r='radian'
+
 ##########################
 ### Script begins here ###
 ##########################
@@ -252,24 +255,9 @@ eval "$(starship init zsh)"
 # fuck
 eval $(thefuck --alias)
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/politicaltheory/Documents/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/politicaltheory/Documents/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/politicaltheory/Documents/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/politicaltheory/Documents/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 # Googler aliases
 
-    # A
+# A
 
 # AliExpress
 alias @ae='googler -w aliexpress.com'
@@ -295,14 +283,14 @@ alias @aw='googler -w wiki.archlinux.org'
 # AZLyrics
 alias @azl='googler -w azlyrics.com'
 
-    # B
+# B
 
 # BBC
 alias @bbc='googler -w bbc.co.uk'
 # Encyclopaedia Britannica
 alias @britannica='googler -w britannica.com'
 
-    # C
+# C
 
 # crunchbase
 alias @cb='googler -w crunchbase.com'
@@ -326,17 +314,17 @@ alias @cricinfo='googler -w espncricinfo.com'
 # D
 
 # The Free Dictionary
-  alias @d='googler -w thefreedictionary.com'
+alias @d='googler -w thefreedictionary.com'
 # Dictionary.com
-  alias @di='googler -w dictionary.com'
+alias @di='googler -w dictionary.com'
 # DistroWatch
-  alias @distrowatch='googler -w distrowatch.com'
+alias @distrowatch='googler -w distrowatch.com'
 # Daily Natural Remedies
-  alias @dnr='googler -w dailynaturalremedies.com'
+alias @dnr='googler -w dailynaturalremedies.com'
 # Debian Package Search
-  alias @dpkg='googler -w packages.debian.org'
+alias @dpkg='googler -w packages.debian.org'
 
-    # E
+# E
 
 # eBay
 alias @e='googler -w ebay.com'
@@ -354,19 +342,19 @@ alias @etym='googler -w etymonline.com'
 # F
 
 # Facebook
-  alias @fb='googler -w facebook.com'
+alias @fb='googler -w facebook.com'
 # Fandango Movie Reviews
-  alias @fd='googler -w fandango.com'
+alias @fd='googler -w fandango.com'
 # Firefox Add-ons
-  alias @firefox='googler -w addons.mozilla.org'
+alias @firefox='googler -w addons.mozilla.org'
 # Forbes
-  alias @forbes='googler -w forbes.com'
+alias @forbes='googler -w forbes.com'
 # Forvo
-  alias @forvo='googler -w forvo.com'
+alias @forvo='googler -w forvo.com'
 # Financial Times
-  alias @ft='googler -w markets.ft.com'
+alias @ft='googler -w markets.ft.com'
 
-    # G
+# G
 
 # Google Scholar
 alias @gs='googler -w scholar.google.com'
@@ -400,7 +388,7 @@ alias @htf='googler -w howtoforge.com'
 # Hulu
 alias @hulu='googler -w hulu.com'
 
-    # I
+# I
 
 # IEEE
 alias @ieee='googler -w ieee.org'
@@ -534,7 +522,7 @@ alias @ss='googler -w subscene.com'
 # Steam
 alias @st='googler -w store.steampowered.com'
 
-    # T
+# T
 
 # Thesaurus.com
 alias @t='googler -w thesaurus.com'
