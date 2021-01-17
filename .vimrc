@@ -127,6 +127,9 @@ Plug 'kshenoy/vim-signature'
 " Slash
 Plug 'junegunn/vim-slash'
 
+" Sneak
+Plug 'justinmk/vim-sneak'
+
 " Snippets
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet-snippets'
@@ -182,6 +185,7 @@ set linebreak                              " Break lines
 set list                                   " List
 set listchars=tab:>-                       " Find tabs (useful to editing YAML)
 set modeline                               " Set variables specific to files
+set mouse=a                                " Mouse support
 set mousehide                              " Hide mouse when typing
 set nobackup                               " No backup~ files
 set nospell                                " Turn off spell check (see below)
@@ -321,6 +325,10 @@ let g:livepreview_previewer = 'open -a Preview'
 " Quickly move current line
 nmap [e  :<C-u>execute 'move -1-'. v:count1<cr>
 nmap ]e  :<C-u>execute 'move +'. v:count1<cr>
+
+" Sneak
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
 
 " Vim Easy Align
 xmap <Leader>ea <Plug>(EasyAlign)
@@ -590,7 +598,7 @@ let R_cmd              = "R"
 let R_hl_term          = 0
 let R_min_editor_width = 30
 let R_nvimpager        = "horizontal"
-let R_rconsole_width   = 55
+let R_rconsole_width   = 50
 let g:R_hi_fun         = 1
 let r_syntax_folding   = 0
 

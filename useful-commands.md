@@ -228,6 +228,10 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<Leader>se` runs a selection and show output
 * `<Leader>xx` toggle comment
 
+## Sneak
+
+* `fXX` find characters `XX` (custom)
+
 ## Windows
 
 * `<Ctrl>wXX<` increase width (replace `XX` by any number you prefer)
