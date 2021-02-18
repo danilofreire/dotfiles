@@ -48,7 +48,7 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<F6>` remove white trailing space (custom)
 * `<F7>` open new terminal (custom)
 * `<Leader>1` go to buffer #1 (custom, up to 9)
-* `<Leader>F` open fuzzy finder (custom)
+* `<Leader>F` open FZF (custom)
 * `<Leader>L` toggle limelight
 * `<Leader>as` toggle AutoSave (custom)
 * `<Leader>ea` open easy-align (custom)
@@ -133,7 +133,7 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<F10>` go to next terminal (custom)
 * `<F11>` toggle terminal (custom)
 * `<F12>` close terminal (custom)
-* `<Leader>d` send code to terminal (custom)
+* `<Leader>l` send code to terminal (custom)
 
 ## Git
 

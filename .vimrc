@@ -99,11 +99,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
 
 " Nvim-R
-Plug 'gaalcaras/ncm-R'
 Plug 'jalvesaq/Nvim-R'
-Plug 'jalvesaq/R-Vim-runtime'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
 
 " Pandoc
 Plug 'vim-pandoc/vim-pandoc'
@@ -114,6 +110,9 @@ Plug 'jeetsukumaran/vim-pythonsense'
 
 " Rainbow Parentheses
 Plug 'frazrepo/vim-rainbow'
+
+" Repeat
+Plug 'tpope/vim-repeat'
 
 " Semshi
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
@@ -242,7 +241,7 @@ let g:gruvbox_material_palette                = 'material'
 " colors gruvbox-material
 
 " Sonokai theme
-let g:sonokai_style                           = 'espresso'
+let g:sonokai_style                           = 'andromeda'
 let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
 colors sonokai
@@ -292,8 +291,15 @@ map <Leader>n :noh <CR>
 " GitGutter
 let g:gitgutter_max_signs = 500
 
+" Sneak
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+
 " fzf
 nmap <Leader><S-F> :FZF ~/<CR>
+
 
 " Highlight yanks
 let g:highlightedyank_highlight_duration = -1
@@ -313,8 +319,10 @@ nmap <F9> :FloatermNew --wintype=normal --position=right python3<CR>
 let g:floaterm_keymap_next   = '<F10>'
 let g:floaterm_keymap_toggle = '<F11>'
 let g:floaterm_keymap_kill   = '<F12>'
-nmap <Leader>d :FloatermSend <CR>
-vmap <Leader>d :'<,'>FloatermSend <CR> 
+let g:floaterm_opener        = 'vsplit'
+nmap <Leader>zf :FloatermNew fzf<CR>
+nmap <Leader>l :FloatermSend <CR>
+vmap <Leader>l :'<,'>FloatermSend <CR> 
 
 " Thesaurus
 let g:tq_enabled_backends = ["datamuse_com", "mthesaur_txt",]
@@ -325,10 +333,6 @@ let g:livepreview_previewer = 'open -a Preview'
 " Quickly move current line
 nmap [e  :<C-u>execute 'move -1-'. v:count1<cr>
 nmap ]e  :<C-u>execute 'move +'. v:count1<cr>
-
-" Sneak
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
 
 " Vim Easy Align
 xmap <Leader>ea <Plug>(EasyAlign)
@@ -490,7 +494,7 @@ let g:gist_get_multiplefile = 1
 let g:gist_post_private     = 1
 let g:gist_show_privates    = 1
 let g:github_token          = ''
-let g:github_user           = ''
+let g:github_user           = 'danilofreire'
 nmap <Leader>ge :Gist -e -s
 nmap <Leader>gi :Gist -b -s
 nmap <Leader>gx :Gist -d<CR>

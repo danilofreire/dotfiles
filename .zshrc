@@ -4,101 +4,28 @@
 # brew cask install font-fira-code
 # brew cask install font-firacode-nerd-font
 # brew install autojump
+# brew install ripgrep
 # brew install fzf
 # brew install gh
 # brew install googler
 # brew install lazygit
 # brew install thefuck
+# brew install pyenv
 # brew tap homebrew/cask-fonts
 # curl -fsSL https://starship.rs/install.sh | zsh
 # https://github.com/morhetz/gruvbox-contrib
+
+# fzf
+alias nfzf='nvim $(fzf)'
+alias ofzf='open $(fzf)'
+export FZF_BASE=/usr/local/bin/fzf
+export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 
 # Miniconda
 # /Users/USERNAME/Documents/miniconda3/bin/conda init zsh
 # export PATH="/Users/USERNAME/miniconda3/bin:$PATH"  
 # commented out by conda initialize
-
-# fzf
-# Modified version where you can press
-# - CTRL-O to open with `open` command,
-# - CTRL-E or Enter key to open with the $EDITOR
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
-#   - Bypass fuzzy finder if there's only one match (--select-1)
-#   - Exit if there's no match (--exit-0)
-nv() {
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
-}
-
-# Modified version where you can press
-#   - CTRL-O to open with `open` command,
-#   - CTRL-E or Enter key to open with the $EDITOR
-fo() {
-  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
-  key=$(head -1 <<< "$out")
-  file=$(head -2 <<< "$out" | tail -1)
-  if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-nvim} "$file"
-  fi
-}
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-# fda - including hidden directories
-fda() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
-# cf - fuzzy cd from anywhere
-# ex: cf word1 word2 ... (even part of a file name)
-# zsh autoload function
-cf() {
-  local file
-
-  file="$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1)"
-
-  if [[ -n $file ]]
-  then
-     if [[ -d $file ]]
-     then
-        cd -- $file
-     else
-        cd -- ${file:h}
-     fi
-  fi
-}
-# like normal autojump when used with arguments but displays an fzf prompt when used without
-j() {
-    if [[ "$#" -ne 0 ]]; then
-        cd $(autojump $@)
-        return
-    fi
-    cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  fzf --height 40% --reverse --inline-info)" 
-}
-# Like normal cd but opens an interactive navigation window when called with no arguments
-function cd() {
-    if [[ "$#" != 0 ]]; then
-        builtin cd "$@";
-        return
-    fi
-    while true; do
-        local lsd=$(echo ".." && ls -p | grep '/$' | sed 's;/$;;')
-        local dir="$(printf '%s\n' "${lsd[@]}" |
-            fzf --reverse --preview '
-                __cd_nxt="$(echo {})";
-                __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
-                echo $__cd_path;
-                echo;
-                ls -p --color=always "${__cd_path}";
-        ')"
-        [[ ${#dir} != 0 ]] || return 0
-        builtin cd "$dir" &> /dev/null
-    done
-}
 
 # lazygit
 alias lg='lazygit'
@@ -109,7 +36,10 @@ alias v='nvim'
 alias vim='nvim'
 
 # python3
-alias python=/usr/local/bin/python3
+alias python=/Users/politicaltheory/.pyenv/shims/python3
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 
 # radian
 alias r='radian'
@@ -215,6 +145,7 @@ plugins=(
   osx
   thefuck
   themes
+  ubuntu
   vi-mode
   virtualenv
   web-search
@@ -255,14 +186,31 @@ eval "$(starship init zsh)"
 # fuck
 eval $(thefuck --alias)
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/politicaltheory/Documents/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/politicaltheory/Documents/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/politicaltheory/Documents/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/politicaltheory/Documents/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 # Googler aliases
 
 # A
 
 # AliExpress
 alias @ae='googler -w aliexpress.com'
+alias @ali='googler -w aliexpress.com'
 # Amazon.com
 alias @a='googler -w amazon.com'
+alias @amazon='googler -w amazon.com'
 alias @abr='googler -w amazon.com.br'
 # AlternativeTo
 alias @alt='googler -w alternativeto.net'
@@ -581,6 +529,7 @@ alias @y='googler -w yahoo.com'
 alias @yf='googler -w finance.yahoo.com'
 # YouTube
 alias @yt='googler -w youtube.com'
+alias @youtube='googler -w youtube.com'
 
 # Z
 
