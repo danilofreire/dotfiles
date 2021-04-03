@@ -20,6 +20,9 @@ Plug 'tpope/vim-commentary'
 " csv-vim
 Plug 'chrisbra/csv.vim'
 
+" Dadbod
+Plug 'tpope/vim-dadbod'
+
 " Devicons
 Plug 'ryanoasis/vim-devicons'
 
@@ -127,7 +130,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/vim-slash'
 
 " Sneak
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 
 " Snippets
 Plug 'honza/vim-snippets'
@@ -241,7 +244,7 @@ let g:gruvbox_material_palette                = 'material'
 " colors gruvbox-material
 
 " Sonokai theme
-let g:sonokai_style                           = 'andromeda'
+let g:sonokai_style                           = 'espresso'
 let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
 colors sonokai
@@ -292,14 +295,13 @@ map <Leader>n :noh <CR>
 let g:gitgutter_max_signs = 500
 
 " Sneak
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
+" map f <Plug>Sneak_f
+" map F <Plug>Sneak_F
+" map t <Plug>Sneak_t
+" map T <Plug>Sneak_T
 
 " fzf
 nmap <Leader><S-F> :FZF ~/<CR>
-
 
 " Highlight yanks
 let g:highlightedyank_highlight_duration = -1
@@ -310,8 +312,17 @@ nmap <Leader>dm :delm! <bar> delm A-Z0-9<CR>
 " Rainbow parentheses
 let g:rainbow_active = 1
 
+" Python
+"
+" Install Python 3 support: 
+" pip install neovim
+" pip install pynvim --upgrade 
+" Use conda environment ml:
+" conda create --name ml
+" conda activate ml
+let g:python3_host_prog = '/Users/politicaltheory/opt/miniconda3/envs/ml/bin/python'
+
 " Floaterm
-" Install Python 3 support: pip3 install pynvim --upgrade 
 nmap <Leader>t :FloatermNew --position=center<CR>
 nmap <F7> :FloatermNew --wintype=normal --position=right<CR>
 nmap <F8> :FloatermNew --wintype=normal --position=right radian<CR>
@@ -666,4 +677,5 @@ nmap <C-l> <C-w><C-l>
 nmap <C-h> <C-w><C-h>
 nmap <C-k> <C-w><C-k>
 nmap <C-j> <C-w><C-j>
+
 

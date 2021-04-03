@@ -4,13 +4,13 @@
 # brew cask install font-fira-code
 # brew cask install font-firacode-nerd-font
 # brew install autojump
-# brew install ripgrep
 # brew install fzf
 # brew install gh
 # brew install googler
 # brew install lazygit
-# brew install thefuck
 # brew install pyenv
+# brew install ripgrep
+# brew install thefuck
 # brew tap homebrew/cask-fonts
 # curl -fsSL https://starship.rs/install.sh | zsh
 # https://github.com/morhetz/gruvbox-contrib
@@ -21,6 +21,13 @@ alias ofzf='open $(fzf)'
 export FZF_BASE=/usr/local/bin/fzf
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
+
+# git
+alias gwip='git commit -m "WIP"'
+alias gcane='git commit --amend --no-edit'
+
+# gh cli
+alias gh web='gh repo view --web'
 
 # Miniconda
 # /Users/USERNAME/Documents/miniconda3/bin/conda init zsh
@@ -188,18 +195,22 @@ eval $(thefuck --alias)
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/politicaltheory/Documents/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/politicaltheory/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/politicaltheory/Documents/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/politicaltheory/Documents/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/politicaltheory/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/politicaltheory/opt/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/politicaltheory/Documents/miniconda3/bin:$PATH"
+        export PATH="/Users/politicaltheory/opt/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Activate conda environment "ml"
+# conda create -n ml
+conda activate ml
 
 # Googler aliases
 
