@@ -130,14 +130,14 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/vim-slash'
 
 " Sneak
-" Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
 
 " Snippets
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet-snippets'
 
 " Sonokai theme
-Plug 'ghifarit53/sonokai'
+Plug 'sainnhe/sonokai'
 
 " Surround
 Plug 'tpope/vim-surround'
@@ -295,10 +295,10 @@ map <Leader>n :noh <CR>
 let g:gitgutter_max_signs = 500
 
 " Sneak
-" map f <Plug>Sneak_f
-" map F <Plug>Sneak_F
-" map t <Plug>Sneak_t
-" map T <Plug>Sneak_T
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
 " fzf
 nmap <Leader><S-F> :FZF ~/<CR>
@@ -320,7 +320,7 @@ let g:rainbow_active = 1
 " Use conda environment ml:
 " conda create --name ml
 " conda activate ml
-let g:python3_host_prog = '/Users/politicaltheory/opt/miniconda3/envs/ml/bin/python'
+let g:python3_host_prog = '/Users/politicaltheory/opt/miniconda3/envs/ml/bin/python3'
 
 " Floaterm
 nmap <Leader>t :FloatermNew --position=center<CR>

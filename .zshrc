@@ -27,7 +27,9 @@ alias gwip='git commit -m "WIP"'
 alias gcane='git commit --amend --no-edit'
 
 # gh cli
-alias gh web='gh repo view --web'
+alias ghweb='gh repo view --web'
+alias ghclone='gh repo clone'
+alias ghmarkdown='gh repo clone danilofreire/rmarkdown-templates'
 
 # Miniconda
 # /Users/USERNAME/Documents/miniconda3/bin/conda init zsh
