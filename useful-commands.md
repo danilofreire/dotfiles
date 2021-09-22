@@ -41,6 +41,7 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<Ctrl>n` autocomplete (insert mode)
 * `<Ctrl>n` select text for multicursors editing (normal mode)
 * `<Ctrl>r` redo
+* `<Ctrl>s` save files (custom)
 * `<Ctrl>v` paste text (custom)
 * `<Ctrl>y` move view pane up
 * `<F3>` toggle paste mode (custom)
@@ -73,6 +74,8 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `G` go to last line
 * `H` go to the top of the screen
 * `I` insert mode in the beginning of the line (`0i`)
+* `K` move selected lines up in visual mode (custom)
+* `J` move selected lines down in visual mode (custom)
 * `J` join line below to the current one with one space in between
 * `L` go to the bottom of the screen
 * `M` go to the middle of the screen
@@ -84,8 +87,7 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `S` delete line and move to the beginning
 * `TX` puts the cursor just before the character X
 * `XXgg` go to the XX line, just type the number
-* `[e` move line above (custom)
-* `]e` move line below (custom)
+* `Y` yank to the end of the line (custom)
 * `` `" `` go to last cursor position
 * `cMOTION` change to end of word (`e`) or any other motion you want to use
 * `fX` jump to the next character X
@@ -227,10 +229,6 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<Leader>sa` run a selection and go down
 * `<Leader>se` runs a selection and show output
 * `<Leader>xx` toggle comment
-
-## Sneak
-
-* `fXX` find characters `XX` (custom)
 
 ## Windows
 

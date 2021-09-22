@@ -29,7 +29,7 @@ alias gcane='git commit --amend --no-edit'
 # gh cli
 alias ghweb='gh repo view --web'
 alias ghclone='gh repo clone'
-alias ghmarkdown='gh repo clone danilofreire/rmarkdown-templates'
+alias ghmd='gh repo clone danilofreire/rmarkdown-templates'
 
 # Miniconda
 # /Users/USERNAME/Documents/miniconda3/bin/conda init zsh
@@ -52,6 +52,11 @@ fi
 
 # radian
 alias r='radian'
+
+# save files
+alias vim="stty stop '' -ixoff ; vim"
+# `Frozing' tty, so after any command terminal settings will be restored
+ttyctl -f
 
 ##########################
 ### Script begins here ###

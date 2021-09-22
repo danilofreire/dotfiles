@@ -8,159 +8,64 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-" Auto-save
+" Plugins
 Plug '907th/vim-auto-save'
-
-" Coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Commentary
 Plug 'tpope/vim-commentary'
-
-" csv-vim
 Plug 'chrisbra/csv.vim'
-
-" Dadbod
 Plug 'tpope/vim-dadbod'
-
-" Devicons
 Plug 'ryanoasis/vim-devicons'
-
-" Diminactive
 Plug 'blueyed/vim-diminactive'
-
-" Easy Align
 Plug 'junegunn/vim-easy-align'
-
-" Easymotion
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
-
-" Emoji
 Plug 'junegunn/vim-emoji'
-
-" Floaterm
 Plug 'voldikss/vim-floaterm'
-
-" Fugitive
 Plug 'tpope/vim-fugitive'
-
-" fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
-" Gist
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-
-" GitGutter
 Plug 'airblade/vim-gitgutter'
-
-" Goyo
 Plug 'junegunn/goyo.vim'
-
-" Grammarous
 Plug 'rhysd/vim-grammarous'
-
-" Gruvbox Material theme
 Plug 'sainnhe/gruvbox-material'
-
-" Highlight yanks
 Plug 'machakann/vim-highlightedyank'
-
-" Jedi
 Plug 'davidhalter/jedi-vim'
-
-" Lens
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
-
-" Lexical
 Plug 'reedes/vim-lexical'
-
-" Lightline
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-
-" Limelight
 Plug 'junegunn/limelight.vim'
-
-" Markdown
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'plasticboy/vim-markdown'
-
-" Material theme
 Plug 'kaicataldo/material.vim'
-
-" Multiple cursors
 Plug 'terryma/vim-multiple-cursors'
-
-" NERDTree
 Plug 'scrooloose/nerdtree'
-
-" Nvim-R
 Plug 'jalvesaq/Nvim-R'
-
-" Pandoc
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-
-" PythonSense
 Plug 'jeetsukumaran/vim-pythonsense'
-
-" Rainbow Parentheses
 Plug 'frazrepo/vim-rainbow'
-
-" Repeat
 Plug 'tpope/vim-repeat'
-
-" Semshi
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-
-" Sensible
 Plug 'tpope/vim-sensible'
-
-" Signature
 Plug 'kshenoy/vim-signature'
-
-" Slash
 Plug 'junegunn/vim-slash'
-
-" Sneak
-Plug 'justinmk/vim-sneak'
-
-" Snippets
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet-snippets'
-
-" Sonokai theme
 Plug 'sainnhe/sonokai'
-
-" Surround
 Plug 'tpope/vim-surround'
-
-" Startify
 Plug 'mhinz/vim-startify'
-
-" Targets
 Plug 'wellle/targets.vim'
-
-" Thesaurus
 Plug 'ron89/thesaurus_query.vim'
-
-" Translate Me
 Plug 'voldikss/vim-translator'
-
-" Write good
 Plug 'davidbeckingsale/writegood.vim'
-
-" Vimtex
 Plug 'lervag/vimtex'
-
-" Wordy
 Plug 'reedes/vim-wordy'
 
 " All of your Plugins must be added before the following line
@@ -212,6 +117,15 @@ set wildmenu                               " Show menu autocomplete options
 set wildmode=longest,list,full             " Options for wildmenu
 syntax enable                              " Syntax highlighting
 
+" Remap leader to space
+let mapleader=" "
+nnoremap <SPACE> <Nop>
+
+" Save with Ctrl+S
+nmap <C-s> :w <CR>
+imap <C-s> <ESC>:w<CR>a
+vmap <C-s> <ESC>:w<CR>gv
+
 " Spelling
 au FileType rmd,md,markdown,pandoc,tex,latex syntax spell toplevel
 au FileType rmd,md,markdown,pandoc,tex,latex,bib,bibtex setl spl=en_gb,pt_br spell
@@ -236,22 +150,21 @@ let g:material_theme_style                    = 'palenight'
 " colors material
 
 " Gruvbox Material theme
-let g:gruvbox_material_background             = 'medium'
 let g:gruvbox_material_better_performance     = 1
 let g:gruvbox_material_disable_italic_comment = 1
 let g:gruvbox_material_enable_bold            = 1
-let g:gruvbox_material_palette                = 'material'
-" colors gruvbox-material
+let g:gruvbox_material_palette                = 'original'
+colors gruvbox-material
 
 " Sonokai theme
 let g:sonokai_style                           = 'espresso'
 let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
-colors sonokai
+" colors sonokai
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'sonokai',
+      \ 'colorscheme': 'gruvbox_material',
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
@@ -294,12 +207,6 @@ map <Leader>n :noh <CR>
 " GitGutter
 let g:gitgutter_max_signs = 500
 
-" Sneak
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-
 " fzf
 nmap <Leader><S-F> :FZF ~/<CR>
 
@@ -340,10 +247,6 @@ let g:tq_enabled_backends = ["datamuse_com", "mthesaur_txt",]
 
 " Latex live preview
 let g:livepreview_previewer = 'open -a Preview'
-
-" Quickly move current line
-nmap [e  :<C-u>execute 'move -1-'. v:count1<cr>
-nmap ]e  :<C-u>execute 'move +'. v:count1<cr>
 
 " Vim Easy Align
 xmap <Leader>ea <Plug>(EasyAlign)
@@ -417,7 +320,17 @@ nmap <Leader><S-t> <Plug>TranslateW
 vmap <Leader><S-t> <Plug>TranslateWV
 
 " Quick yanking to the end of the line
-nmap Y y''$
+nmap Y y$
+
+" Moving text
+vmap J :m '>+1<CR>gv=gv
+vmap K :m '<-2<CR>gv=gv
+
+" Keeping the cursor centred 
+nmap Y yg$
+nmap n nzzzv
+nmap N Nzzzv
+nmap J mzJ`z
 
 " Yank/paste to the OS clipboard with <Leader>y and <Leader>p
 nmap <Leader>y "+y
