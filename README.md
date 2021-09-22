@@ -54,7 +54,7 @@ noremap <Right> <Nop>
 If you want to make your [lightline toolbar](https://github.com/itchyny/lightline.vim) and [vim-devicons](https://github.com/ryanoasis/vim-devicons) look nice, please download [Nerd fonts](https://github.com/ryanoasis/nerd-fonts). I use [Fira Code](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode).
 ```
 brew tap homebrew/cask-fonts
-brew cask install font-firacode-nerd-font
+brew install --cask font-fira-code
 ```
 
 And this is how the editor looks like with the default configurations:
