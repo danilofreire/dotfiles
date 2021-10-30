@@ -9,9 +9,9 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugins
-Plug '907th/vim-auto-save'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
+Plug 'github/copilot.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'tpope/vim-dadbod'
 Plug 'ryanoasis/vim-devicons'
@@ -325,12 +325,6 @@ nmap Y y$
 " Moving text
 vmap J :m '>+1<CR>gv=gv
 vmap K :m '<-2<CR>gv=gv
-
-" Keeping the cursor centred 
-nmap Y yg$
-nmap n nzzzv
-nmap N Nzzzv
-nmap J mzJ`z
 
 " Yank/paste to the OS clipboard with <Leader>y and <Leader>p
 nmap <Leader>y "+y
