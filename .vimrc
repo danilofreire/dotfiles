@@ -9,64 +9,64 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugins
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-commentary'
-Plug 'github/copilot.vim'
-Plug 'chrisbra/csv.vim'
-Plug 'tpope/vim-dadbod'
-Plug 'ryanoasis/vim-devicons'
-Plug 'blueyed/vim-diminactive'
-Plug 'junegunn/vim-easy-align'
-Plug 'easymotion/vim-easymotion'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
-Plug 'junegunn/vim-emoji'
-Plug 'voldikss/vim-floaterm'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'mattn/gist-vim'
-Plug 'mattn/webapi-vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/goyo.vim'
-Plug 'rhysd/vim-grammarous'
-Plug 'sainnhe/gruvbox-material'
-Plug 'machakann/vim-highlightedyank'
-Plug 'davidhalter/jedi-vim'
-Plug 'camspiers/animate.vim'
-Plug 'camspiers/lens.vim'
-Plug 'reedes/vim-lexical'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'junegunn/limelight.vim'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'godlygeek/tabular'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'plasticboy/vim-markdown'
-Plug 'kaicataldo/material.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/nerdtree'
-Plug 'jalvesaq/Nvim-R'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'jeetsukumaran/vim-pythonsense'
-Plug 'frazrepo/vim-rainbow'
-Plug 'tpope/vim-repeat'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'tpope/vim-sensible'
-Plug 'kshenoy/vim-signature'
-Plug 'junegunn/vim-slash'
-Plug 'honza/vim-snippets'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'sainnhe/sonokai'
-Plug 'tpope/vim-surround'
-Plug 'mhinz/vim-startify'
-Plug 'wellle/targets.vim'
-Plug 'ron89/thesaurus_query.vim'
-Plug 'voldikss/vim-translator'
-Plug 'davidbeckingsale/writegood.vim'
-Plug 'lervag/vimtex'
-Plug 'reedes/vim-wordy'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                           " Conqueror of Completion - autocomplete
+Plug 'tpope/vim-commentary'                                               " Commenting out code
+Plug 'github/copilot.vim'                                                 " GitHub Copilot - autocomplete
+Plug 'chrisbra/csv.vim'                                                   " CSV editing
+Plug 'tpope/vim-dadbod'                                                   " Interact with databases
+Plug 'ryanoasis/vim-devicons'                                             " Show icons for files
+Plug 'blueyed/vim-diminactive'                                            " Dim inactive buffers
+Plug 'junegunn/vim-easy-align'                                            " Align text
+Plug 'easymotion/vim-easymotion'                                          " Text navigation
+Plug 'haya14busa/incsearch.vim'                                           " Incremental search
+Plug 'haya14busa/incsearch-easymotion.vim'                                " Incremental search with easymotion
+Plug 'junegunn/vim-emoji'                                                 " Emoji support
+Plug 'voldikss/vim-floaterm'                                              " Floating terminal
+Plug 'tpope/vim-fugitive'                                                 " Git integration
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                       " Fuzzy file finder
+Plug 'junegunn/fzf.vim'                                                   " Fuzzy file finder
+Plug 'mattn/gist-vim'                                                     " Gist integration
+Plug 'mattn/webapi-vim'                                                   " Web API integration
+Plug 'airblade/vim-gitgutter'                                             " Git integration
+Plug 'junegunn/goyo.vim'                                                  " Distraction-free writing
+Plug 'rhysd/vim-grammarous'                                               " Syntax highlighting for prose
+Plug 'sainnhe/gruvbox-material'                                           " Gruvbox theme
+Plug 'machakann/vim-highlightedyank'                                      " Highlight yanked text
+Plug 'davidhalter/jedi-vim'                                               " Python autocompletion
+Plug 'camspiers/animate.vim'                                              " Animate text
+Plug 'camspiers/lens.vim'                                                 " Lens
+Plug 'reedes/vim-lexical'                                                 " Lexical navigation
+Plug 'itchyny/lightline.vim'                                              " Lightline
+Plug 'mengelbrecht/lightline-bufferline'                                  " Lightline bufferline
+Plug 'junegunn/limelight.vim'                                             " Highlight matching parenthesis
+Plug 'dhruvasagar/vim-table-mode'                                         " Table editing
+Plug 'godlygeek/tabular'                                                  " Text filtering and alignment
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } } " Markdown preview
+Plug 'plasticboy/vim-markdown'                                            " Markdown editing
+Plug 'kaicataldo/material.vim'                                            " Material theme
+Plug 'terryma/vim-multiple-cursors'                                       " Multiple cursors
+Plug 'scrooloose/nerdtree'                                                " File tree
+Plug 'jalvesaq/Nvim-R'                                                    " R integration
+Plug 'vim-pandoc/vim-pandoc'                                              " Pandoc integration
+Plug 'vim-pandoc/vim-pandoc-syntax'                                       " Pandoc syntax highlighting
+Plug 'jeetsukumaran/vim-pythonsense'                                      " Python syntax highlighting
+Plug 'frazrepo/vim-rainbow'                                               " Rainbow brackets
+Plug 'tpope/vim-repeat'                                                   " Repeat last change
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}                    " Semshi syntax highlighting
+Plug 'tpope/vim-sensible'                                                 " Sensible defaults
+Plug 'kshenoy/vim-signature'                                              " Place, toggle and display marks
+Plug 'junegunn/vim-slash'                                                 " Slash commands
+Plug 'honza/vim-snippets'                                                 " Snippets
+Plug 'Shougo/neosnippet-snippets'                                         " Neosnippet snippets
+Plug 'sainnhe/sonokai'                                                    " Sonokai theme
+Plug 'tpope/vim-surround'                                                 " Surround text
+Plug 'mhinz/vim-startify'                                                 " Start screen
+Plug 'wellle/targets.vim'                                                 " Add text objects to help navigation
+Plug 'ron89/thesaurus_query.vim'                                          " Thesaurus query
+Plug 'voldikss/vim-translator'                                            " Translate text
+Plug 'davidbeckingsale/writegood.vim'                                     " Linter for English writing
+Plug 'lervag/vimtex'                                                      " LaTeX
+Plug 'reedes/vim-wordy'                                                   " Tools for English prose
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -300,7 +300,7 @@ nmap <Leader>cm :CocList marketplace <CR>
 " :CocInstall coc-ultisnips coc-terminal coc-sql coc-snippets coc-r-lsp
 " coc-python coc-pairs coc-omni coc-neosnippet coc-marketplace coc-lists
 " coc-emoji coc-yaml coc-vimtex coc-bibtex coc-texlab coc-html coc-json
-" coc-translator coc-prettier
+" coc-translator coc-prettier coc-tabnine
 
 " Jedi
 let g:jedi#goto_command             = ""
@@ -417,10 +417,10 @@ nmap <Leader>ge :Gist -e -s
 nmap <Leader>gi :Gist -b -s
 nmap <Leader>gx :Gist -d<CR>
 
-" Sort - numbers, reverse, alphabetically
+" Sort - alphabetically, numbers, reverse
+vmap <Leader>sa :'<,'>sort u<CR>
 vmap <Leader>sn :'<,'>sort n<CR>
 vmap <Leader>sr :'<,'>sort!<CR>
-vmap <Leader>ss :'<,'>sort u<CR>
 
 " Vim-Polyglot
 let g:polyglot_disabled = ['latex']
