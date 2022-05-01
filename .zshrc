@@ -53,6 +53,10 @@ fi
 # radian
 alias r='radian'
 
+# remove images from ~/Desktop/
+alias rmdp='rm -rf ~/Desktop/*.png'
+alias rmdj='rm -rf ~/Desktop/*.jpg'
+
 # save files
 alias vim="stty stop '' -ixoff ; vim"
 # `Frozing' tty, so after any command terminal settings will be restored
@@ -145,6 +149,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   autojump
+  brew
   catimg
   command-not-found
   copyfile
@@ -156,7 +161,8 @@ plugins=(
   git
   gitfast
   gitignore
-  osx
+  gh
+  macos
   thefuck
   themes
   ubuntu
@@ -324,6 +330,7 @@ alias @ft='googler -w markets.ft.com'
 
 # Google Scholar
 alias @gs='googler -w scholar.google.com'
+alias @scholar='googler -w scholar.google.com'
 # Google Search
 alias @g='googler'
 # Genius Lyrics
@@ -553,4 +560,3 @@ alias @youtube='googler -w youtube.com'
 
 # ZDNet
 alias @zdnet='googler -w zdnet.com'
-
