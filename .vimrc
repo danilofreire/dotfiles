@@ -154,17 +154,17 @@ let g:gruvbox_material_better_performance     = 1
 let g:gruvbox_material_disable_italic_comment = 1
 let g:gruvbox_material_enable_bold            = 1
 let g:gruvbox_material_palette                = 'original'
-colors gruvbox-material
+" colors gruvbox-material
 
 " Sonokai theme
 let g:sonokai_style                           = 'espresso'
 let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
-" colors sonokai
+colors sonokai
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox_material',
+      \ 'colorscheme': 'sonokai',
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
@@ -260,19 +260,33 @@ nmap <Leader>nf :NERDTreeFind<CR>
 set shortmess+=c
 set signcolumn=yes
 set updatetime=300
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" Map <tab> for trigger completion, completion confirm, snippet expand and jump 
+" like VSCode:
 inoremap <silent><expr> <TAB>
-	  \ pumvisible() ? "\<C-n>" :
-	  \ <SID>check_back_space() ? "\<TAB>" :
-	  \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
+  \ coc#pum#visible() ? coc#_select_confirm() :
+   \ coc#expandableOrJumpable() ?
+   \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+   \ CheckBackSpace() ? "\<TAB>" :
+   \ coc#refresh()
+function! CheckBackSpace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+let g:coc_snippet_next = '<tab>'
+" Use tab for trigger completion with characters ahead and navigate.
+function! CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+\ coc#pum#visible() ? coc#pum#next(1):
+\ CheckBackSpace() ? "\<Tab>" :
+\ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -490,6 +504,9 @@ autocmd VimResized * if exists('#goyo') | exe "normal \<c-w>20<" | endif
 autocmd User GoyoEnter nested call <SID>goyo_enter()
 autocmd User GoyoLeave nested call <SID>goyo_leave()
 
+" Increase window after Goyo
+nmap <Leader>yo <C-w><C-h> :20<C-w><
+
 " UltiSnips
 let g:UltiSnipsUsePythonVersion = 3
 
@@ -584,5 +601,3 @@ nmap <C-l> <C-w><C-l>
 nmap <C-h> <C-w><C-h>
 nmap <C-k> <C-w><C-k>
 nmap <C-j> <C-w><C-j>
-
-
