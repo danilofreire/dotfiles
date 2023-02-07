@@ -157,6 +157,13 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<Leader>gs` git status (custom)
 * `<Leader>gv` git diff, vertical split (custom)
 
+## GitHub Copilot
+
+* `<Ctrl-]>` dismiss the current suggestion
+* `<fn-option-]>` cycle to the next suggestion, if one is available 
+* `<fn-option-[>` cycle to the previous suggestion 
+* `<fn-option-\>` explicitly request a suggestion, even if Copilot is disabled 
+
 ## Gist
 
 * `<Leader>gi` create private gist with description (custom)
