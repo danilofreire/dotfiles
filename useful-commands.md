@@ -137,12 +137,19 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<F12>` close terminal (custom)
 * `<Leader>l` send code to terminal (custom)
 
+## Gist
+
+* `<Leader>gi` create private gist with description (custom)
+* `<Leader>gI` create public gist with description
+* `<Leader>ge` edit gist with description (custom)
+* `<Leader>gx` delete gist
+
 ## Git
 
 * `<Leader>ga` git add (custom)
 * `<Leader>gb` shows `git blame` output (custom)
 * `<Leader>gbr` git branch (custom)
-* `<Leader>gc` git commit, close the tab to push (custom)
+* `<Leader>gc` git commit. Write a comment and close the tab to push (custom)
 * `<Leader>gca` git amend (custom)
 * `<Leader>gcam` git amend --no-edit (custom)
 * `<Leader>gco` git checkout (custom)
@@ -163,13 +170,6 @@ Here is a list of commands that I regularly use. Some of them are customised.
 * `<fn-option-]>` cycle to the next suggestion, if one is available 
 * `<fn-option-[>` cycle to the previous suggestion 
 * `<fn-option-\>` explicitly request a suggestion, even if Copilot is disabled 
-
-## Gist
-
-* `<Leader>gi` create private gist with description (custom)
-* `<Leader>gI` create public gist with description
-* `<Leader>ge` edit gist with description (custom)
-* `<Leader>gx` delete gist
 
 ## LaTeX
 

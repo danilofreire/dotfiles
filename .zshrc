@@ -12,8 +12,11 @@
 # brew install ripgrep
 # brew install thefuck
 # brew tap homebrew/cask-fonts
-# curl -fsSL https://starship.rs/install.sh | zsh
 # https://github.com/morhetz/gruvbox-contrib
+
+# autojump
+[[ -s /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh ]] && source /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
 
 # fzf
 alias nfzf='nvim $(fzf)'
@@ -23,13 +26,18 @@ export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 
 # git
-alias gwip='git commit -m "WIP"'
 alias gcane='git commit --amend --no-edit'
+alias gwip='git add . && git commit -m "WIP" && git push'
+
+# git-ignore
+alias gig='gi latex,linux,macos,python,r,vim,windows >> .gitignore'
+alias gignore='gi latex,linux,macos,python,r,vim,windows >> .gitignore'
 
 # gh cli
-alias ghweb='gh repo view --web'
 alias ghclone='gh repo clone'
 alias ghmd='gh repo clone danilofreire/rmarkdown-templates'
+alias ghupdate='brew update && brew upgrade gh'
+alias ghweb='gh repo view --web'
 
 # Miniconda
 # /Users/USERNAME/Documents/miniconda3/bin/conda init zsh
@@ -37,25 +45,27 @@ alias ghmd='gh repo clone danilofreire/rmarkdown-templates'
 # commented out by conda initialize
 
 # lazygit
-alias lg='lazygit'
+# alias lg='lazygit'
 
 # neovim
 alias n='nvim'
+alias nar='nvim article.Rmd references.bib'
+alias nn='nvim article.Rmd references.bib'
 alias v='nvim'
 alias vim='nvim'
 
 # python3
-alias python=/Users/politicaltheory/.pyenv/shims/python3
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+alias python=/usr/local/bin/python3
+alias python3=/usr/local/bin/python3
 
 # radian
 alias r='radian'
 
-# remove images from ~/Desktop/
-alias rmdp='rm -rf ~/Desktop/*.png'
-alias rmdj='rm -rf ~/Desktop/*.jpg'
+# remove images 
+alias rmdp='rm ~/Desktop/*.png'
+alias rmdj='rm ~/Desktop/*.jpg'
+alias rmpng='rm *.png'
+alias rmjpg='rm *.jpg'
 
 # save files
 alias vim="stty stop '' -ixoff ; vim"
@@ -69,7 +79,7 @@ ttyctl -f
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/politicaltheory/.oh-my-zsh"
+export ZSH="/Users/USERS/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -201,29 +211,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Starship
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)
 
 # fuck
-eval $(thefuck --alias)
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/politicaltheory/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/politicaltheory/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/politicaltheory/opt/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/politicaltheory/opt/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# Activate conda environment "ml"
-# conda create -n ml
-conda activate ml
+eval $(/usr/local/bin/python3 /usr/local/bin/thefuck --alias)
 
 # Googler aliases
 
@@ -560,3 +551,4 @@ alias @youtube='googler -w youtube.com'
 
 # ZDNet
 alias @zdnet='googler -w zdnet.com'
+

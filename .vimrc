@@ -227,7 +227,8 @@ let g:rainbow_active = 1
 " Use conda environment ml:
 " conda create --name ml
 " conda activate ml
-let g:python3_host_prog = '/Users/politicaltheory/opt/miniconda3/envs/ml/bin/python3'
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog  = '/usr/local/bin/python3'
 
 " Floaterm
 nmap <Leader>t :FloatermNew --position=center<CR>
@@ -314,7 +315,8 @@ nmap <Leader>cm :CocList marketplace <CR>
 " :CocInstall coc-ultisnips coc-terminal coc-sql coc-snippets coc-r-lsp
 " coc-python coc-pairs coc-omni coc-neosnippet coc-marketplace coc-lists
 " coc-emoji coc-yaml coc-vimtex coc-bibtex coc-texlab coc-html coc-json
-" coc-translator coc-prettier coc-tabnine
+" coc-translator coc-prettier coc-tabnine coc-vimtex coc-markdownlint
+" coc-jedi
 
 " Jedi
 let g:jedi#goto_command             = ""
@@ -505,7 +507,7 @@ autocmd User GoyoEnter nested call <SID>goyo_enter()
 autocmd User GoyoLeave nested call <SID>goyo_leave()
 
 " Increase window after Goyo
-nmap <Leader>yo <C-w><C-h> :20<C-w><
+" nmap <Leader>yo <C-w><C-h> :20<C-w>
 
 " UltiSnips
 let g:UltiSnipsUsePythonVersion = 3
@@ -601,3 +603,5 @@ nmap <C-l> <C-w><C-l>
 nmap <C-h> <C-w><C-h>
 nmap <C-k> <C-w><C-k>
 nmap <C-j> <C-w><C-j>
+
+
