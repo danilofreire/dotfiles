@@ -228,7 +228,7 @@ let g:rainbow_active = 1
 " conda create --name ml
 " conda activate ml
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:python_host_prog  = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python3'
 
 " Floaterm
 nmap <Leader>t :FloatermNew --position=center<CR>
@@ -241,7 +241,9 @@ let g:floaterm_keymap_kill   = '<F12>'
 let g:floaterm_opener        = 'vsplit'
 nmap <Leader>zf :FloatermNew fzf<CR>
 nmap <Leader>l :FloatermSend <CR>
+nmap <S-CR> :FloatermSend <CR>
 vmap <Leader>l :'<,'>FloatermSend <CR> 
+vmap <S-CR> :'<,'>FloatermSend <CR>
 
 " Thesaurus
 let g:tq_enabled_backends = ["datamuse_com", "mthesaur_txt",]
@@ -431,6 +433,7 @@ let g:github_token          = ''
 let g:github_user           = 'danilofreire'
 nmap <Leader>ge :Gist -e -s
 nmap <Leader>gi :Gist -b -s
+nmap <Leader>gpri :Gist -p -s
 nmap <Leader>gx :Gist -d<CR>
 
 " Sort - alphabetically, numbers, reverse
