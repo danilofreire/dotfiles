@@ -318,7 +318,10 @@ nmap <Leader>cm :CocList marketplace <CR>
 " coc-python coc-pairs coc-omni coc-neosnippet coc-marketplace coc-lists
 " coc-emoji coc-yaml coc-vimtex coc-bibtex coc-texlab coc-html coc-json
 " coc-translator coc-prettier coc-tabnine coc-vimtex coc-markdownlint
-" coc-jedi
+" coc-pyright
+
+" Cursor.execute for Python and SQL
+nnoremap <Leader>ex i<CR>cursor.execute("")<Esc>F"i
 
 " Jedi
 let g:jedi#goto_command             = ""
@@ -606,5 +609,3 @@ nmap <C-l> <C-w><C-l>
 nmap <C-h> <C-w><C-h>
 nmap <C-k> <C-w><C-k>
 nmap <C-j> <C-w><C-j>
-
-

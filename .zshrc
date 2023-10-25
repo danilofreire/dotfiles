@@ -26,6 +26,7 @@ export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 
 # git
+alias gar='git add article.Rmd references.bib'
 alias gcane='git commit --amend --no-edit'
 alias gwip='git add . && git commit -m "WIP" && git push'
 
@@ -38,6 +39,7 @@ alias ghclone='gh repo clone'
 alias ghmd='gh repo clone danilofreire/rmarkdown-templates'
 alias ghupdate='brew update && brew upgrade gh'
 alias ghweb='gh repo view --web'
+alias ghart='gh repo clone danilofreire/rmarkdown-templates && cd rmarkdown-templates/article && nvim article.Rmd references.bib'
 
 # Miniconda
 # /Users/USERNAME/Documents/miniconda3/bin/conda init zsh
@@ -57,6 +59,7 @@ alias vim='nvim'
 # python3
 alias python=/usr/local/bin/python3
 alias python3=/usr/local/bin/python3
+alias p=/usr/local/bin/python3
 
 # radian
 alias r='radian'
@@ -64,8 +67,8 @@ alias r='radian'
 # remove images 
 alias rmdp='rm ~/Desktop/*.png'
 alias rmdj='rm ~/Desktop/*.jpg'
-alias rmpng='rm *.png'
-alias rmjpg='rm *.jpg'
+alias rmp='rm *.png'
+alias rmj='rm *.jpg'
 
 # save files
 alias vim="stty stop '' -ixoff ; vim"
@@ -79,7 +82,7 @@ ttyctl -f
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/USERS/.oh-my-zsh"
+export ZSH="/Users/politicaltheory/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -211,7 +214,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Starship
-# eval "$(starship init zsh)
+eval "$(starship init zsh)"
 
 # fuck
 eval $(/usr/local/bin/python3 /usr/local/bin/thefuck --alias)
