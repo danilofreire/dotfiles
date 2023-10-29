@@ -14,7 +14,6 @@ Plug 'tpope/vim-commentary'                                               " Comm
 Plug 'github/copilot.vim'                                                 " GitHub Copilot - autocomplete
 Plug 'chrisbra/csv.vim'                                                   " CSV editing
 Plug 'tpope/vim-dadbod'                                                   " Interact with databases
-Plug 'ryanoasis/vim-devicons'                                             " Show icons for files
 Plug 'blueyed/vim-diminactive'                                            " Dim inactive buffers
 Plug 'junegunn/vim-easy-align'                                            " Align text
 Plug 'easymotion/vim-easymotion'                                          " Text navigation
@@ -52,7 +51,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'                                       " Pand
 Plug 'jeetsukumaran/vim-pythonsense'                                      " Python syntax highlighting
 Plug 'frazrepo/vim-rainbow'                                               " Rainbow brackets
 Plug 'tpope/vim-repeat'                                                   " Repeat last change
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}                    " Semshi syntax highlighting
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}                  " Semshi syntax highlighting
 Plug 'tpope/vim-sensible'                                                 " Sensible defaults
 Plug 'kshenoy/vim-signature'                                              " Place, toggle and display marks
 Plug 'junegunn/vim-slash'                                                 " Slash commands
@@ -67,6 +66,7 @@ Plug 'voldikss/vim-translator'                                            " Tran
 Plug 'davidbeckingsale/writegood.vim'                                     " Linter for English writing
 Plug 'lervag/vimtex'                                                      " LaTeX
 Plug 'reedes/vim-wordy'                                                   " Tools for English prose
+Plug 'ryanoasis/vim-devicons'                                             " Show icons for files
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -81,8 +81,10 @@ set completeopt+=menuone,noselect,noinsert " Autocomplete options
 set completeopt-=preview                   " Remove preview
 set confirm                                " Y-N-C prompt if closing with unsaved changes
 set expandtab                              " Expand tabs into spaces
+set encoding=utf8                          " Enconding for vim-devicons
 set fo-=t                                  " Formatting
 set guicursor=i:ver25-iCursor              " Cursor size
+set guifont=FiraCodeNerdFont-Retina:h16    " Font for vim-devicons
 set hidden                                 " No unsaved buffer warnings
 set hlsearch                               " Highlight all search results
 set ignorecase                             " Always case-insensitive
@@ -609,3 +611,4 @@ nmap <C-l> <C-w><C-l>
 nmap <C-h> <C-w><C-h>
 nmap <C-k> <C-w><C-k>
 nmap <C-j> <C-w><C-j>
+

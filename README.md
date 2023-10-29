@@ -12,7 +12,7 @@ brew install neovim
 
 I recommend you to install [iterm2](https://www.iterm2.com/) and [tmux](https://github.com/tmux/tmux) too:
 ```
-brew cask install iterm2
+brew install --cask iterm2
 brew install tmux
 ```
 
@@ -56,6 +56,8 @@ If you want to make your [lightline toolbar](https://github.com/itchyny/lightlin
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code
 ```
+
+To install the [iTerm2 Gruvbox Theme](https://github.com/herrbischoff/iterm2-gruvbox/tree/master), download the [`gruvbox.itermcolors`](https://raw.githubusercontent.com/herrbischoff/iterm2-gruvbox/master/gruvbox.itermcolors) file and import it in iTerm2.
 
 And this is how the editor looks like with the default configurations:
 
