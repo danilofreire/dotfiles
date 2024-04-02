@@ -1,1 +1,2 @@
+# This configuration sets the remote theme for the GitHub Pages site to the Slate theme version 0.2.0.
 remote_theme: pages-themes/slate@v0.2.0

@@ -1,21 +1,23 @@
 # Install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Then also install a few plugins:
-# brew cask install font-fira-code
-# brew cask install font-firacode-nerd-font
+# brew tap homebrew/cask-fonts
+# brew install --cask font-fira-code
+# brew install --cask font-firacode-nerd-font
 # brew install autojump
 # brew install fzf
 # brew install gh
 # brew install googler
-# brew install lazygit
 # brew install pyenv
 # brew install ripgrep
 # brew install thefuck
-# brew tap homebrew/cask-fonts
+# brew install zsh-autosuggestions
+# brew install zsh-completions
 # https://github.com/morhetz/gruvbox-contrib
+# sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v4.3.2/googler && sudo chmod +x /usr/local/bin/googler
 
 # autojump
-[[ -s /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh ]] && source /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh
+[[ -s /Users/Danilo/.autojump/etc/profile.d/autojump.sh ]] && source /Users/Danilo/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
 # fzf
@@ -35,11 +37,15 @@ alias gig='gi latex,linux,macos,python,r,vim,windows >> .gitignore'
 alias gignore='gi latex,linux,macos,python,r,vim,windows >> .gitignore'
 
 # gh cli
+alias ghart='gh repo clone danilofreire/quarto-templates && cd quarto-templates/article && nvim article.qmd references.bib'
+alias gharticle='gh repo clone danilofreire/quarto-templates && cd quarto-templates/article && nvim article.Rmd references.bib'
 alias ghclone='gh repo clone'
-alias ghmd='gh repo clone danilofreire/rmarkdown-templates'
+alias ghletter='gh repo clone danilofreire/quarto-templates && cd rmarkdown-templates/letter && nvim letter.Rmd'
+alias ghmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates'
+alias ghqa='gh repo clone danilofreire/quarto-templates && cd quarto-templates/article && nvim article.qmd references.bib'
+alias ghquarto='gh repo clone danilofreire/quarto-templates && cd quarto-templates'
 alias ghupdate='brew update && brew upgrade gh'
 alias ghweb='gh repo view --web'
-alias ghart='gh repo clone danilofreire/rmarkdown-templates && cd rmarkdown-templates/article && nvim article.Rmd references.bib'
 
 # Miniconda
 # /Users/USERNAME/Documents/miniconda3/bin/conda init zsh
@@ -52,26 +58,36 @@ alias ghart='gh repo clone danilofreire/rmarkdown-templates && cd rmarkdown-temp
 # neovim
 alias n='nvim'
 alias nar='nvim article.Rmd references.bib'
+alias narticle='nvim article.Rmd references.bib'
 alias nn='nvim article.Rmd references.bib'
 alias v='nvim'
-alias vim='nvim'
 
 # python3
-alias python=/usr/local/bin/python3
-alias python3=/usr/local/bin/python3
-alias p=/usr/local/bin/python3
+alias python=/opt/homebrew/bin/python3.11
+alias python3=/opt/homebrew/bin/python3.11
+alias p=/opt/homebrew/bin/python3.11
+
+# quarto
+alias qapdf='quarto render article.qmd --to pdf'
+alias qap='quarto render article.qmd --to pdf'
+alias qah='quarto render article.qmd --to html'
+alias qlp='quarto render letter.qmd --to pdf'
+alias qlh='quarto render letter.qmd --to html'
 
 # radian
 alias r='radian'
 
 # remove images 
+alias rdpng='rm ~/Desktop/*.png'
 alias rmdp='rm ~/Desktop/*.png'
+alias rmpng='rm ~/Desktop/*.png'
 alias rmdj='rm ~/Desktop/*.jpg'
 alias rmp='rm *.png'
 alias rmj='rm *.jpg'
 
 # save files
 alias vim="stty stop '' -ixoff ; vim"
+
 # `Frozing' tty, so after any command terminal settings will be restored
 ttyctl -f
 
@@ -82,7 +98,7 @@ ttyctl -f
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/politicaltheory/.oh-my-zsh"
+export ZSH="/Users/Danilo/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -217,111 +233,47 @@ source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
 
 # fuck
-eval $(/usr/local/bin/python3 /usr/local/bin/thefuck --alias)
+# eval $(/opt/homebrew/bin/python3.11 /usr/local/bin/thefuck --alias)
 
 # Googler aliases
-
-# A
 
 # AliExpress
 alias @ae='googler -w aliexpress.com'
 alias @ali='googler -w aliexpress.com'
 # Amazon.com
-alias @a='googler -w amazon.com'
-alias @amazon='googler -w amazon.com'
+alias @a='googler -w amazon.co.uk'
+alias @amazon='googler -w amazon.co.uk'
 alias @abr='googler -w amazon.com.br'
 # AlternativeTo
 alias @alt='googler -w alternativeto.net'
-# Android Developers
-alias @android='googler -w developer.android.com'
-# ARM Information Center
-alias @arm='googler -w infocenter.arm.com'
-# asciinema
-alias @asciinema='googler -w asciinema.org'
-# Ask Ubuntu
-alias @askubuntu='googler -w askubuntu.com'
-# Arch Forums
-alias @abbs='googler -w bbs.archlinux.org'
-# Arch User Repository
-alias @aur='googler -w aur.archlinux.org'
-# Arch Wiki
-alias @aw='googler -w wiki.archlinux.org'
 # AZLyrics
 alias @azl='googler -w azlyrics.com'
-
-# B
-
 # BBC
 alias @bbc='googler -w bbc.co.uk'
 # Encyclopaedia Britannica
 alias @britannica='googler -w britannica.com'
-
-# C
-
-# crunchbase
-alias @cb='googler -w crunchbase.com'
-# Chrome Extensions
-alias @chrome='googler -w chrome.google.com'
-# craigslist
-alias @cl='googler -w craigslist.org'
-# commandlinefu
-alias @cmd='googler -w commandlinefu.com'
 # CNN
 alias @cnn='googler -w cnn.com'
-# Comedy Central
-alias @comedy='googler -w cc.com'
-# CPP Reference
-alias @cpp='googler -w en.cppreference.com'
-# Cracked.com
-alias @cracked='googler -w cracked.com'
-# Cricinfo
-alias @cricinfo='googler -w espncricinfo.com'
-
-# D
-
-# The Free Dictionary
-alias @d='googler -w thefreedictionary.com'
 # Dictionary.com
 alias @di='googler -w dictionary.com'
 # DistroWatch
 alias @distrowatch='googler -w distrowatch.com'
-# Daily Natural Remedies
-alias @dnr='googler -w dailynaturalremedies.com'
-# Debian Package Search
-alias @dpkg='googler -w packages.debian.org'
-
-# E
-
 # eBay
 alias @e='googler -w ebay.com'
-# Episode Guides
-alias @eg='googler -w epguides.com'
-# Embedded
-alias @embedded='googler -w embedded.com'
 # ESPN
 alias @espn='googler -w espn.com'
 # Etsy
 alias @etsy='googler -w etsy.com'
 # Online Etymology Dictionary
 alias @etym='googler -w etymonline.com'
-
-# F
-
 # Facebook
 alias @fb='googler -w facebook.com'
-# Fandango Movie Reviews
-alias @fd='googler -w fandango.com'
 # Firefox Add-ons
 alias @firefox='googler -w addons.mozilla.org'
 # Forbes
 alias @forbes='googler -w forbes.com'
-# Forvo
-alias @forvo='googler -w forvo.com'
 # Financial Times
 alias @ft='googler -w markets.ft.com'
-
-# G
-
 # Google Scholar
 alias @gs='googler -w scholar.google.com'
 alias @scholar='googler -w scholar.google.com'
@@ -331,227 +283,72 @@ alias @g='googler'
 alias @genius='googler -w genius.com'
 # GitHub
 alias @gh='googler -w github.com'
-# GNU
-alias @gnu='googler -w gnu.org'
-# The GNU Privacy Guard
-alias @gpg='googler -w gnupg.org'
 # Project Gutenberg
 alias @gutenberg='googler -w gutenberg.org'
-
-# H
-
-# Hackaday
-alias @had='googler -w hackaday.com'
-# Healthline
-alias @hl='googler -w healthline.com'
-# History
-alias @history='googler -w history.com'
-# Hacker News
-alias @hn='googler -w news.ycombinator.com'
-# HowStuffWorks
-alias @hsw='googler -w howstuffworks.com'
-# HowtoForge
-alias @htf='googler -w howtoforge.com'
 # Hulu
 alias @hulu='googler -w hulu.com'
-
-# I
-
-# IEEE
-alias @ieee='googler -w ieee.org'
-# IETF
-alias @ietf='googler -w ietf.org'
-# IETF Datatracker
-alias @ietfd='googler -w datatracker.ietf.org'
 # Instagram
 alias @ig='googler -w instagram.com'
 # IMDB
 alias @imdb='googler -w imdb.com'
-# Internet Radio
-alias @iradio='googler -w internet-radio.com'
-
-# J
-
-# K
-
-# The Linux Kernel Archives
-alias @kernel='googler -w kernel.org'
 # Khan Academy
 alias @khan='googler -w khanacademy.org'
-
-# L
-
-# Last.fm
-alias @lfm='googler -w last.fm'
 # LinkedIn
 alias @li='googler -w linkedin.com'
-# Linux.com
-alias @linux='googler -w linux.com'
-# Linux Journal
-alias @lj='googler -w linuxjournal.com'
-# LinuxQuestions
-alias @lq='googler -w linuxquestions.org'
-# LQWiki
-alias @lqw='googler -w wiki.linuxquestions.org'
-# LWN.net
-alias @lwn='googler -w lwn.net'
-# Linux Cross Reference
-alias @lxr='googler -w lxr.free-electrons.com'
-
-# M
-
-# Ubuntu Manpage
-alias @man='googler -w manpages.ubuntu.com'
-# Linux manual page
-alias @man7='googler -w man7.org'
-# Manga Reader
-alias @mangar='googler -w mangareader.net'
-# MLB
-alias @mlb='googler -w mlb.mlb.com'
-# Mac Rumors
-alias @mr='googler -w macrumors.com'
-
-# N
-
 # Google News
 alias @n='googler -N'
 # Nature Research
 alias @nature='googler -N nature.com'
-# NBA
-alias @nba='googler -N nba.com'
 # National Geographic
 alias @ng='googler -N nationalgeographic.com'
-# National Programme on Technology Enhanced Learning
-alias @nptel='googler -w nptel.ac.in'
-
-# O
-
 # MIT OpenCourseWare
 alias @ocw='googler -w ocw.mit.edu'
-# Open Embedded
-alias @oembedded='googler -w openembedded.org'
 # OpenSubtitles
 alias @op='googler -w opensubtitles.org'
-# Opensource.com
-alias @opensource='googler -w opensource.com'
-# Open Source Alternative
-alias @osalt='googler -w osalt.com'
-# OSDev Wiki
-alias @osdev='googler -w wiki.osdev.org'
-# OpenWrt
-alias @owrt='googler -w openwrt.org'
 # Oxford Dictionary
 alias @ox='googler -w en.oxforddictionaries.com'
-
-# P
-
-# Google Patents
-alias @patent='googler -w patents.google.com'
 # The Pirate Bay
 alias @pirate='googler -w thepiratebay.org'
-# Android Apps
-alias @play='googler -w play.google.com'
-# PlayOnLinux
-alias @playonlinux='googler -w playonlinux.com'
 # Python documentation
 alias @python='googler -w docs.python.org'
-
-# Q
-
 # Wikiquote
 alias @quotes='googler -w en.wikiquote.org'
-
-# R
-
 # Reddit
 alias @r='googler -w reddit.com'
-# Reader's Digest
-alias @rd='googler -w rd.com'
-# RFC Reader
-alias @rfc='googler -w rfc-editor.org'
-# Rpmfind
-alias @rpm='googler -w rpmfind.net'
 # Rotten Tomatoes
 alias @rt='googler -w rottentomatoes.com'
-
-# S
-
 # OnlineSlangDictionary
 alias @slang='googler -w onlineslangdictionary.com'
 # Stack Overflow
 alias @so='googler -w stackoverflow.com'
-# Softpedia
-alias @softpedia='googler -w softpedia.com'
-# SurceForge
-alias @sourceforge='googler -w sourceforge.net'
-# Subscene
-alias @ss='googler -w subscene.com'
-# Steam
-alias @st='googler -w store.steampowered.com'
-
-# T
-
 # Thesaurus.com
 alias @t='googler -w thesaurus.com'
 # TED Talks
 alias @ted='googler -w ted.com'
-# The Linux Documentation Project
-alias @tldp='googler -w tldp.org'
-# tl;drLegal
-alias @tldrlegal='googler -w tldrlegal.com'
-# Torrentz2
-alias @to='googler -w torrentz2.eu'
 # The Pirate Bay
 alias @tpb='googler -w thepiratebay.org'
-# TuneIn
-alias @tunein='googler -w tunein.com'
 # Twitter
 alias @tw='googler -w twitter.com'
 # Twitch
 alias @twitch='googler -w twitch.tv'
-
-# U
-
-# Ubuntu Forums
-alias @ubuntuforums='googler -w ubuntuforums.org'
-# Ubuntu Packages
-alias @ubuntupackages='googler -w packages.ubuntu.com'
-# Ubuntu Wiki
-alias @uwiki='googler -w wiki.ubuntu.com'
-
-# V
-
 # Vim Wiki
 alias @vim='googler -w vim.org'
-
-# W
-
 # Wikipedia
 alias @w='googler -w en.wikipedia.org'
 # Walmart
 alias @walmart='googler -w walmart.com'
 # Weather.com
 alias @weather='googler -w weather.com'
-# Wikia
-alias @wikia='googler -w wikia.com'
-
-# X
-
 # XKCD
 alias @xkcd='googler -w xkcd.com'
-
-# Y
-
-# Yahoo
-alias @y='googler -w yahoo.com'
-# Yahoo Finance
-alias @yf='googler -w finance.yahoo.com'
 # YouTube
 alias @yt='googler -w youtube.com'
 alias @youtube='googler -w youtube.com'
 
-# Z
+# Add quarto to the path
+if [[ -d /Users/danilo/Applications/quarto/bin ]]; then
+  export PATH="/Users/danilo/Applications/quarto/bin:$PATH"
+fi
 
-# ZDNet
-alias @zdnet='googler -w zdnet.com'
-
+# Activate autosuggestions
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh

@@ -1,8 +1,12 @@
-# Neovim Directory
+# Dotfiles
 
-My configuration files and plugins for [Neovim](https://neovim.io/). They work fine with regular [vim](http://www.vim.org) too.
+This repository contains my configuration files and scripts for my development environment. I use [Neovim](https://neovim.io/) and [VSCode](https://code.visualstudio.com/) as my text editors, [Zsh](https://www.zsh.org/) as my shell, and [Git](https://git-scm.com/) as my version control system. I also use [GitHub Copilot](https://copilot.github.com/) as my AI pair programmer.
 
-## Set up instructions:
+## Neovim
+
+Most of the configuration files here are for Neovim, but they work fine with regular [vim](http://www.vim.org) too. You can find a detailed explanation of how to set up Neovim below.
+
+### Neovim set up instructions:
 
 Install the latest version of neovim with [homebrew](https://brew.sh/):
 ```
@@ -10,10 +14,13 @@ Install the latest version of neovim with [homebrew](https://brew.sh/):
 brew install neovim
 ```
 
-I recommend you to install [iterm2](https://www.iterm2.com/) and [tmux](https://github.com/tmux/tmux) too:
+I recommend you to install [iterm2](https://www.iterm2.com/), [tmux](https://github.com/tmux/tmux), [zsh](https://www.zsh.org/), and [oh-my-zsh](https://ohmyz.sh/) as well:
 ```
 brew install --cask iterm2
 brew install tmux
+brew install zsh
+chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 Download [vim-plug](https://github.com/junegunn/vim-plug):
@@ -24,7 +31,7 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 Download this repository and copy the contents to your home folder
 ```
-git clone https://github.com/danilofreire/vimrc
+git clone https://github.com/danilofreire/dotfiles
 cd vimrc/
 mv .vimrc /Users/username/
 ```
@@ -35,7 +42,7 @@ set runtimepath^=/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 ```
-... or just copy the [`init.vim`](https://raw.githubusercontent.com/danilofreire/vimrc/master/init.vim) file above.
+... or just copy the [`init.vim`](https://raw.githubusercontent.com/danilofreire/dotfiles/master/init.vim) file above.
 
 Open `.vimrc` and type `:PlugInstall`. From the command line:
 ```
@@ -61,7 +68,7 @@ To install the [iTerm2 Gruvbox Theme](https://github.com/herrbischoff/iterm2-gru
 
 And this is how the editor looks like with the default configurations:
 
-![](https://github.com/danilofreire/vimrc/raw/master/neovim.png)
+![](https://github.com/danilofreire/dotfiles/raw/master/neovim.png)
 
 I hope you enjoy using Neovim! :)
 
