@@ -149,7 +149,7 @@ parso==0.8.3
 partd==1.4.1
 patsy==0.5.3
 pexpect==4.8.0
-Pillow==10.1.0
+Pillow==10.2.0
 platformdirs==3.11.0
 plotly==5.18.0
 plotnine==0.12.4
