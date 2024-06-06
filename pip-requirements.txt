@@ -229,7 +229,7 @@ threadpoolctl==3.2.0
 tinycss2==1.2.1
 tomlkit==0.12.2
 toolz==0.12.0
-tornado==6.3.3
+tornado==6.4.1
 traitlets==5.13.0
 trio==0.25.0
 trio-websocket==0.11.1
