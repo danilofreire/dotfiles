@@ -17,7 +17,7 @@
 # sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v4.3.2/googler && sudo chmod +x /usr/local/bin/googler
 
 # autojump
-[[ -s /Users/Danilo/.autojump/etc/profile.d/autojump.sh ]] && source /Users/Danilo/.autojump/etc/profile.d/autojump.sh
+[[ -s /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh ]] && source /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
 # fzf
@@ -98,7 +98,7 @@ ttyctl -f
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/Danilo/.oh-my-zsh"
+export ZSH="/Users/politicaltheory/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -351,4 +351,4 @@ if [[ -d /Users/danilo/Applications/quarto/bin ]]; then
 fi
 
 # Activate autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
