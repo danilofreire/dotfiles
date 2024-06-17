@@ -28,8 +28,15 @@ export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 
 # git
+alias gaa='git add .'
 alias gar='git add article.Rmd references.bib'
 alias gcane='git commit --amend --no-edit'
+alias gcmsg='git commit -am'
+alias gorigin='git remove add origin main && git push -u origin main'
+alias gp='git push'
+alias gpf='git -f push'
+alias gpl='git pull'
+alias gs='git status'
 alias gwip='git add . && git commit -m "WIP" && git push'
 
 # git-ignore
@@ -37,12 +44,9 @@ alias gig='gi latex,linux,macos,python,r,vim,windows >> .gitignore'
 alias gignore='gi latex,linux,macos,python,r,vim,windows >> .gitignore'
 
 # gh cli
-alias ghart='gh repo clone danilofreire/quarto-templates && cd quarto-templates/article && nvim article.qmd references.bib'
-alias gharticle='gh repo clone danilofreire/quarto-templates && cd quarto-templates/article && nvim article.Rmd references.bib'
 alias ghclone='gh repo clone'
-alias ghletter='gh repo clone danilofreire/quarto-templates && cd rmarkdown-templates/letter && nvim letter.Rmd'
 alias ghmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates'
-alias ghqa='gh repo clone danilofreire/quarto-templates && cd quarto-templates/article && nvim article.qmd references.bib'
+alias ghqa='gh repo clone danilofreire/quarto-templates . && rm -rf letter cv syllabus title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && nvim article.qmd references.bib'
 alias ghquarto='gh repo clone danilofreire/quarto-templates && cd quarto-templates'
 alias ghupdate='brew update && brew upgrade gh'
 alias ghweb='gh repo view --web'
@@ -53,7 +57,7 @@ alias ghweb='gh repo view --web'
 # commented out by conda initialize
 
 # lazygit
-# alias lg='lazygit'
+alias lg='lazygit'
 
 # neovim
 alias n='nvim'
@@ -63,27 +67,38 @@ alias nn='nvim article.Rmd references.bib'
 alias v='nvim'
 
 # python3
-alias python=/opt/homebrew/bin/python3.11
-alias python3=/opt/homebrew/bin/python3.11
-alias p=/opt/homebrew/bin/python3.11
+alias python=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
+alias python3=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
+alias p=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
+alias p3=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
 
 # quarto
-alias qapdf='quarto render article.qmd --to pdf'
-alias qap='quarto render article.qmd --to pdf'
+alias qa='gh repo clone danilofreire/quarto-templates article && cd article && rm -rf cv syllabus letter title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv article/*.* ./ && rm -rf article && nvim article.qmd references.bib'
 alias qah='quarto render article.qmd --to html'
-alias qlp='quarto render letter.qmd --to pdf'
+alias qap='quarto render article.qmd --to pdf'
+alias qapdf='quarto render article.qmd --to pdf'
+alias qappendix='gh repo clone danilofreire/quarto-templates appendix && cd appendix && rm -rf cv syllabus letter title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv article/*.* ./ && rm -rf article && mv article.qmd appendix.qmd && nvim appendix.qmd references.bib'
+alias qarticle='gh repo clone danilofreire/quarto-templates article && cd article && rm -rf cv syllabus letter title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv article/*.* ./ && rm -rf article && nvim article.qmd references.bib'
+alias qclone='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
+alias qletter='gh repo clone danilofreire/quarto-templates letter && cd letter && rm -rf article cv syllabus title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv letter/*.* ./ && rm -rf letter && nvim letter.qmd'
 alias qlh='quarto render letter.qmd --to html'
+alias qlp='quarto render letter.qmd --to pdf'
+alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
+alias qp='gh repo clone danilofreire/quarto-presentation . && rm screenshot.png README.md .gitignore && rm -rf .git && nvim quarto-presentation.qmd references.bib'
+alias qphere='gh repo clone danilofreire/quarto-presentation presentation && cd presentation/ && rm screenshot.png README.md .gitignore && rm -rf .git && mv presentation/*.* && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
+alias qpres='gh repo clone danilofreire/quarto-presentation presentation && cd presentation/ && rm screenshot.png README.md .gitignore && rm -rf .git && nvim quarto-presentation.qmd references.bib'
+alias qpresensation='gh repo clone danilofreire/quarto-presentation presentation && cd presentation/ && rm screenshot.png README.md .gitignore && rm -rf .git && nvim quarto-presentation.qmd references.bib'
 
 # radian
 alias r='radian'
 
 # remove images 
 alias rdpng='rm ~/Desktop/*.png'
-alias rmdp='rm ~/Desktop/*.png'
-alias rmpng='rm ~/Desktop/*.png'
 alias rmdj='rm ~/Desktop/*.jpg'
-alias rmp='rm *.png'
-alias rmj='rm *.jpg'
+alias rmdp='rm ~/Desktop/*.png'
+alias rmj='rm ~/Desktop/*.jpg'
+alias rmp='rm ~/Desktop/*.png'
+alias rmpng='rm ~/Desktop/*.png'
 
 # save files
 alias vim="stty stop '' -ixoff ; vim"
