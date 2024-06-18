@@ -198,7 +198,7 @@ rfc3986-validator==0.1.1
 rich==13.6.0
 rpds-py==0.10.6
 rsa==4.9
-scikit-learn==1.3.2
+scikit-learn==1.5.0
 scipy==1.11.3
 scpi-pkg==2.2.7
 scs==3.2.4.post1
