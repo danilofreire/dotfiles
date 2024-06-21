@@ -29,14 +29,16 @@ export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 
 # git
 alias gaa='git add .'
-alias gar='git add article.Rmd references.bib'
+alias gar='git add article.qmd references.bib'
 alias gcane='git commit --amend --no-edit'
 alias gcmsg='git commit -am'
-alias gorigin='git remove add origin main && git push -u origin main'
+alias gorigin='git remote add origin main && git push -u origin main'
 alias gp='git push'
 alias gpf='git -f push'
 alias gpl='git pull'
 alias gs='git status'
+alias gst='git status'
+alias gup='git push --set-upstream origin main'
 alias gwip='git add . && git commit -m "WIP" && git push'
 
 # git-ignore
