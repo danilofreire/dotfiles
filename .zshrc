@@ -53,11 +53,6 @@ alias ghquarto='gh repo clone danilofreire/quarto-templates && cd quarto-templat
 alias ghupdate='brew update && brew upgrade gh'
 alias ghweb='gh repo view --web'
 
-# Miniconda
-# /Users/USERNAME/Documents/miniconda3/bin/conda init zsh
-# export PATH="/Users/USERNAME/miniconda3/bin:$PATH"  
-# commented out by conda initialize
-
 # lazygit
 alias lg='lazygit'
 
@@ -69,10 +64,10 @@ alias nn='nvim article.Rmd references.bib'
 alias v='nvim'
 
 # python3
-alias python=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
-alias python3=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
-alias p=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
-alias p3=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
+alias python=/opt/anaconda3/bin/python
+alias python3=/opt/anaconda3/bin/python
+alias p3=/opt/anaconda3/bin/python
+alias p=/opt/anaconda3/bin/python
 
 # quarto
 alias qa='gh repo clone danilofreire/quarto-templates article && cd article && rm -rf cv syllabus letter title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv article/*.* ./ && rm -rf article && nvim article.qmd references.bib'
@@ -87,11 +82,11 @@ alias qletter='gh repo clone danilofreire/quarto-templates letter && cd letter &
 alias qlh='quarto render letter.qmd --to html'
 alias qlp='quarto render letter.qmd --to pdf'
 alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
-alias qmetropolis='gh repo clone danilofreire/metropolis-beamer presentation && cd presentation/ && rm testing.sh README.md .gitignore LICENSE.md && rm -rf .git screenshots docs && nvim template.qmd references.bib'
+alias qmetropolis='gh repo clone danilofreire/metropolis-beamer presentation && cd presentation/ && git remote remove origin && rm testing.sh README.md .gitignore LICENSE.md && rm -rf .git && nvim template.qmd references.bib'
 alias qp='gh repo clone danilofreire/quarto-presentation . && rm screenshot.png README.md .gitignore && rm -rf .git && nvim quarto-presentation.qmd references.bib'
 alias qphere='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
-alias qpres='gh repo clone danilofreire/metropolis-beamer presentation && cd presentation/ && rm testing.sh README.md .gitignore LICENSE.md && rm -rf .git screenshots docs && nvim template.qmd references.bib'
-alias qpresentation='gh repo clone danilofreire/metropolis-beamer presentation && cd presentation/ && rm testing.sh README.md .gitignore LICENSE.md && rm -rf .git screenshots docs && nvim template.qmd references.bib'
+alias qpreshere='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
+alias qpresentation='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
 export QUARTO_PYTHON=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
 
 # radian
@@ -372,3 +367,22 @@ fi
 
 # Activate autosuggestions
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# GitHub Copilot aliases
+eval "$(gh copilot alias -- zsh)"
+
