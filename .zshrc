@@ -11,6 +11,7 @@
 # brew install pyenv
 # brew install ripgrep
 # brew install thefuck
+# brew install tldr
 # brew install zsh-autosuggestions
 # brew install zsh-completions
 # https://github.com/morhetz/gruvbox-contrib
