@@ -1,6 +1,6 @@
-# Useful Commands
+# Useful vim commands
 
-Here is a list of commands that I regularly use. Some of them are customised.
+Here is a list of vim commands that I regularly use. Many of them are customised.
 
 ## Basic commands
 
