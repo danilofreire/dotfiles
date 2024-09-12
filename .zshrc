@@ -18,6 +18,10 @@
 # Go to https://github.com/morhetz/gruvbox-contrib/blob/master/iterm2/gruvbox-dark.itermcolors
 # Download the file, then load it on Settings, Profiles, Color, Colour Presents in iTerm2
 # sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v4.3.2/googler && sudo chmod +x /usr/local/bin/googler
+# Extensions for gh:
+# gh extension install github/gh-copilot
+# gh extension install gennaro-tedesco/gh-s
+# gh extension install korosuke613/gh-user-stars
 
 # autojump
 [[ -s /Users/dafreir/.autojump/etc/profile.d/autojump.sh ]] && source /Users/dafreir/.autojump/etc/profile.d/autojump.sh
@@ -369,7 +373,7 @@ if [[ -d /Users/danilo/Applications/quarto/bin ]]; then
 fi
 
 # Activate autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
