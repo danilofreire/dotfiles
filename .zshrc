@@ -207,7 +207,6 @@ plugins=(
   dircycle
   docker
   docker-compose
-  docker-machine
   fzf 
   git
   gitfast
