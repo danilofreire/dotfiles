@@ -2,8 +2,10 @@
 # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # Install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# Then also install a few plugins:
-# brew install --cask font-fira-code 
+# Install a few plugins:
+# brew tap ryanoasis/nerd-fonts
+# brew install --cask font-fira-code-nerd-font
+# Select Fira Code Nerd Font in Iterm2 (Settings, Profile, Text)
 # brew install autojump
 # brew install fzf
 # brew install gh
@@ -13,7 +15,8 @@
 # brew install tldr
 # brew install zsh-autosuggestions
 # brew install zsh-completions
-# https://github.com/morhetz/gruvbox-contrib
+# Go to https://github.com/morhetz/gruvbox-contrib/blob/master/iterm2/gruvbox-dark.itermcolors
+# Download the file, then load it on Settings, Profiles, Color, Colour Presents in iTerm2
 # sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v4.3.2/googler && sudo chmod +x /usr/local/bin/googler
 
 # autojump
