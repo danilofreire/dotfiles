@@ -1,13 +1,12 @@
+# Install Homebrew
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # Install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Then also install a few plugins:
-# brew tap homebrew/cask-fonts
-# brew install --cask font-fira-code
-# brew install --cask font-firacode-nerd-font
+# brew install --cask font-fira-code 
 # brew install autojump
 # brew install fzf
 # brew install gh
-# brew install googler
 # brew install pyenv
 # brew install ripgrep
 # brew install thefuck
@@ -18,7 +17,7 @@
 # sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v4.3.2/googler && sudo chmod +x /usr/local/bin/googler
 
 # autojump
-[[ -s /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh ]] && source /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh
+[[ -s /Users/dafreir/.autojump/etc/profile.d/autojump.sh ]] && source /Users/dafreir/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
 # fzf
@@ -114,7 +113,7 @@ ttyctl -f
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/politicaltheory/.oh-my-zsh"
+export ZSH="/Users/dafreir/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
