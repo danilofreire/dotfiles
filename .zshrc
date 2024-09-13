@@ -9,12 +9,16 @@
 # brew install autojump
 # brew install fzf
 # brew install gh
+# brew install --cask miniconda
+# brew install pandoc
 # brew install pyenv
+# brew install r
 # brew install ripgrep
 # brew install thefuck
 # brew install tldr
 # brew install zsh-autosuggestions
 # brew install zsh-completions
+# conda install -c conda-forge radian
 # Go to https://github.com/morhetz/gruvbox-contrib/blob/master/iterm2/gruvbox-dark.itermcolors
 # Download the file, then load it on Settings, Profiles, Color, Colour Presents in iTerm2
 # sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v4.3.2/googler && sudo chmod +x /usr/local/bin/googler
