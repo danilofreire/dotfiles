@@ -16,6 +16,9 @@
 # brew install ripgrep
 # brew install thefuck
 # brew install tldr
+# brew install zsh
+# chsh -s $(which zsh)
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # brew install zsh-autosuggestions
 # brew install zsh-completions
 # conda install -c conda-forge radian
