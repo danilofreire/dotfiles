@@ -1,0 +1,68 @@
+## General Settings
+set autoindent
+set backup
+set backupdir "~/.nano/backups"
+set constantshow
+set historylog
+set linenumbers
+set mouse
+set multibuffer
+set nohelp
+set softwrap
+set tabsize 4
+set tabstospaces
+
+## Syntax Highlighting
+include "/opt/homebrew/share/nano/*.nanorc"
+
+## Basic color scheme for nano
+
+## Interface colors
+set titlecolor brightwhite,blue
+set statuscolor brightwhite,green
+set errorcolor brightwhite,red
+set selectedcolor brightwhite,magenta
+set numbercolor cyan
+set keycolor cyan
+set functioncolor green
+
+## Syntax highlighting
+include "/opt/homebrew/share/nano/*.nanorc"
+
+## Other settings
+set linenumbers
+set autoindent
+set tabsize 4
+set tabstospaces
+
+## Key Bindings
+bind ^Q exit all
+bind ^S savefile main
+bind ^W writeout main
+bind ^O insert main
+bind ^H help all
+bind ^N nextbuf all
+bind ^P prevbuf all
+
+## Macros
+bind ^J "|fmt -w 72" main
+
+## Custom Syntax Highlighting
+syntax "custom" "\.custom$"
+color red "\<(TODO|FIXME|XXX|BUG)\>"
+color green "#.*$"
+color blue "\"(\\.|[^\"])*\""
+color yellow "'(\\.|[^'])*'"
+
+## Enable Spell Checking
+set speller "aspell -x -c"
+
+## Miscellaneous
+set wordchars "<_>."
+set zap
+set atblanks
+set showcursor
+set smarthome
+set afterends
+set trimblanks
+set unix

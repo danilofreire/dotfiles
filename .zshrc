@@ -9,20 +9,22 @@
 # brew install autojump
 # brew install fzf
 # brew install gh
+# brew install --cask iterm2
 # brew install pyenv
+# brew install --cask quarto
+# brew install r
 # brew install ripgrep
 # brew install thefuck
 # brew install tldr
 # brew install zsh-autosuggestions
 # brew install zsh-completions
+# conda install -c conda-forge radian
 # Go to https://github.com/morhetz/gruvbox-contrib/blob/master/iterm2/gruvbox-dark.itermcolors
 # Download the file, then load it on Settings, Profiles, Color, Colour Presents in iTerm2
-# sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v4.3.2/googler && sudo chmod +x /usr/local/bin/googler
 # Extensions for gh:
 # gh extension install github/gh-copilot
 # gh extension install gennaro-tedesco/gh-s
 # gh extension install korosuke613/gh-user-stars
-
 # auto-complete
 # source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
@@ -268,118 +270,8 @@ eval "$(starship init zsh)"
 # fuck
 # eval $(/opt/homebrew/bin/python3.11 /usr/local/bin/thefuck --alias)
 
-# Googler aliases
-
-# AliExpress
-alias @ae='googler -w aliexpress.com'
-alias @ali='googler -w aliexpress.com'
-# Amazon.com
-alias @a='googler -w amazon.co.uk'
-alias @amazon='googler -w amazon.co.uk'
-alias @abr='googler -w amazon.com.br'
-# AlternativeTo
-alias @alt='googler -w alternativeto.net'
-# AZLyrics
-alias @azl='googler -w azlyrics.com'
-# BBC
-alias @bbc='googler -w bbc.co.uk'
-# Encyclopaedia Britannica
-alias @britannica='googler -w britannica.com'
-# CNN
-alias @cnn='googler -w cnn.com'
-# Dictionary.com
-alias @di='googler -w dictionary.com'
-# DistroWatch
-alias @distrowatch='googler -w distrowatch.com'
-# eBay
-alias @e='googler -w ebay.com'
-# ESPN
-alias @espn='googler -w espn.com'
-# Etsy
-alias @etsy='googler -w etsy.com'
-# Online Etymology Dictionary
-alias @etym='googler -w etymonline.com'
-# Facebook
-alias @fb='googler -w facebook.com'
-# Firefox Add-ons
-alias @firefox='googler -w addons.mozilla.org'
-# Forbes
-alias @forbes='googler -w forbes.com'
-# Financial Times
-alias @ft='googler -w markets.ft.com'
-# Google Scholar
-alias @gs='googler -w scholar.google.com'
-alias @scholar='googler -w scholar.google.com'
-# Google Search
-alias @g='googler'
-# Genius Lyrics
-alias @genius='googler -w genius.com'
-# GitHub
-alias @gh='googler -w github.com'
-# Project Gutenberg
-alias @gutenberg='googler -w gutenberg.org'
-# Hulu
-alias @hulu='googler -w hulu.com'
-# Instagram
-alias @ig='googler -w instagram.com'
-# IMDB
-alias @imdb='googler -w imdb.com'
-# Khan Academy
-alias @khan='googler -w khanacademy.org'
-# LinkedIn
-alias @li='googler -w linkedin.com'
-# Google News
-alias @n='googler -N'
-# Nature Research
-alias @nature='googler -N nature.com'
-# National Geographic
-alias @ng='googler -N nationalgeographic.com'
-# MIT OpenCourseWare
-alias @ocw='googler -w ocw.mit.edu'
-# OpenSubtitles
-alias @op='googler -w opensubtitles.org'
-# Oxford Dictionary
-alias @ox='googler -w en.oxforddictionaries.com'
-# The Pirate Bay
-alias @pirate='googler -w thepiratebay.org'
-# Python documentation
-alias @python='googler -w docs.python.org'
-# Wikiquote
-alias @quotes='googler -w en.wikiquote.org'
-# Reddit
-alias @r='googler -w reddit.com'
-# Rotten Tomatoes
-alias @rt='googler -w rottentomatoes.com'
-# OnlineSlangDictionary
-alias @slang='googler -w onlineslangdictionary.com'
-# Stack Overflow
-alias @so='googler -w stackoverflow.com'
-# Thesaurus.com
-alias @t='googler -w thesaurus.com'
-# TED Talks
-alias @ted='googler -w ted.com'
-# The Pirate Bay
-alias @tpb='googler -w thepiratebay.org'
-# Twitter
-alias @tw='googler -w twitter.com'
-# Twitch
-alias @twitch='googler -w twitch.tv'
-# Vim Wiki
-alias @vim='googler -w vim.org'
-# Wikipedia
-alias @w='googler -w en.wikipedia.org'
-# Walmart
-alias @walmart='googler -w walmart.com'
-# Weather.com
-alias @weather='googler -w weather.com'
-# XKCD
-alias @xkcd='googler -w xkcd.com'
-# YouTube
-alias @yt='googler -w youtube.com'
-alias @youtube='googler -w youtube.com'
-
 # Quarto Python
-export QUARTO_PYTHON=$(which python3)
+# export QUARTO_PYTHON=$(which python3)
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -396,4 +288,3 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 # End of conda initialization
-
