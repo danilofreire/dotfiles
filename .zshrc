@@ -1,24 +1,33 @@
+# Install Homebrew
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # Install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# Then also install a few plugins:
-# brew tap homebrew/cask-fonts
-# brew install --cask font-fira-code
-# brew install --cask font-firacode-nerd-font
+# Install a few plugins:
+# brew tap ryanoasis/nerd-fonts
+# brew install --cask font-fira-code-nerd-font
+# Select Fira Code Nerd Font in Iterm2 (Settings, Profile, Text)
 # brew install autojump
 # brew install fzf
 # brew install gh
-# brew install googler
 # brew install pyenv
 # brew install ripgrep
 # brew install thefuck
 # brew install tldr
 # brew install zsh-autosuggestions
 # brew install zsh-completions
-# https://github.com/morhetz/gruvbox-contrib
+# Go to https://github.com/morhetz/gruvbox-contrib/blob/master/iterm2/gruvbox-dark.itermcolors
+# Download the file, then load it on Settings, Profiles, Color, Colour Presents in iTerm2
 # sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v4.3.2/googler && sudo chmod +x /usr/local/bin/googler
+# Extensions for gh:
+# gh extension install github/gh-copilot
+# gh extension install gennaro-tedesco/gh-s
+# gh extension install korosuke613/gh-user-stars
+
+# auto-complete
+# source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # autojump
-[[ -s /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh ]] && source /Users/politicaltheory/.autojump/etc/profile.d/autojump.sh
+[[ -s /Users/dafreir/.autojump/etc/profile.d/autojump.sh ]] && source /Users/dafreir/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
 # fzf
@@ -65,10 +74,10 @@ alias nn='nvim article.Rmd references.bib'
 alias v='nvim'
 
 # python3
-alias python=/opt/anaconda3/bin/python
-alias python3=/opt/anaconda3/bin/python
-alias p3=/opt/anaconda3/bin/python
-alias p=/opt/anaconda3/bin/python
+alias python=/opt/miniconda3/bin/python
+alias python3=/opt/miniconda3/bin/python
+alias p3=/opt/miniconda3/bin/python
+alias p=/opt/miniconda3/bin/python
 
 # quarto
 alias qa='gh repo clone danilofreire/quarto-templates article && cd article && rm -rf cv syllabus letter title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv article/*.* ./ && rm -rf article && nvim article.qmd references.bib'
@@ -84,10 +93,10 @@ alias qlh='quarto render letter.qmd --to html'
 alias qlp='quarto render letter.qmd --to pdf'
 alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
 alias qmetropolis='gh repo clone danilofreire/metropolis-beamer presentation && cd presentation/ && git remote remove origin && rm testing.sh README.md .gitignore LICENSE.md && rm -rf .git && nvim template.qmd references.bib'
-alias qp='gh repo clone danilofreire/quarto-presentation . && rm screenshot.png README.md .gitignore && rm -rf .git && nvim quarto-presentation.qmd references.bib'
+alias qp='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md *.html .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation'
 alias qphere='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
 alias qpreshere='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
-alias qpresentation='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
+alias qpresentation='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md *.html .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation'
 export QUARTO_PYTHON=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
 
 # radian
@@ -114,7 +123,7 @@ ttyctl -f
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/politicaltheory/.oh-my-zsh"
+export ZSH="/Users/dafreir/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -193,6 +202,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  aliases
   autojump
   brew
   catimg
@@ -201,7 +211,6 @@ plugins=(
   dircycle
   docker
   docker-compose
-  docker-machine
   fzf 
   git
   gitfast
@@ -214,7 +223,15 @@ plugins=(
   vi-mode
   virtualenv
   web-search
+  z
   zsh-interactive-cd
+)
+
+# Search engines
+ZSH_WEB_SEARCH_ENGINES=(
+  reddit "https://www.reddit.com/search/?q="
+  perplexity "https://www.perplexity.ai/search?q="
+  pp "https://www.perplexity.ai/search?q="
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -361,29 +378,22 @@ alias @xkcd='googler -w xkcd.com'
 alias @yt='googler -w youtube.com'
 alias @youtube='googler -w youtube.com'
 
-# Add quarto to the path
-if [[ -d /Users/danilo/Applications/quarto/bin ]]; then
-  export PATH="/Users/danilo/Applications/quarto/bin:$PATH"
-fi
-
-# Activate autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Quarto Python
+export QUARTO_PYTHON=$(which python3)
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/opt/anaconda3/bin:$PATH"
+        export PATH="/opt/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# GitHub Copilot aliases
-eval "$(gh copilot alias -- zsh)"
+# End of conda initialization
 
