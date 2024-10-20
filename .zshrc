@@ -65,6 +65,14 @@ alias ghquarto='gh repo clone danilofreire/quarto-templates && cd quarto-templat
 alias ghupdate='brew update && brew upgrade gh'
 alias ghweb='gh repo view --web'
 
+# jupyterlite
+# the command below builds a jupyterlite site for pages hosted on GitHub
+# it is useful for my data science courses
+# run the command from the root folder in the repository
+# it builds the website in the docs/ folder of the gh-pages branch
+# the example jupyter folder is also in the root folder
+alias gjl='mkdir -p docs/jupyter && cp -r jupyter/* docs/jupyter && cd docs/jupyter && pip install -r requirements.txt && jupyter lite build && mv _output/* ./ && git add ./ -f && git commit -m "update JupyterLite" && git push'
+
 # lazygit
 alias lg='lazygit'
 
@@ -94,8 +102,8 @@ alias qlh='quarto render letter.qmd --to html'
 alias qlp='quarto render letter.qmd --to pdf'
 alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
 alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis-beamer/* ./ && git remote remove origin && rm -rf testing.sh README.md .gitignore LICENSE.md && .git && code template.qmd references.bib'
-alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf screenshot.png README.md *.html .gitignore .git'
-alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf screenshot.png README.md *.html .gitignore .git'
+alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf screenshot.png README.md *.html .gitignore .git quarto-presentation'
+alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf screenshot.png README.md *.html .gitignore .git quarto-presentation'
 export QUARTO_PYTHON=/opt/miniconda3/bin/python
 
 # radian
