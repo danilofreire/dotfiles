@@ -16,9 +16,6 @@
 # brew install ripgrep
 # brew install thefuck
 # brew install tldr
-# brew install zsh
-# chsh -s $(which zsh)
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # brew install zsh-autosuggestions
 # brew install zsh-completions
 # conda install -c conda-forge radian
@@ -85,24 +82,21 @@ alias p3=/opt/miniconda3/bin/python
 alias p=/opt/miniconda3/bin/python
 
 # quarto
-alias qa='gh repo clone danilofreire/quarto-templates article && cd article && rm -rf cv syllabus letter title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv article/*.* ./ && rm -rf article && nvim article.qmd references.bib'
+alias qa='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && code article.qmd references.bib'
 alias qah='quarto render article.qmd --to html'
 alias qap='quarto render article.qmd --to pdf'
 alias qapdf='quarto render article.qmd --to pdf'
-alias qappendix='gh repo clone danilofreire/quarto-templates appendix && cd appendix && rm -rf cv syllabus letter title-page .git article-screenshot.png .gitignore README.md _config.yaml && mv article/*.* ./ && rm -rf article && mv article.qmd appendix.qmd && nvim appendix.qmd references.bib'
-alias qarticle='gh repo clone danilofreire/quarto-templates article && cd article && rm -rf cv syllabus letter title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv article/*.* ./ && rm -rf article && nvim article.qmd references.bib'
-alias qclean='gh repo clone danilofreire/quarto-presentation presentation && cd presentation/ && rm screenshot.png README.md .gitignore && rm -rf .git && nvim quarto-presentation.qmd references.bib'
+alias qappendix='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && rm article.pdf && mv article.qmd appendix.qmd && code appendix.qmd references.bib'
+alias qarticle='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && code article.qmd references.bib'
 alias qclone='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
-alias qletter='gh repo clone danilofreire/quarto-templates letter && cd letter && rm -rf article cv syllabus title-page .git && rm article-screenshot.png .gitignore README.md _config.yaml && mv letter/*.* ./ && rm -rf letter && nvim letter.qmd'
+alias qletter='gh repo clone danilofreire/quarto-templates && mv quarto-templates/letter/* ./ && rm -rf quarto-templates && code letter.qmd'
 alias qlh='quarto render letter.qmd --to html'
 alias qlp='quarto render letter.qmd --to pdf'
 alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
-alias qmetropolis='gh repo clone danilofreire/metropolis-beamer presentation && cd presentation/ && git remote remove origin && rm testing.sh README.md .gitignore LICENSE.md && rm -rf .git && nvim template.qmd references.bib'
-alias qp='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md *.html .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation'
-alias qphere='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
-alias qpreshere='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation && nvim quarto-presentation.qmd references.bib'
-alias qpresentation='gh repo clone danilofreire/quarto-presentation presentation && cd presentation && rm -rf screenshot.png README.md *.html .gitignore .git && mv ./*.* _extensions images ../ && cd .. && rm -rf presentation'
-export QUARTO_PYTHON=/Library/Frameworks/Python.framework/Versions/3.12/bin/python3
+alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis-beamer/* ./ && git remote remove origin && rm -rf testing.sh README.md .gitignore LICENSE.md && .git && code template.qmd references.bib'
+alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf screenshot.png README.md *.html .gitignore .git'
+alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf screenshot.png README.md *.html .gitignore .git'
+export QUARTO_PYTHON=/opt/miniconda3/bin/python
 
 # radian
 alias r='radian'
@@ -274,7 +268,7 @@ eval "$(starship init zsh)"
 # eval $(/opt/homebrew/bin/python3.11 /usr/local/bin/thefuck --alias)
 
 # Quarto Python
-# export QUARTO_PYTHON=$(which python3)
+# export QUARTO_PYTHON=/opt/miniconda3/bin/python
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -291,3 +285,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 # End of conda initialization
+eval "$(gh copilot alias -- zsh)"
