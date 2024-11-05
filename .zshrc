@@ -102,8 +102,9 @@ alias qlh='quarto render letter.qmd --to html'
 alias qlp='quarto render letter.qmd --to pdf'
 alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
 alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis-beamer/* ./ && git remote remove origin && rm -rf testing.sh README.md .gitignore LICENSE.md && .git && code template.qmd references.bib'
-alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf screenshot.png README.md *.html .gitignore .git quarto-presentation'
-alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf screenshot.png README.md *.html .gitignore .git quarto-presentation'
+alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation && rm screenshot.png README.md *.html .gitignore'
+alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation && rm screenshot.png README.md *.html .gitignore'
+alias qrgh='quarto render lectures/lectures.qmd && quarto render syllabus.qmd && gaa && git add docs -f && gcmsg "add lecture" && gp'
 export QUARTO_PYTHON=/opt/miniconda3/bin/python
 
 # radian
