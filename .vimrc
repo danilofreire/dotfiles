@@ -9,7 +9,6 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugins
-Plug 'neoclide/coc.nvim', {'branch': 'release'}                           " Conqueror of Completion - autocomplete
 Plug 'tpope/vim-commentary'                                               " Commenting out code
 Plug 'github/copilot.vim'                                                 " GitHub Copilot - autocomplete
 Plug 'chrisbra/csv.vim'                                                   " CSV editing
@@ -51,7 +50,6 @@ Plug 'vim-pandoc/vim-pandoc-syntax'                                       " Pand
 Plug 'jeetsukumaran/vim-pythonsense'                                      " Python syntax highlighting
 Plug 'frazrepo/vim-rainbow'                                               " Rainbow brackets
 Plug 'tpope/vim-repeat'                                                   " Repeat last change
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}                  " Semshi syntax highlighting
 Plug 'tpope/vim-sensible'                                                 " Sensible defaults
 Plug 'kshenoy/vim-signature'                                              " Place, toggle and display marks
 Plug 'junegunn/vim-slash'                                                 " Slash commands
@@ -67,6 +65,9 @@ Plug 'davidbeckingsale/writegood.vim'                                     " Lint
 Plug 'lervag/vimtex'                                                      " LaTeX
 Plug 'reedes/vim-wordy'                                                   " Tools for English prose
 Plug 'ryanoasis/vim-devicons'                                             " Show icons for files
+Plug 'nvim-lua/plenary.nvim'                                              " Plenary
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }             " Copilot chat
+Plug '3rd/image.nvim'                                                     " Image viewer
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -127,6 +128,34 @@ nnoremap <SPACE> <Nop>
 nmap <C-s> :w <CR>
 imap <C-s> <ESC>:w<CR>a
 vmap <C-s> <ESC>:w<CR>gv
+
+" Copilot Chat
+lua << EOF
+local copilot_chat = require("CopilotChat")
+copilot_chat.setup({
+  debug = true,
+  show_help = "yes",
+  prompts = {
+    Explain = "Explain how it works in English for a beginner.",
+    Review = "Review the following code and provide concise suggestions.",
+    Tests = "Briefly explain how the selected code works, then generate unit tests.",
+    Refactor = "Refactor the code to improve clarity and readability.",
+  },
+  build = function()
+    vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+  end,
+  event = "VeryLazy",
+})
+
+EOF
+
+" Copilot Chat mappings
+nnoremap <leader>gha <cmd>CopilotChatAgents<cr>
+nnoremap <leader>ghe <cmd>CopilotChatExplain<cr>
+nnoremap <leader>ghf <cmd>CopilotChatFix<cr>
+nnoremap <leader>ghm <cmd>CopilotChatModels<cr>
+nnoremap <leader>gho <cmd>CopilotChatOptimize<cr>
+nnoremap <leader>ght <cmd>CopilotChatToggle<cr>
 
 " Spelling
 au FileType rmd,md,markdown,pandoc,tex,latex syntax spell toplevel
@@ -229,8 +258,8 @@ let g:rainbow_active = 1
 " Use conda environment ml:
 " conda create --name ml
 " conda activate ml
-let g:python3_host_prog = '/usr/local/bin/python3'
-let g:python_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/opt/miniconda3/bin/python'
+let g:python_host_prog = '/opt/miniconda3/bin/python'
 
 " Floaterm
 nmap <Leader>t :FloatermNew --position=center<CR>
@@ -260,67 +289,6 @@ nmap <Leader>ea <Plug>(EasyAlign)
 " NERDTree
 nmap <Leader>nt :NERDTreeToggle<CR>
 nmap <Leader>nf :NERDTreeFind<CR>
-
-" Coc.nvim config
-set shortmess+=c
-set signcolumn=yes
-set updatetime=300
-" Map <tab> for trigger completion, completion confirm, snippet expand and jump 
-" like VSCode:
-inoremap <silent><expr> <TAB>
-  \ coc#pum#visible() ? coc#_select_confirm() :
-   \ coc#expandableOrJumpable() ?
-   \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-   \ CheckBackSpace() ? "\<TAB>" :
-   \ coc#refresh()
-function! CheckBackSpace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-let g:coc_snippet_next = '<tab>'
-" Use tab for trigger completion with characters ahead and navigate.
-function! CheckBackSpace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-" Insert <tab> when previous text is space, refresh completion if not.
-inoremap <silent><expr> <TAB>
-\ coc#pum#visible() ? coc#pum#next(1):
-\ CheckBackSpace() ? "\<Tab>" :
-\ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-	execute 'h '.expand('<cword>')
-  else
-	call CocAction('doHover')
-  endif
-endfunction
-
-" Coc Marketplace
-nmap <Leader>cc :CocCommand <CR>
-nmap <Leader>cl :CocList <CR>
-nmap <Leader>cm :CocList marketplace <CR>
-
-" Coc extensions to download:
-" :CocInstall coc-ultisnips coc-terminal coc-sql coc-snippets coc-r-lsp
-" coc-python coc-pairs coc-omni coc-neosnippet coc-marketplace coc-lists
-" coc-emoji coc-yaml coc-vimtex coc-bibtex coc-texlab coc-html coc-json
-" coc-translator coc-prettier coc-tabnine coc-vimtex coc-markdownlint
-" coc-pyright
 
 " Cursor.execute for Python and SQL
 nnoremap <Leader>ex i<CR>cursor.execute("")<Esc>F"i
