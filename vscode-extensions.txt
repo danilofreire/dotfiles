@@ -8,6 +8,7 @@ donjayamanne.githistory
 dunstontc.viml
 github.copilot
 github.copilot-chat
+ionutvmi.path-autocomplete
 james-yu.latex-workshop
 mathematic.vscode-pdf
 monokai.theme-monokai-pro-vscode
@@ -21,6 +22,8 @@ ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
 ms-toolsai.vscode-jupyter-cell-tags
 ms-vscode-remote.remote-containers
+ms-vscode.vscode-copilot-data-analysis
+ms-vscode.vscode-websearchforcopilot
 notzaki.pandocciter
 quarto.quarto
 rdebugger.r-debugger
@@ -31,4 +34,5 @@ sumneko.lua
 tianyishi.rmarkdown
 vscodevim.vim
 vsls-contrib.gistfs
+yy0931.vscode-sqlite3-editor
 yzhang.markdown-all-in-one

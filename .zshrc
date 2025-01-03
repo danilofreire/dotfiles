@@ -8,6 +8,7 @@
 # Select Fira Code Nerd Font in Iterm2 (Settings, Profile, Text)
 # brew install autojump
 # brew install fzf
+# brew install lla
 # brew install gh
 # brew install --cask iterm2
 # brew install pyenv
