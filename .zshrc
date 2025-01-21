@@ -8,7 +8,6 @@
 # Select Fira Code Nerd Font in Iterm2 (Settings, Profile, Text)
 # brew install autojump
 # brew install fzf
-# brew install lla
 # brew install gh
 # brew install --cask iterm2
 # brew install pyenv
@@ -84,11 +83,22 @@ alias narticle='nvim article.Rmd references.bib'
 alias nn='nvim article.Rmd references.bib'
 alias v='nvim'
 
+# ollama
+alias deepseek='ollama run deepseek-llm:latest'
+alias ds='ollama run deepseek-llm:latest'
+alias llm='ollama run deepseek-llm:latest'
+alias ods='ollama run deepseek-llm:latest'
+alias or1='ollama run deepseek-r1:7b'
+alias os='ollama stop deepseek-llm'
+alias r1='ollama run deepseek-r1:7b'
+alias stop='ollama stop deepseek-llm'
+alias stopr1='ollama stop deepseek-r1:7b'
+
 # python3
-alias python=/opt/miniconda3/bin/python
-alias python3=/opt/miniconda3/bin/python
-alias p3=/opt/miniconda3/bin/python
-alias p=/opt/miniconda3/bin/python
+alias python=/opt/miniconda3/bin/python3
+alias python3=/opt/miniconda3/bin/python3
+alias p3=/opt/miniconda3/bin/python3
+alias p=/opt/miniconda3/bin/python3
 
 # quarto
 alias qa='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && code article.qmd references.bib'
@@ -106,7 +116,7 @@ alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis
 alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
 alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
 alias qrgh='quarto render lectures/lectures.qmd && quarto render syllabus.qmd && gaa && git add docs -f && gcmsg "add lecture" && gp'
-export QUARTO_PYTHON=/opt/miniconda3/bin/python
+export QUARTO_PYTHON=/opt/miniconda3/bin/python3
 
 # radian
 alias r='radian'
@@ -296,3 +306,5 @@ unset __conda_setup
 # <<< conda initialize <<<
 # End of conda initialization
 eval "$(gh copilot alias -- zsh)"
+
+. "$HOME/.local/bin/env"
