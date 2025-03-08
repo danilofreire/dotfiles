@@ -29,8 +29,11 @@
 # source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # autojump
-[[ -s /Users/dafreir/.autojump/etc/profile.d/autojump.sh ]] && source /Users/dafreir/.autojump/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
+
+# VS Code Insiders
+alias code='code-insiders'
 
 # fzf
 alias nfzf='nvim $(fzf)'
@@ -84,15 +87,12 @@ alias nn='nvim article.Rmd references.bib'
 alias v='nvim'
 
 # ollama
-alias deepseek='ollama run deepseek-llm:latest'
-alias ds='ollama run deepseek-llm:latest'
-alias llm='ollama run deepseek-llm:latest'
-alias ods='ollama run deepseek-llm:latest'
-alias or1='ollama run deepseek-r1:7b'
-alias os='ollama stop deepseek-llm'
-alias r1='ollama run deepseek-r1:7b'
-alias stop='ollama stop deepseek-llm'
-alias stopr1='ollama stop deepseek-r1:7b'
+alias deepseek='ollama run michaelneale/deepseek-r1-goose:latest'
+alias ds='ollama run michaelneale/deepseek-r1-goose:latest'
+alias llm='ollama run michaelneale/deepseek-r1-goose:latest'
+alias r1='ollama run michaelneale/deepseek-r1-goose:latest'
+alias stop='ollama stop michaelneale/deepseek-r1-goose:latest'
+alias stopr1='ollama stop michaelneale/deepseek-r1-goose:latest'
 
 # python3
 alias python=/opt/miniconda3/bin/python3
@@ -115,7 +115,7 @@ alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
 alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis-beamer/* ./ && git remote remove origin && rm -rf testing.sh README.md .gitignore LICENSE.md && .git && code template.qmd references.bib'
 alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
 alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
-alias qrgh='quarto render lectures/lectures.qmd && quarto render syllabus.qmd && gaa && git add docs -f && gcmsg "add lecture" && gp'
+alias ql='quarto render lectures.qmd && gaa && git add docs -f && gcmsg "add lecture" && gp && git switch main'
 export QUARTO_PYTHON=/opt/miniconda3/bin/python3
 
 # radian
@@ -130,140 +130,7 @@ alias rmp='rm ~/Desktop/*.png'
 alias rmpng='rm ~/Desktop/*.png'
 
 # save files
-alias vim="stty stop '' -ixoff ; vim"
-
-# `Frozing' tty, so after any command terminal settings will be restored
-ttyctl -f
-
-##########################
-### Script begins here ###
-##########################
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/dafreir/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Set fzf installation directory path
-# export FZF_BASE=/path/to/fzf/install/dir
-
-# Uncomment to set the FZF_DEFAULT_COMMAND
-# export FZF_DEFAULT_COMMAND='<your fzf default commmand>'
-
-# Uncomment the following line to disable fuzzy completion
-# DISABLE_FZF_AUTO_COMPLETION="true"
-
-# Uncomment the following line to disable key bindings (CTRL-T, CTRL-R, ALT-C)
-# DISABLE_FZF_KEY_BINDINGS="true"
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  aliases
-  autojump
-  brew
-  catimg
-  command-not-found
-  copyfile
-  dircycle
-  docker
-  docker-compose
-  fzf 
-  git
-  gitfast
-  gitignore
-  gh
-  macos
-  thefuck
-  themes
-  ubuntu
-  vi-mode
-  virtualenv
-  web-search
-  z
-  zsh-interactive-cd
-)
-
-# Search engines
-ZSH_WEB_SEARCH_ENGINES=(
-  reddit "https://www.reddit.com/search/?q="
-  perplexity "https://www.perplexity.ai/search?q="
-  pp "https://www.perplexity.ai/search?q="
-)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
+alias vim="stty stop '' -ixoff ;;" then
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
@@ -308,3 +175,6 @@ unset __conda_setup
 eval "$(gh copilot alias -- zsh)"
 
 . "$HOME/.local/bin/env"
+
+# CBT therapist alias
+alias cbt='~/Documents/github/cbt/chat_session.sh'
