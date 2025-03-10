@@ -2,6 +2,7 @@
 # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # Install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#
 # Install a few plugins:
 # brew tap ryanoasis/nerd-fonts
 # brew install --cask font-fira-code-nerd-font
@@ -27,6 +28,9 @@
 # gh extension install korosuke613/gh-user-stars
 # auto-complete
 # source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+# Plugins
+plugins=(aliases autojump brew common-aliases docker gh git gitignore iterm2 macos python thefuck web-search)
 
 # autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
