@@ -182,3 +182,6 @@ eval "$(gh copilot alias -- zsh)"
 
 # CBT therapist alias
 alias cbt='~/Documents/github/cbt/chat_session.sh'
+
+# Web-UI
+alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788
