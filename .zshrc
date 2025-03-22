@@ -185,3 +185,6 @@ alias cbt='~/Documents/github/cbt/chat_session.sh'
 
 # Web-UI
 alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788'
+
+# Aider - DeepSeek
+alias ads="export OPENROUTER_API_KEY=sk-XXXXX && aider --model openrouter/deepseek/deepseek-r1:free"
