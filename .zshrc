@@ -30,7 +30,7 @@
 # source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # Plugins
-plugins=(aliases autojump brew common-aliases docker gh git gitignore iterm2 macos python thefuck web-search)
+plugins=(aliases autojump brew common-aliases conda docker gh git gitignore iterm2 macos pip python thefuck vi-mode web-search)
 
 # autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
@@ -38,6 +38,9 @@ autoload -U compinit && compinit -u
 
 # VS Code Insiders
 alias code='code-insiders'
+
+# Vim-like keybindings
+bindkey -v
 
 # fzf
 alias nfzf='nvim $(fzf)'
@@ -99,10 +102,10 @@ alias stop='ollama stop michaelneale/deepseek-r1-goose:latest'
 alias stopr1='ollama stop michaelneale/deepseek-r1-goose:latest'
 
 # python3
-alias python=/opt/miniconda3/bin/python3
-alias python3=/opt/miniconda3/bin/python3
-alias p3=/opt/miniconda3/bin/python3
-alias p=/opt/miniconda3/bin/python3
+alias python=~/miniconda3/bin/python3
+alias python3=~/miniconda3/bin/python3
+alias p3=~/miniconda3/bin/python3
+alias p=~/miniconda3/bin/python3
 
 # quarto
 alias qa='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && code article.qmd references.bib'
@@ -117,10 +120,10 @@ alias qlh='quarto render letter.qmd --to html'
 alias qlp='quarto render letter.qmd --to pdf'
 alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
 alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis-beamer/* ./ && git remote remove origin && rm -rf testing.sh README.md .gitignore LICENSE.md && .git && code template.qmd references.bib'
-alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
-alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
+alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm -rf ./_extensions/coatless-quarto/ ./_extensions/quarto-ext/ ./_extensions/r-wasm/ ./_extensions/martinomagnifico/ screenshot.png README.md *.html references.bib && mkdir figures'
+alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm -rf ./_extensions/coatless-quarto/ ./_extensions/quarto-ext/ ./_extensions/r-wasm/ ./_extensions/martinomagnifico/ screenshot.png README.md *.html references.bib && mkdir figures'
 alias ql='quarto render lectures.qmd && gaa && git add docs -f && gcmsg "add lecture" && gp && git switch main'
-export QUARTO_PYTHON=/opt/miniconda3/bin/python3
+export QUARTO_PYTHON=~/miniconda3/bin/python3
 
 # radian
 alias r='radian'
@@ -163,14 +166,14 @@ eval "$(starship init zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/dafreir/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/dafreir/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/dafreir/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/opt/miniconda3/bin:$PATH"
+        export PATH="/Users/dafreir/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -185,6 +188,3 @@ alias cbt='~/Documents/github/cbt/chat_session.sh'
 
 # Web-UI
 alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788'
-
-# Aider - DeepSeek
-alias ads="export OPENROUTER_API_KEY=sk-XXXXX && aider --model openrouter/deepseek/deepseek-r1:free"
