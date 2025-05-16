@@ -29,6 +29,47 @@
 # auto-complete
 # source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
+# Make zsh handle spaces in filenames better
+setopt AUTO_CD              # If a command is not recognized, and is a directory, cd to it
+setopt GLOB_COMPLETE        # Show autocompletion menu with globs
+setopt MAGIC_EQUAL_SUBST    # Perform filename expansion on the right side of '=' in assignments
+setopt NO_CASE_GLOB         # Case insensitive globbing
+setopt NUMERIC_GLOB_SORT    # Sort globs numerically
+setopt RC_EXPAND_PARAM      # Expand arrays in parameters
+setopt EXTENDED_GLOB        # Use extended globbing syntax
+setopt INTERACTIVE_COMMENTS # Allow comments in interactive shells
+
+# Auto-quote special characters in URLs or filenames with spaces
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
+# Function to better handle files with spaces
+function mcp() {
+    # This is a safer mv/cp function that handles spaces better
+    if [[ "$1" == "mv" || "$1" == "cp" ]]; then
+        local cmd=$1
+        shift
+        # If last argument is a directory that exists
+        if [[ -d "${@[-1]}" ]]; then
+            # Move/copy all other arguments to that directory
+            $cmd "$@"
+        elif [[ $# -eq 2 ]]; then
+            # Simple rename/copy operation
+            $cmd "$@"
+        else
+            echo "Usage: mcp [mv|cp] source(s) destination"
+            return 1
+        fi
+    else
+        echo "Usage: mcp [mv|cp] source(s) destination"
+        return 1
+    fi
+}
+
+# Aliases for the mcp function
+alias mvs='mcp mv'
+alias cps='mcp cp'
+
 # Plugins
 plugins=(aliases autojump brew common-aliases conda docker gh git gitignore iterm2 macos pip python thefuck vi-mode web-search)
 
@@ -54,6 +95,8 @@ alias gaa='git add .'
 alias gar='git add article.qmd references.bib'
 alias gcane='git commit --amend --no-edit'
 alias gcmsg='git commit -am'
+alias ggp='git add . && git commit -m "add lectures" && gp && git switch main'
+alias gl='git log'
 alias gorigin='git remote add origin main && git push -u origin main'
 alias gp='git push'
 alias gpf='git -f push'
@@ -115,14 +158,15 @@ alias qapdf='quarto render article.qmd --to pdf'
 alias qappendix='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && rm article.pdf && mv article.qmd appendix.qmd && code appendix.qmd references.bib'
 alias qarticle='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && code article.qmd references.bib'
 alias qclone='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
+alias ql='quarto render lectures.qmd && gaa && git add docs -f && gcmsg "add lecture" && gp && git switch main'
 alias qletter='gh repo clone danilofreire/quarto-templates && mv quarto-templates/letter/* ./ && rm -rf quarto-templates && code letter.qmd'
 alias qlh='quarto render letter.qmd --to html'
 alias qlp='quarto render letter.qmd --to pdf'
 alias qmd='gh repo clone danilofreire/quarto-templates && cd quarto-templates/'
 alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis-beamer/* ./ && git remote remove origin && rm -rf testing.sh README.md .gitignore LICENSE.md && .git && code template.qmd references.bib'
 alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm -rf ./_extensions/coatless-quarto/ ./_extensions/quarto-ext/ ./_extensions/r-wasm/ ./_extensions/martinomagnifico/ screenshot.png README.md *.html references.bib && mkdir figures'
-alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm -rf ./_extensions/coatless-quarto/ ./_extensions/quarto-ext/ ./_extensions/r-wasm/ ./_extensions/martinomagnifico/ screenshot.png README.md *.html references.bib && mkdir figures'
-alias ql='quarto render lectures.qmd && gaa && git add docs -f && gcmsg "add lecture" && gp && git switch main'
+alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
+alias qr='quarto render'
 export QUARTO_PYTHON=~/miniconda3/bin/python3
 
 # radian
