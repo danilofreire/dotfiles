@@ -150,6 +150,9 @@ nnoremap <leader>ghm <cmd>CopilotChatModels<cr>
 nnoremap <leader>gho <cmd>CopilotChatOptimize<cr>
 nnoremap <leader>ght <cmd>CopilotChatToggle<cr>
 
+" Open a terminal in a vertical split
+nnoremap <Leader>vt <cmd>:vert term<cr>
+
 " Spelling
 au FileType rmd,md,markdown,pandoc,tex,latex syntax spell toplevel
 au FileType rmd,md,markdown,pandoc,tex,latex,bib,bibtex setl spl=en_gb,pt_br spell
