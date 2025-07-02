@@ -1,0 +1,101 @@
+{
+  "theme": "ANSI Light",
+  "selectedAuthType": "oauth-personal",
+  "preferredEditor": "vim",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--headless"
+      ],
+      "alwaysAllow": [
+        "browser_go_back",
+        "browser_go_forward",
+        "browser_choose_file",
+        "browser_snapshot",
+        "browser_click",
+        "browser_hover",
+        "browser_type",
+        "browser_select_option",
+        "browser_take_screenshot",
+        "browser_press_key",
+        "browser_wait",
+        "browser_save_as_pdf",
+        "browser_close",
+        "browser_install",
+        "browser_file_upload",
+        "browser_navigate_back",
+        "browser_navigate_forward",
+        "browser_pdf_save",
+        "browser_drag",
+        "browser_tab_list",
+        "browser_tab_new",
+        "browser_tab_select",
+        "browser_tab_close",
+        "navigate",
+        "browser_resize",
+        "browser_console_messages",
+        "browser_handle_dialog",
+        "browser_navigate",
+        "browser_network_requests",
+        "browser_generate_playwright_test",
+        "browser_wait_for"
+      ]
+    },
+    "youtube-transcript": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@kimtaeyoon83/mcp-server-youtube-transcript"
+      ],
+      "alwaysAllow": [
+        "get_transcript"
+      ]
+    },
+    "youtube": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anaisbetts/mcp-installer",
+        "@anaisbetts/mcp-youtube"
+      ],
+      "alwaysAllow": [
+        "get_transcript",
+        "install_repo_mcp_server",
+        "install_local_mcp_server",
+        "search"
+      ]
+    },
+    "ddg-search": {
+      "command": "uvx",
+      "args": [
+        "duckduckgo-mcp-server"
+      ]
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "alwaysAllow": [
+        "sequentialthinking"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": ""
+      },
+      "alwaysAllow": [
+        "resolve-library-id",
+        "get-library-docs"
+      ]
+    }
+  }
+}

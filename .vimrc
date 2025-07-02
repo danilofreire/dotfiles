@@ -66,7 +66,7 @@ Plug 'lervag/vimtex'                                                      " LaTe
 Plug 'reedes/vim-wordy'                                                   " Tools for English prose
 Plug 'ryanoasis/vim-devicons'                                             " Show icons for files
 Plug 'nvim-lua/plenary.nvim'                                              " Plenary
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }             " Copilot chat
+Plug 'CopilotC-Nvim/CopilotChat.nvim'                                     " Copilot chat
 Plug '3rd/image.nvim'                                                     " Image viewer
 
 " All of your Plugins must be added before the following line
@@ -100,8 +100,8 @@ set mousehide                              " Hide mouse when typing
 set nobackup                               " No backup~ files
 set nospell                                " Turn off spell check (see below)
 set number relativenumber                  " Show line numbers
-set pastetoggle=<F3>                       " Toggle paste mode
 set path+=**                               " Fuzzy find files
+set rtp+=/opt/homebrew/opt/fzf             " FZF path
 set shiftwidth=2                           " Indent
 set shortmess+=c                           " Shut off completion messages
 set showmatch                              " Show matching pair for [] {} and ()
@@ -131,25 +131,18 @@ vmap <C-s> <ESC>:w<CR>gv
 
 " Copilot Chat
 lua << EOF
-local copilot_chat = require("CopilotChat")
-copilot_chat.setup({
+require("CopilotChat").setup{
   debug = true,
   show_help = "yes",
-  prompts = {
-    Explain = "Explain how it works in English for a beginner.",
-    Review = "Review the following code and provide concise suggestions.",
-    Tests = "Briefly explain how the selected code works, then generate unit tests.",
-    Refactor = "Refactor the code to improve clarity and readability.",
-  },
-  build = function()
-    vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
-  end,
-  event = "VeryLazy",
-})
+  mappings = {
+    complete = {insert = '<Leader><Tab>'}
+  }
+}
 
 EOF
 
 " Copilot Chat mappings
+nnoremap <leader>gh <cmd>CopilotChatToggle<cr>
 nnoremap <leader>gha <cmd>CopilotChatAgents<cr>
 nnoremap <leader>ghe <cmd>CopilotChatExplain<cr>
 nnoremap <leader>ghf <cmd>CopilotChatFix<cr>
@@ -579,4 +572,5 @@ nmap <C-l> <C-w><C-l>
 nmap <C-h> <C-w><C-h>
 nmap <C-k> <C-w><C-k>
 nmap <C-j> <C-w><C-j>
+
 
