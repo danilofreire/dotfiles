@@ -1,7 +1,7 @@
 {
   "theme": "ANSI Light",
   "selectedAuthType": "oauth-personal",
-  "preferredEditor": "vim",
+  "preferredEditor": "neovim",
   "mcpServers": {
     "playwright": {
       "command": "npx",
