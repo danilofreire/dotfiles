@@ -1,0 +1,54 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ],
+      "alwaysAllow": [
+        "browser_navigate",
+        "browser_install",
+        "browser_take_screenshot",
+        "browser_click",
+        "browser_type",
+        "browser_evaluate",
+        "browser_navigate_back"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "~/"
+      ],
+      "alwaysAllow": [
+        "list_directory",
+        "read_text_file",
+        "move_file",
+        "edit_file"
+      ]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": ""
+      },
+      "alwaysAllow": [
+        "brave_web_search"
+      ]
+    },
+    "git-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@0.1.29",
+        "https://gitmcp.io/danilofreire/qtm350"
+      ]
+    }
+  }
+}
