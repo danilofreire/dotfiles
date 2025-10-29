@@ -8,7 +8,8 @@ notebook~=7.2.2
 jupyterlite-pyodide-kernel==0.4.2
 
 # R kernel (optional)
-git+https://github.com/r-wasm/jupyterlite-webr-kernel.git
+# Pinned to specific commit for reproducibility and to allow Dependabot to track updates
+git+https://github.com/r-wasm/jupyterlite-webr-kernel.git@ead4456a4d4b921557a11b208c3b759fe8436457
 
 # JavaScript kernel (optional)
 jupyterlite-javascript-kernel==0.3.0
