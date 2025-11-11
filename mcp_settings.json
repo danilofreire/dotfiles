@@ -48,6 +48,32 @@
         "-y",
         "mcp-remote@0.1.29",
         "https://gitmcp.io/danilofreire/qtm350"
+      ],
+      "alwaysAllow": []
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": ""
+      }
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "youtube": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anaisbetts/mcp-installer",
+        "@anaisbetts/mcp-youtube"
       ]
     }
   }
