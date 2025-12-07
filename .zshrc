@@ -144,12 +144,6 @@ alias r1='ollama run michaelneale/deepseek-r1-goose:latest'
 alias stop='ollama stop michaelneale/deepseek-r1-goose:latest'
 alias stopr1='ollama stop michaelneale/deepseek-r1-goose:latest'
 
-# python3
-alias python=~/miniconda3/bin/python3
-alias python3=~/miniconda3/bin/python3
-alias p3=~/miniconda3/bin/python3
-alias p=~/miniconda3/bin/python3
-
 # quarto
 alias qa='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && code article.qmd references.bib'
 alias qah='quarto render article.qmd --to html'
@@ -167,7 +161,7 @@ alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis
 alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm -rf ./_extensions/coatless-quarto/ ./_extensions/quarto-ext/ ./_extensions/r-wasm/ ./_extensions/martinomagnifico/ screenshot.png README.md *.html references.bib && mkdir figures'
 alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
 alias qr='quarto render'
-export QUARTO_PYTHON=~/miniconda3/bin/python3
+export QUARTO_PYTHON=/opt/miniconda3/bin/python3
 
 # radian
 alias r='radian'
@@ -205,30 +199,29 @@ eval "$(starship init zsh)"
 # fuck
 # eval $(/opt/homebrew/bin/python3.11 /usr/local/bin/thefuck --alias)
 
-# Quarto Python
-# export QUARTO_PYTHON=/opt/miniconda3/bin/python
+# Web-UI
+alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788'
+
+# Added by Antigravity
+export PATH="/Users/dafreir/.antigravity/antigravity/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/dafreir/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/dafreir/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/dafreir/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/dafreir/miniconda3/bin:$PATH"
+        export PATH="/opt/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-# End of conda initialization
-eval "$(gh copilot alias -- zsh)"
 
-. "$HOME/.local/bin/env"
 
-# CBT therapist alias
-alias cbt='~/Documents/github/cbt/chat_session.sh'
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/dafreir/.lmstudio/bin"
+# End of LM Studio CLI section
 
-# Web-UI
-alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788'
