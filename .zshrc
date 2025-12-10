@@ -77,8 +77,8 @@ plugins=(aliases autojump brew common-aliases conda docker gh git gitignore iter
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
-# VS Code Insiders
-alias code='code-insiders'
+# VS Code (standard)
+# alias code='code-insiders'  # Commented out to use standard VS Code
 
 # Vim-like keybindings
 bindkey -v
