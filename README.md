@@ -38,7 +38,7 @@ mv .vimrc /Users/username/
 
 Create a `~/.config/nvim/init.vim` file with the following content:
 ```
-set runtimepath^=/.vim runtimepath+=~/.vim/after
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 ```

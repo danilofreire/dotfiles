@@ -44,7 +44,10 @@ Plug 'plasticboy/vim-markdown'                                            " Mark
 Plug 'kaicataldo/material.vim'                                            " Material theme
 Plug 'terryma/vim-multiple-cursors'                                       " Multiple cursors
 Plug 'scrooloose/nerdtree'                                                " File tree
-Plug 'jalvesaq/Nvim-R'                                                    " R integration
+" NOTE: The old 'jalvesaq/Nvim-R' plugin is now Vim-only and does NOT work
+" with Neovim (causes E117: Unknown function: job_start). Use R.nvim instead.
+" If you get job_start errors, make sure you're using R.nvim, not Nvim-R.
+Plug 'R-nvim/R.nvim', { 'do': 'git submodule update --init --recursive' } " R integration (successor to Nvim-R)
 Plug 'vim-pandoc/vim-pandoc'                                              " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                       " Pandoc syntax highlighting
 Plug 'jeetsukumaran/vim-pythonsense'                                      " Python syntax highlighting
@@ -68,6 +71,16 @@ Plug 'ryanoasis/vim-devicons'                                             " Show
 Plug 'nvim-lua/plenary.nvim'                                              " Plenary
 Plug 'CopilotC-Nvim/CopilotChat.nvim'                                     " Copilot chat
 Plug '3rd/image.nvim'                                                     " Image viewer
+" NOTE: nvim-treesitter MUST use the 'master' branch (not 'main').
+" The 'main' branch rewrote the API and 'nvim-treesitter.configs' won't load.
+" If you get 'module nvim-treesitter.configs not found', switch to master:
+"   cd ~/.vim/plugged/nvim-treesitter && git checkout master
+" Parsers are compiled with a C compiler (clang). If they fail to install:
+"   brew install tree-sitter tree-sitter-cli
+"   nvim +'TSInstallSync r markdown markdown_inline rnoweb yaml csv' +'q'
+" If you get 'permission denied' for ~/.local/share/nvim/site/parser:
+"   sudo chown -R $(whoami):staff ~/.local/share/nvim/site
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' } " Tree-sitter (required by R.nvim)
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -130,6 +143,7 @@ imap <C-s> <ESC>:w<CR>a
 vmap <C-s> <ESC>:w<CR>gv
 
 " Copilot Chat
+if has('nvim')
 lua << EOF
 require("CopilotChat").setup{
   debug = true,
@@ -138,24 +152,26 @@ require("CopilotChat").setup{
     complete = {insert = '<Leader><Tab>'}
   }
 }
-
 EOF
+endif
 
 " Copilot Chat mappings
-nnoremap <leader>gh <cmd>CopilotChatToggle<cr>
-nnoremap <leader>gha <cmd>CopilotChatAgents<cr>
-nnoremap <leader>ghe <cmd>CopilotChatExplain<cr>
-nnoremap <leader>ghf <cmd>CopilotChatFix<cr>
-nnoremap <leader>ghm <cmd>CopilotChatModels<cr>
-nnoremap <leader>gho <cmd>CopilotChatOptimize<cr>
-nnoremap <leader>ght <cmd>CopilotChatToggle<cr>
+if has('nvim')
+  nnoremap <leader>gh <cmd>CopilotChatToggle<cr>
+  nnoremap <leader>gha <cmd>CopilotChatAgents<cr>
+  nnoremap <leader>ghe <cmd>CopilotChatExplain<cr>
+  nnoremap <leader>ghf <cmd>CopilotChatFix<cr>
+  nnoremap <leader>ghm <cmd>CopilotChatModels<cr>
+  nnoremap <leader>gho <cmd>CopilotChatOptimize<cr>
+  nnoremap <leader>ght <cmd>CopilotChatToggle<cr>
 
-" Open a terminal in a vertical split
-nnoremap <Leader>vt <cmd>:vert term<cr>
+  " Open a terminal in a vertical split
+  nnoremap <Leader>vt <cmd>:vert term<cr>
+endif
 
 " Spelling
-au FileType rmd,md,markdown,pandoc,tex,latex syntax spell toplevel
-au FileType rmd,md,markdown,pandoc,tex,latex,bib,bibtex setl spl=en_gb,pt_br spell
+au FileType rmd,md,markdown,pandoc,tex,latex,quarto syntax spell toplevel
+au FileType rmd,md,markdown,pandoc,tex,latex,bib,bibtex,quarto setl spl=en_gb,pt_br spell
 map <Leader>ns :set nospell<CR>
 map <Leader>z 1z=
 
@@ -498,22 +514,73 @@ let g:pandoc#keyboard#display_motions  = 0
 let g:pandoc#syntax#conceal#use        = 0
 au BufNewFile,BufRead *.Rmd :call pandoc#completion#Init()
 au BufNewFile,BufRead *.Rmd :call pandoc#bibliographies#Init()
+au BufNewFile,BufRead *.qmd :call pandoc#completion#Init()
+au BufNewFile,BufRead *.qmd :call pandoc#bibliographies#Init()
 
 " Map ESC to leave terminal
 :tnoremap <Esc> <C-\><C-n>
 
-" nvim-R
+" R.nvim (successor to Nvim-R)
 " Install radian: pip3 install radian
-let R_app              = "radian"
-let R_args             = []
-let R_bracketed_paste  = 1
-let R_cmd              = "R"
-let R_hl_term          = 0
-let R_min_editor_width = 30
-let R_nvimpager        = "horizontal"
-let R_rconsole_width   = 50
-let g:R_hi_fun         = 1
-let r_syntax_folding   = 0
+"
+" TROUBLESHOOTING:
+" ================
+" 1. If nvim hangs or shows swap file warnings when opening a file:
+"    - Kill stuck nvim processes: ps aux | grep nvim, then kill <PID>
+"    - Remove swap files: rm ~/.local/state/nvim/swap/*
+"
+" 2. If you see 'E117: Unknown function: job_start':
+"    - You're using the old Nvim-R plugin. Replace it with R.nvim (see above).
+"
+" 3. If you see 'R.nvim requires nvim-treesitter':
+"    - Make sure nvim-treesitter is installed (see Plug line above).
+"    - Install parsers: nvim +'TSInstallSync r markdown markdown_inline rnoweb yaml csv' +'q'
+"
+" 4. If you see 'module nvim-treesitter.configs not found':
+"    - Switch nvim-treesitter to the master branch:
+"      cd ~/.vim/plugged/nvim-treesitter && git checkout master
+"
+" 5. If you see 'permission denied' for parser/queries directories:
+"    - Fix ownership: sudo chown -R $(whoami):staff ~/.local/share/nvim/site
+"
+" 6. If you see 'ERROR: R exit code = 143' in headless mode:
+"    - This is normal and ONLY happens in headless mode (nvim --headless).
+"    - It won't happen during regular interactive use.
+"
+" 7. Key bindings for R.nvim:
+"    - \rf  Start R
+"    - \rq  Quit R
+"    - Enter (normal mode)  Send current line to R
+"    - Enter (visual mode)  Send selection to R
+"
+if has('nvim')
+lua << RNVIM
+  -- Tree-sitter (required by R.nvim) — using master branch
+  -- IMPORTANT: must use 'master' branch, NOT 'main' (different API)
+  require("nvim-treesitter.configs").setup({
+    ensure_installed = { "markdown", "markdown_inline", "r", "rnoweb", "yaml", "csv" },
+    highlight = { enable = true },
+  })
+
+  -- R.nvim (replaces the old jalvesaq/Nvim-R, which is now Vim-only)
+  -- Docs: https://github.com/R-nvim/R.nvim
+  require("r").setup({
+    R_args = {"--quiet", "--no-save"},
+    R_app = "radian",
+    auto_start = "no",        -- Don't start R automatically; use \rf to start
+    bracketed_paste = true,   -- Required when using radian
+    min_editor_width = 30,
+    rconsole_width = 50,
+    nvimpager = "split_h",    -- Show R help in horizontal split
+    hook = {
+      on_filetype = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
+        vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
+      end
+    },
+  })
+RNVIM
+endif
 
 " Some shortcuts for easymotion:
 " <Leader>f{char} to move to {char}{char}
@@ -575,5 +642,4 @@ nmap <C-l> <C-w><C-l>
 nmap <C-h> <C-w><C-h>
 nmap <C-k> <C-w><C-k>
 nmap <C-j> <C-w><C-j>
-
 

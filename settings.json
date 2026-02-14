@@ -228,6 +228,8 @@
         "editor.defaultFormatter": "vscode.html-language-features"
     },
     "github.copilot.advanced": {},
+    "chat.customAgentInSubagent.enabled": true,
+    "github.copilot.chat.responsesApiReasoningEffort": "high",
     "ruff.interpreter": [
         "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
     ],
