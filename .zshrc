@@ -77,8 +77,8 @@ plugins=(aliases autojump brew common-aliases conda docker gh git gitignore iter
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
-# VS Code (standard)
-# alias code='code-insiders'  # Commented out to use standard VS Code
+# # Mapping agy to code
+# alias code='agy'  # Commented out to use standard VS Code
 
 # Vim-like keybindings
 bindkey -v
@@ -174,13 +174,6 @@ alias rmj='rm ~/Desktop/*.jpg'
 alias rmp='rm ~/Desktop/*.png'
 alias rmpng='rm ~/Desktop/*.png'
 
-# save files
-alias vim="stty stop '' -ixoff ;;" then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -193,6 +186,9 @@ alias vim="stty stop '' -ixoff ;;" then
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# shell-ai (shai) - AI-powered shell command generator
+# Config is at ~/.config/shell-ai/config.json
+
 # Starship
 eval "$(starship init zsh)"
 
@@ -202,8 +198,8 @@ eval "$(starship init zsh)"
 # Web-UI
 alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788'
 
-# Added by Antigravity
-export PATH="/Users/dafreir/.antigravity/antigravity/bin:$PATH"
+# Added by opencode: alias code to code-insiders
+alias code='code-insiders'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -225,3 +221,5 @@ unset __conda_setup
 export PATH="$PATH:/Users/dafreir/.lmstudio/bin"
 # End of LM Studio CLI section
 
+# opencode
+export PATH=/Users/dafreir/.opencode/bin:$PATH
