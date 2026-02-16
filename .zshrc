@@ -77,9 +77,6 @@ plugins=(aliases autojump brew common-aliases conda docker gh git gitignore iter
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
-# # Mapping agy to code
-# alias code='agy'  # Commented out to use standard VS Code
-
 # Vim-like keybindings
 bindkey -v
 
@@ -198,6 +195,9 @@ eval "$(starship init zsh)"
 # Web-UI
 alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788'
 
+# Mapping agy to code
+# alias code='agy'  # Commented out to use standard VS Code
+
 # Added by opencode: alias code to code-insiders
 alias code='code-insiders'
 
@@ -223,3 +223,6 @@ export PATH="$PATH:/Users/dafreir/.lmstudio/bin"
 
 # opencode
 export PATH=/Users/dafreir/.opencode/bin:$PATH
+
+# Claude Code
+export PATH="$HOME/.local/bin:$PATH"
