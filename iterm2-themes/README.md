@@ -4,7 +4,7 @@ This folder contains a few iTerm2 colour schemes I use.
 
 ## Included themes
 
-- Gruvbox (in the parent directory: `../gruvbox.itermcolors`)
+- Gruvbox
 - Monokai Pro
 - Monokai Pro Octagon
 - Monokai Pro Ristretto

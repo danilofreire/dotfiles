@@ -1,74 +1,85 @@
 # Dotfiles
 
-This repository contains my configuration files and scripts for my development environment. I use [Neovim](https://neovim.io/) and [VSCode](https://code.visualstudio.com/) as my text editors, [Zsh](https://www.zsh.org/) as my shell, and [Git](https://git-scm.com/) as my version control system. I also use [GitHub Copilot](https://copilot.github.com/) as my AI pair programmer.
+Configuration files for my development environment. I use [Neovim](https://neovim.io/) and [VS Code](https://code.visualstudio.com/) as text editors, [Zsh](https://www.zsh.org/) as my shell, and [iTerm2](https://iterm2.com/) as my terminal.
+
+## Repository structure
+
+```
+dotfiles/
+├── gemini/              # Gemini MCP settings
+├── iterm2-themes/       # iTerm2 colour schemes
+├── latex/               # LaTeX configuration (.latexmkrc)
+├── nano/                # Nano editor configuration
+├── neovim/              # Neovim/Vim configuration and plugins
+├── roo-code/            # Roo Code MCP settings and custom modes
+├── vscode/              # VS Code settings and extensions list
+├── zsh/                 # Zsh configuration and cheatsheet
+├── useful-commands.md   # Handy command reference
+└── _config.yml          # GitHub Pages configuration
+```
 
 ## Neovim
 
-Most of the configuration files here are for Neovim, but they work fine with regular [vim](http://www.vim.org) too. You can find a detailed explanation of how to set up Neovim below.
+The `neovim/` folder contains `.vimrc`, `init.vim`, `coc-settings.json`, and a screenshot. These files work with both Neovim and regular [Vim](http://www.vim.org).
 
-### Neovim set up instructions:
+### Setup
 
-Install the latest version of neovim with [homebrew](https://brew.sh/):
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+Install Neovim with [Homebrew](https://brew.sh/):
+
+```bash
 brew install neovim
 ```
 
-I recommend you to install [iterm2](https://www.iterm2.com/), [tmux](https://github.com/tmux/tmux), [zsh](https://www.zsh.org/), and [oh-my-zsh](https://ohmyz.sh/) as well:
-```
+I also recommend installing iTerm2, Zsh, and [Oh My Zsh](https://ohmyz.sh/):
+
+```bash
 brew install --cask iterm2
-brew install tmux
 brew install zsh
 chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 Download [vim-plug](https://github.com/junegunn/vim-plug):
-```
+
+```bash
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-Download this repository and copy the contents to your home folder
-```
+Copy the configuration files to your home folder and create a symlink for Neovim:
+
+```bash
 git clone https://github.com/danilofreire/dotfiles
-cd vimrc/
-mv .vimrc /Users/username/
+cp dotfiles/neovim/.vimrc ~/
+cp dotfiles/neovim/init.vim ~/.config/nvim/init.vim
 ```
 
-Create a `~/.config/nvim/init.vim` file with the following content:
-```
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-source ~/.vimrc
-```
-... or just copy the [`init.vim`](https://raw.githubusercontent.com/danilofreire/dotfiles/master/init.vim) file above.
+Then open Neovim and install plugins:
 
-Open `.vimrc` and type `:PlugInstall`. From the command line:
-```
+```bash
 nvim .vimrc +PlugInstall +qall
 ```
 
-To use the arrow keys in normal mode, delete the following lines in the `.vimrc` file:
-```
-" Deactivate arrow keys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+For nice icons in [lightline](https://github.com/itchyny/lightline.vim) and [vim-devicons](https://github.com/ryanoasis/vim-devicons), install [Fira Code Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode):
+
+```bash
+brew install --cask font-fira-code-nerd-font
 ```
 
-If you want to make your [lightline toolbar](https://github.com/itchyny/lightline.vim) and [vim-devicons](https://github.com/ryanoasis/vim-devicons) look nice, please download [Nerd fonts](https://github.com/ryanoasis/nerd-fonts). I use [Fira Code](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode).
+![Neovim screenshot](https://github.com/danilofreire/dotfiles/raw/master/neovim/neovim.png)
+
+## iTerm2 themes
+
+The `iterm2-themes/` folder includes Gruvbox, Nord, Pale Night Hc, Monokai Pro, Monokai Pro Octagon, and Monokai Pro Ristretto. To install a theme, run `open <filename>.itermcolors` and select it in iTerm2 under **Settings > Profiles > Colors > Color Presets**. Many more themes are available at <https://iterm2colorschemes.com>.
+
+## VS Code
+
+The `vscode/` folder contains my `settings.json` and a list of installed extensions. To install all extensions at once:
+
+```bash
+cat vscode/vscode-extensions.txt | xargs -L 1 code --install-extension
 ```
-brew tap homebrew/cask-fonts
-brew install --cask font-fira-code
-```
 
-To install the [iTerm2 Gruvbox Theme](https://github.com/herrbischoff/iterm2-gruvbox/tree/master), download the [`gruvbox.itermcolors`](https://raw.githubusercontent.com/herrbischoff/iterm2-gruvbox/master/gruvbox.itermcolors) file and import it in iTerm2.
+## Zsh
 
-And this is how the editor looks like with the default configurations:
-
-![](https://github.com/danilofreire/dotfiles/raw/master/neovim.png)
-
-I hope you enjoy using Neovim! :)
-
+The `zsh/` folder contains my `.zshrc` with aliases, plugins, and shell options. It also includes a Git/Oh My Zsh cheatsheet. I use [Starship](https://starship.rs/) as my prompt and [autojump](https://github.com/wting/autojump) for quick directory navigation.
