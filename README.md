@@ -13,14 +13,12 @@ dotfiles/
 ├── neovim/              # Neovim/Vim configuration and plugins
 ├── roo-code/            # Roo Code MCP settings and custom modes
 ├── vscode/              # VS Code settings and extensions list
-├── zsh/                 # Zsh configuration and cheatsheet
-├── useful-commands.md   # Handy command reference
-└── _config.yml          # GitHub Pages configuration
+└── zsh/                 # Zsh configuration and cheatsheet
 ```
 
 ## Neovim
 
-The `neovim/` folder contains `.vimrc`, `init.vim`, `coc-settings.json`, and a screenshot. These files work with both Neovim and regular [Vim](http://www.vim.org).
+The `neovim/` folder contains `.vimrc`, `init.vim`, `coc-settings.json`, a command reference (`useful-commands.md`), and a screenshot. These files work with both Neovim and regular [Vim](http://www.vim.org).
 
 ### Setup
 
