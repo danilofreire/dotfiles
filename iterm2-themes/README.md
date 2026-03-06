@@ -5,9 +5,13 @@ This folder contains a few iTerm2 colour schemes I use.
 ## Included themes
 
 - Gruvbox
+- Gruvbox Dark
 - Monokai Pro
+- Monokai Pro Machine
 - Monokai Pro Octagon
 - Monokai Pro Ristretto
+- Monokai Pro Spectrum
+- Monokai Soda
 - Nord
 - Pale Night Hc
 
