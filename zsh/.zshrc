@@ -133,6 +133,9 @@ alias narticle='nvim article.Rmd references.bib'
 alias nn='nvim article.Rmd references.bib'
 alias v='nvim'
 
+# claude
+alias c='claude'
+
 # ollama
 alias deepseek='ollama run michaelneale/deepseek-r1-goose:latest'
 alias ds='ollama run michaelneale/deepseek-r1-goose:latest'
