@@ -101,6 +101,7 @@ alias nn='nvim article.qmd references.bib'
 
 # claude
 alias c='claude'
+alias tw='tmux-work'
 
 # quarto
 alias qa='gh repo clone danilofreire/quarto-templates && mv quarto-templates/article/* ./ && rm -rf quarto-templates && code article.qmd references.bib'
