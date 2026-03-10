@@ -59,7 +59,7 @@ Plug 'junegunn/vim-slash'                                                 " Slas
 Plug 'honza/vim-snippets'                                                 " Snippets
 Plug 'Shougo/neosnippet-snippets'                                         " Neosnippet snippets
 Plug 'sainnhe/sonokai'                                                    " Sonokai theme
-Plug 'khoido2003/monokai-v2.nvim'                                         " Monokai V2 theme
+Plug 'loctvl842/monokai-pro.nvim'                                         " Monokai Pro theme
 Plug 'tpope/vim-surround'                                                 " Surround text
 Plug 'mhinz/vim-startify'                                                 " Start screen
 Plug 'wellle/targets.vim'                                                 " Add text objects to help navigation
@@ -143,30 +143,8 @@ nmap <C-s> :w <CR>
 imap <C-s> <ESC>:w<CR>a
 vmap <C-s> <ESC>:w<CR>gv
 
-" Copilot Chat
+" Open a terminal in a vertical split
 if has('nvim')
-lua << EOF
-require("CopilotChat").setup{
-  debug = true,
-  show_help = "yes",
-  mappings = {
-    complete = {insert = '<Leader><Tab>'}
-  }
-}
-EOF
-endif
-
-" Copilot Chat mappings
-if has('nvim')
-  nnoremap <leader>gh <cmd>CopilotChatToggle<cr>
-  nnoremap <leader>gha <cmd>CopilotChatAgents<cr>
-  nnoremap <leader>ghe <cmd>CopilotChatExplain<cr>
-  nnoremap <leader>ghf <cmd>CopilotChatFix<cr>
-  nnoremap <leader>ghm <cmd>CopilotChatModels<cr>
-  nnoremap <leader>gho <cmd>CopilotChatOptimize<cr>
-  nnoremap <leader>ght <cmd>CopilotChatToggle<cr>
-
-  " Open a terminal in a vertical split
   nnoremap <Leader>vt <cmd>:vert term<cr>
 endif
 
@@ -206,22 +184,21 @@ let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
 " colors sonokai
 
-" Monokai V2 theme (ristretto filter)
+" Monokai Pro theme
 if has('nvim')
 lua << MONOKAI
-  require("monokai-v2").setup({
+  require("monokai-pro").setup({
     filter = "ristretto",
   })
 MONOKAI
-  colorscheme monokai-v2
-
+  colorscheme monokai-pro
 else
   colors sonokai
 endif
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'monokaiv2',
+      \ 'colorscheme': 'monokaipro',
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
@@ -241,8 +218,8 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileformat': 'MyFileformat',
       \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
 function! MyFiletype()
@@ -278,9 +255,9 @@ let g:rainbow_active = 1
 
 " Python
 "
-" Install Python 3 support: 
+" Install Python 3 support:
 " pip install neovim
-" pip install pynvim --upgrade 
+" pip install pynvim --upgrade
 " Use conda environment ml:
 " conda create --name ml
 " conda activate ml
@@ -299,7 +276,7 @@ let g:floaterm_opener        = 'vsplit'
 nmap <Leader>zf :FloatermNew fzf<CR>
 nmap <Leader>l :FloatermSend <CR>
 nmap <S-CR> :FloatermSend <CR>
-vmap <Leader>l :'<,'>FloatermSend <CR> 
+vmap <Leader>l :'<,'>FloatermSend <CR>
 vmap <S-CR> :'<,'>FloatermSend <CR>
 
 " Thesaurus
@@ -613,7 +590,7 @@ au FileType r,html,css,javascript setl ts=2 sw=2 sts=2 et
 " Wrap/unwrap text
 function! WrapText()
   let tw = &textwidth
-  if tw==80 
+  if tw==80
     set tw=0
   else
     set tw=80
@@ -656,4 +633,3 @@ nmap <C-l> <C-w><C-l>
 nmap <C-h> <C-w><C-h>
 nmap <C-k> <C-w><C-k>
 nmap <C-j> <C-w><C-j>
-
