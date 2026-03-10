@@ -59,7 +59,7 @@ Plug 'junegunn/vim-slash'                                                 " Slas
 Plug 'honza/vim-snippets'                                                 " Snippets
 Plug 'Shougo/neosnippet-snippets'                                         " Neosnippet snippets
 Plug 'sainnhe/sonokai'                                                    " Sonokai theme
-Plug 'loctvl842/monokai-pro.nvim'                                         " Monokai Pro theme
+Plug 'khoido2003/monokai-v2.nvim'                                         " Monokai V2 theme
 Plug 'tpope/vim-surround'                                                 " Surround text
 Plug 'mhinz/vim-startify'                                                 " Start screen
 Plug 'wellle/targets.vim'                                                 " Add text objects to help navigation
@@ -206,23 +206,22 @@ let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
 " colors sonokai
 
-" Monokai Pro theme (ristretto filter)
+" Monokai V2 theme (ristretto filter)
 if has('nvim')
 lua << MONOKAI
-  require("monokai-pro").setup({
+  require("monokai-v2").setup({
     filter = "ristretto",
-    inc_search = "underline",
-    background_clear = {},
   })
 MONOKAI
-  colorscheme monokai-pro
+  colorscheme monokai-v2
+
 else
   colors sonokai
 endif
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'molokai',
+      \ 'colorscheme': 'monokaiv2',
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
