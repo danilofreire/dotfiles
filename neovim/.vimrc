@@ -59,6 +59,7 @@ Plug 'junegunn/vim-slash'                                                 " Slas
 Plug 'honza/vim-snippets'                                                 " Snippets
 Plug 'Shougo/neosnippet-snippets'                                         " Neosnippet snippets
 Plug 'sainnhe/sonokai'                                                    " Sonokai theme
+Plug 'loctvl842/monokai-pro.nvim'                                         " Monokai Pro theme
 Plug 'tpope/vim-surround'                                                 " Surround text
 Plug 'mhinz/vim-startify'                                                 " Start screen
 Plug 'wellle/targets.vim'                                                 " Add text objects to help navigation
@@ -199,15 +200,29 @@ let g:gruvbox_material_enable_bold            = 1
 let g:gruvbox_material_palette                = 'original'
 " colors gruvbox-material
 
-" Sonokai theme
+" Sonokai theme (inactive, kept for reference)
 let g:sonokai_style                           = 'espresso'
 let g:sonokai_enable_italic                   = 0
 let g:sonokai_disable_italic_comment          = 1
-colors sonokai
+" colors sonokai
+
+" Monokai Pro theme (ristretto filter)
+if has('nvim')
+lua << MONOKAI
+  require("monokai-pro").setup({
+    filter = "ristretto",
+    inc_search = "underline",
+    background_clear = {},
+  })
+MONOKAI
+  colorscheme monokai-pro
+else
+  colors sonokai
+endif
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'sonokai',
+      \ 'colorscheme': 'molokai',
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
