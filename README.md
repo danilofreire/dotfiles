@@ -1,12 +1,13 @@
 # Dotfiles
 
-Configuration files for my development environment. I use [Neovim](https://neovim.io/) and [VS Code](https://code.visualstudio.com/) as text editors, [Zsh](https://www.zsh.org/) as my shell, and [iTerm2](https://iterm2.com/) as my terminal.
+Configuration files for my development environment. I use [Neovim](https://neovim.io/) and [VS Code](https://code.visualstudio.com/) as text editors, [Zsh](https://www.zsh.org/) as my shell, and [Ghostty](https://ghostty.org/) as my terminal.
 
 ## Repository structure
 
 ```
 dotfiles/
 ├── gemini/              # Gemini MCP settings
+├── ghostty/             # Ghostty terminal configuration
 ├── iterm2-themes/       # iTerm2 colour schemes
 ├── latex/               # LaTeX configuration (.latexmkrc)
 ├── nano/                # Nano editor configuration
@@ -65,6 +66,23 @@ brew install --cask font-fira-code-nerd-font
 ```
 
 ![Neovim screenshot](https://github.com/danilofreire/dotfiles/raw/master/neovim/neovim.png)
+
+## Ghostty
+
+The `ghostty/` folder contains my Ghostty terminal configuration. It uses the Monokai Pro Ristretto theme with FiraCode Nerd Font. To install Ghostty:
+
+```bash
+brew install --cask ghostty
+```
+
+Copy the config file to the expected location:
+
+```bash
+mkdir -p ~/.config/ghostty
+cp dotfiles/ghostty/config ~/.config/ghostty/config
+```
+
+Ghostty hot-reloads its configuration, so changes take effect immediately. The config file is at `~/.config/ghostty/config`.
 
 ## iTerm2 themes
 
