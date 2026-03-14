@@ -80,8 +80,12 @@ case "${1:-}" in
         tmux send-keys -t "$SESSION:0.0" 'claude' C-m
         exec tmux attach-session -t "$SESSION"
         ;;
-    remove)
-        # Remove the currently focused agent pane
+    remove|rm)
+        # Remove an agent pane
+        # Usage: tw rm           — remove the focused pane
+        #        tw rm h         — remove horizontal neighbour (below, or above)
+        #        tw rm v         — remove vertical neighbour (right, or left)
+        #        tw rm up/down/left/right — remove pane in that direction
         if ! tmux has-session -t "$SESSION" 2>/dev/null; then
             echo "No '$SESSION' session running." >&2
             exit 1
@@ -92,10 +96,41 @@ case "${1:-}" in
         raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
             preview_id="${raw#*=}"
 
-        active=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+        # Determine which pane to remove
+        direction="${2:-}"
+        if [[ -z "$direction" ]]; then
+            # No argument: remove the focused pane
+            target=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+        else
+            # Try to find a neighbour in the given direction
+            case "$direction" in
+                h)     dirs="down-of up-of" ;;
+                v)     dirs="right-of left-of" ;;
+                up)    dirs="up-of" ;;
+                down)  dirs="down-of" ;;
+                left)  dirs="left-of" ;;
+                right) dirs="right-of" ;;
+                *)
+                    echo "Usage: tmux-work rm [h|v|up|down|left|right]" >&2
+                    exit 1
+                    ;;
+            esac
+            target=""
+            for d in $dirs; do
+                candidate=$(tmux display-message -t "{$d}" -p '#{pane_id}' 2>/dev/null) || continue
+                if [[ -n "$candidate" ]]; then
+                    target="$candidate"
+                    break
+                fi
+            done
+            if [[ -z "$target" ]]; then
+                tmux display-message -t "$SESSION" "No pane in that direction."
+                exit 1
+            fi
+        fi
 
         # Don't remove the preview pane
-        if [[ -n "$preview_id" ]] && [[ "$active" == "$preview_id" ]]; then
+        if [[ -n "$preview_id" ]] && [[ "$target" == "$preview_id" ]]; then
             tmux display-message -t "$SESSION" "Can't remove the preview pane. Use: tmux-work preview"
             exit 1
         fi
@@ -112,16 +147,30 @@ case "${1:-}" in
             exit 1
         fi
 
-        tmux kill-pane -t "$active"
+        tmux kill-pane -t "$target"
         tmux display-message -t "$SESSION" "Agent pane removed."
         exit 0
         ;;
     add)
         # Add a new Claude agent by splitting the current (or first agent) pane
+        # Usage: tw add [h|v|up|down|left|right]
+        # Follows vim convention: h = :split, v = :vsplit. Default is h.
         if ! tmux has-session -t "$SESSION" 2>/dev/null; then
             echo "No '$SESSION' session running." >&2
             exit 1
         fi
+
+        # Parse split direction
+        case "${2:-h}" in
+            h|up|down)    split_flag="-v" ;;  # horizontal line = top/bottom (tmux -v)
+            v|left|right) split_flag="-h" ;;  # vertical line = side by side (tmux -h)
+            *)
+                echo "Usage: tmux-work add [h|v|up|down|left|right]" >&2
+                echo "  h/up/down      horizontal split (top/bottom, default)" >&2
+                echo "  v/left/right   vertical split (side by side)" >&2
+                exit 1
+                ;;
+        esac
 
         # Get preview pane ID (if any) so we don't split it
         preview_id=""
@@ -150,7 +199,7 @@ case "${1:-}" in
         new_num=$((agent_count + 1))
 
         # Split the target pane and start Claude
-        tmux split-window -v -t "$target" -l 50% -c "$HOME"
+        tmux split-window $split_flag -t "$target" -l 50% -c "$HOME"
         new_id=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
         tmux select-pane -t "$new_id" -T "Agent $new_num"
         tmux send-keys -t "$new_id" 'claude' C-m
@@ -271,8 +320,12 @@ case "${1:-}" in
         echo "  duo        2 Claude agents (stacked) + preview pane"
         echo "  solo       1 Claude agent + preview pane"
         echo "  focus      1 Claude agent, full screen"
-        echo "  add        Add another Claude agent (splits current pane)"
-        echo "  remove     Remove the currently focused agent pane"
+        echo "  add [h|v|up|down|left|right]  Add another agent"
+        echo "             h/up/down — top/bottom (default)"
+        echo "             v/left/right — side by side"
+        echo "  remove/rm  Remove the focused agent pane"
+        echo "             rm h/v — remove horizontal/vertical neighbour"
+        echo "             rm up/down/left/right — remove pane in direction"
         echo "  kill       Kill the work session"
         echo "  preview    Toggle the preview pane on/off"
         echo "  preview-pane  Print the preview pane index (for scripts)"

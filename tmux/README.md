@@ -79,9 +79,29 @@ Each agent pane launches `claude` automatically. The preview pane on the right s
 ### Managing agents
 
 ```bash
-tw add          # Add another agent (splits the current pane)
-tw remove       # Remove the focused agent pane
+# Adding agents
+tw add          # Add agent below current pane (horizontal split, default)
+tw add h        # Same as above (horizontal split, like vim :split)
+tw add v        # Add agent beside current pane (vertical split, like vim :vsplit)
+tw add up       # Same as tw add h
+tw add down     # Same as tw add h
+tw add left     # Same as tw add v
+tw add right    # Same as tw add v
+
+# Removing agents
+tw rm           # Remove the focused agent pane
+tw remove       # Same as above
+tw rm h         # Remove the neighbour below (or above)
+tw rm v         # Remove the neighbour to the right (or left)
+tw rm up        # Remove the pane above
+tw rm down      # Remove the pane below
+tw rm left      # Remove the pane to the left
+tw rm right     # Remove the pane to the right
 ```
+
+Split directions follow vim conventions: `h` = horizontal line (`:split`, top/bottom), `v` = vertical line (`:vsplit`, side by side).
+
+The `rm` directional commands protect the preview pane and the last remaining agent pane.
 
 ### Preview pane
 
