@@ -13,6 +13,7 @@ dotfiles/
 ├── nano/                # Nano editor configuration
 ├── neovim/              # Neovim/Vim configuration and plugins
 ├── roo-code/            # Roo Code MCP settings and custom modes
+├── tmux/                # tmux config and multi-agent workspace launcher
 ├── vscode/              # VS Code settings and extensions list
 └── zsh/                 # Zsh configuration and cheatsheet
 ```
@@ -83,6 +84,30 @@ cp dotfiles/ghostty/config ~/.config/ghostty/config
 ```
 
 Ghostty hot-reloads its configuration, so changes take effect immediately. The config file is at `~/.config/ghostty/config`.
+
+## tmux
+
+The `tmux/` folder contains my tmux configuration and `tmux-work`, a script that launches multi-agent [Claude Code](https://claude.com/claude-code) workspaces with a shared preview pane. Install tmux with Homebrew:
+
+```bash
+brew install tmux
+```
+
+Copy the files to their expected locations:
+
+```bash
+cp dotfiles/tmux/tmux.conf ~/.tmux.conf
+cp dotfiles/tmux/tmux-work ~/.local/bin/tmux-work
+chmod +x ~/.local/bin/tmux-work
+```
+
+Add the alias to your `.zshrc`:
+
+```bash
+alias tw='tmux-work'
+```
+
+The script supports several layouts (`tw`, `tw duo`, `tw solo`, `tw focus`) and pane management commands (`tw add`, `tw rm`, `tw open`, `tw preview`). Both `add` and `rm` accept vim-style directional arguments (`h`, `v`, `up`, `down`, `left`, `right`). See the [tmux README](tmux/README.md) for full usage details.
 
 ## iTerm2 themes
 
