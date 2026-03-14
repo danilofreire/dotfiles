@@ -1,0 +1,342 @@
+#!/usr/bin/env bash
+# tmux-work: Launch a 4-agent Claude Code workspace with a shared preview pane
+#
+# Layout:
+#   +----------+----------+--------------+
+#   | Agent 1  | Agent 2  |              |
+#   | (Claude) | (Claude) |   Preview    |
+#   |          |          |   / Neovim   |
+#   +----------+----------+   (shared    |
+#   | Agent 3  | Agent 4  |    shell)    |
+#   | (Claude) | (Claude) |              |
+#   +----------+----------+--------------+
+
+set -uo pipefail
+
+SESSION="work"
+
+# Subcommands
+case "${1:-}" in
+    attach)
+        if tmux has-session -t "$SESSION" 2>/dev/null; then
+            exec tmux attach-session -t "$SESSION"
+        else
+            echo "No '$SESSION' session running. Start one with: tmux-work"
+            exit 1
+        fi
+        ;;
+    kill)
+        if tmux has-session -t "$SESSION" 2>/dev/null; then
+            tmux kill-session -t "$SESSION"
+            echo "Session '$SESSION' killed."
+        else
+            echo "No '$SESSION' session running."
+        fi
+        exit 0
+        ;;
+    solo)
+        # One Claude agent + preview pane (side by side)
+        if tmux has-session -t "$SESSION" 2>/dev/null; then
+            tmux kill-session -t "$SESSION"
+        fi
+        tmux new-session -d -s "$SESSION" -c "$HOME"
+        tmux split-window -h -t "$SESSION:0.0" -l 40% -c "$HOME"
+        tmux select-pane -t "$SESSION:0.0" -T "Claude"
+        tmux select-pane -t "$SESSION:0.1" -T "Preview"
+        tmux set-environment -t "$SESSION" PREVIEW_PANE_ID \
+            "$(tmux display-message -t "$SESSION:0.1" -p '#{pane_id}')"
+        tmux send-keys -t "$SESSION:0.0" 'claude' C-m
+        tmux select-pane -t "$SESSION:0.0"
+        exec tmux attach-session -t "$SESSION"
+        ;;
+    duo)
+        # Two Claude agents (stacked) + preview pane
+        if tmux has-session -t "$SESSION" 2>/dev/null; then
+            tmux kill-session -t "$SESSION"
+        fi
+        tmux new-session -d -s "$SESSION" -c "$HOME"
+        # Split off preview column on the right (25%)
+        tmux split-window -h -t "$SESSION:0.0" -l 25% -c "$HOME"
+        # Split left side into top/bottom agents
+        tmux split-window -v -t "$SESSION:0.0" -l 50% -c "$HOME"
+        # pane 0 = Agent 1, pane 1 = Agent 2, pane 2 = Preview
+        tmux select-pane -t "$SESSION:0.0" -T "Agent 1"
+        tmux select-pane -t "$SESSION:0.1" -T "Agent 2"
+        tmux select-pane -t "$SESSION:0.2" -T "Preview"
+        tmux set-environment -t "$SESSION" PREVIEW_PANE_ID \
+            "$(tmux display-message -t "$SESSION:0.2" -p '#{pane_id}')"
+        tmux send-keys -t "$SESSION:0.0" 'claude' C-m
+        tmux send-keys -t "$SESSION:0.1" 'claude' C-m
+        tmux select-pane -t "$SESSION:0.0"
+        exec tmux attach-session -t "$SESSION"
+        ;;
+    focus)
+        # Single Claude agent, full screen
+        if tmux has-session -t "$SESSION" 2>/dev/null; then
+            tmux kill-session -t "$SESSION"
+        fi
+        tmux new-session -d -s "$SESSION" -c "$HOME"
+        tmux select-pane -t "$SESSION:0.0" -T "Claude"
+        tmux send-keys -t "$SESSION:0.0" 'claude' C-m
+        exec tmux attach-session -t "$SESSION"
+        ;;
+    remove)
+        # Remove the currently focused agent pane
+        if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+            echo "No '$SESSION' session running." >&2
+            exit 1
+        fi
+
+        # Get preview pane ID (if any)
+        preview_id=""
+        raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
+            preview_id="${raw#*=}"
+
+        active=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+
+        # Don't remove the preview pane
+        if [[ -n "$preview_id" ]] && [[ "$active" == "$preview_id" ]]; then
+            tmux display-message -t "$SESSION" "Can't remove the preview pane. Use: tmux-work preview"
+            exit 1
+        fi
+
+        # Don't remove the last agent pane
+        if [[ -n "$preview_id" ]]; then
+            agent_count=$(tmux list-panes -t "$SESSION:0" -F '#{pane_id}' \
+                | grep -cv "^${preview_id}$")
+        else
+            agent_count=$(tmux list-panes -t "$SESSION:0" | wc -l | tr -d ' ')
+        fi
+        if [[ "$agent_count" -le 1 ]]; then
+            tmux display-message -t "$SESSION" "Last agent pane. Use: tmux-work kill"
+            exit 1
+        fi
+
+        tmux kill-pane -t "$active"
+        tmux display-message -t "$SESSION" "Agent pane removed."
+        exit 0
+        ;;
+    add)
+        # Add a new Claude agent by splitting the current (or first agent) pane
+        if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+            echo "No '$SESSION' session running." >&2
+            exit 1
+        fi
+
+        # Get preview pane ID (if any) so we don't split it
+        preview_id=""
+        raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
+            preview_id="${raw#*=}"
+
+        # Pick the pane to split: the active pane, unless it's the preview
+        active=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+        target="$active"
+        if [[ -n "$preview_id" ]] && [[ "$target" == "$preview_id" ]]; then
+            target=$(tmux list-panes -t "$SESSION:0" -F '#{pane_id}' \
+                | grep -v "^${preview_id}$" | head -1)
+            if [[ -z "$target" ]]; then
+                echo "No agent pane to split." >&2
+                exit 1
+            fi
+        fi
+
+        # Count existing agent panes to number the new one
+        if [[ -n "$preview_id" ]]; then
+            agent_count=$(tmux list-panes -t "$SESSION:0" -F '#{pane_id}' \
+                | grep -cv "^${preview_id}$")
+        else
+            agent_count=$(tmux list-panes -t "$SESSION:0" | wc -l | tr -d ' ')
+        fi
+        new_num=$((agent_count + 1))
+
+        # Split the target pane and start Claude
+        tmux split-window -v -t "$target" -l 50% -c "$HOME"
+        new_id=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+        tmux select-pane -t "$new_id" -T "Agent $new_num"
+        tmux send-keys -t "$new_id" 'claude' C-m
+        tmux select-pane -t "$active"
+        tmux display-message -t "$SESSION" "Agent $new_num added."
+        exit 0
+        ;;
+    preview)
+        if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+            echo "No '$SESSION' session running." >&2
+            exit 1
+        fi
+
+        # Get stored preview pane ID
+        preview_id=""
+        raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
+            preview_id="${raw#*=}"
+
+        if [[ -z "$preview_id" ]]; then
+            # No stored ID: create a fresh preview pane
+            active=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+            tmux split-window -h -f -t "$SESSION:0" -l 25% -c "$HOME"
+            new_id=$(tmux display-message -p '#{pane_id}')
+            tmux select-pane -t "$new_id" -T "Preview"
+            tmux set-environment -t "$SESSION" PREVIEW_PANE_ID "$new_id"
+            tmux select-pane -t "$active"
+            tmux display-message -t "$SESSION" "Preview pane created."
+            exit 0
+        fi
+
+        # Check if preview pane is currently in window 0
+        if tmux list-panes -t "$SESSION:0" -F '#{pane_id}' | grep -q "^${preview_id}$"; then
+            # HIDE
+            tmux break-pane -d -s "$preview_id" -n "Preview-hidden"
+            tmux display-message -t "$SESSION" "Preview pane hidden."
+        elif tmux list-panes -a -F '#{pane_id}' | grep -q "^${preview_id}$"; then
+            # RESTORE
+            active=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+            tmux join-pane -h -f -d -s "$preview_id" -t "$SESSION:0" -l 25%
+            tmux select-pane -t "$active"
+            tmux display-message -t "$SESSION" "Preview pane restored."
+        else
+            # Preview pane was killed; re-create
+            active=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+            tmux split-window -h -f -t "$SESSION:0" -l 25% -c "$HOME"
+            new_id=$(tmux display-message -p '#{pane_id}')
+            tmux select-pane -t "$new_id" -T "Preview"
+            tmux set-environment -t "$SESSION" PREVIEW_PANE_ID "$new_id"
+            tmux select-pane -t "$active"
+            tmux display-message -t "$SESSION" "Preview pane re-created."
+        fi
+        exit 0
+        ;;
+    preview-pane)
+        if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+            exit 1
+        fi
+        preview_id=""
+        raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
+            preview_id="${raw#*=}"
+        if [[ -z "$preview_id" ]]; then
+            exit 1
+        fi
+        if tmux list-panes -t "$SESSION:0" -F '#{pane_id}' | grep -q "^${preview_id}$"; then
+            # Return the current pane index for the preview pane
+            tmux list-panes -t "$SESSION:0" -F '#{pane_id} #{pane_index}' \
+                | grep "^${preview_id} " | awk '{print $2}'
+            exit 0
+        elif tmux list-panes -a -F '#{pane_id}' | grep -q "^${preview_id}$"; then
+            echo "hidden"
+            exit 2
+        else
+            exit 1
+        fi
+        ;;
+    open)
+        # Open a file in neovim in the preview pane
+        if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+            echo "No '$SESSION' session running." >&2
+            exit 1
+        fi
+        if [[ -z "${2:-}" ]]; then
+            echo "Usage: tmux-work open <file>" >&2
+            exit 1
+        fi
+        # Resolve to absolute path
+        filepath="$(cd "$(dirname "$2")" 2>/dev/null && echo "$(pwd)/$(basename "$2")")"
+        if [[ ! -f "$filepath" ]]; then
+            echo "File not found: $2" >&2
+            exit 1
+        fi
+        # Get preview pane ID
+        preview_id=""
+        raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
+            preview_id="${raw#*=}"
+        if [[ -z "$preview_id" ]]; then
+            echo "No preview pane. Run: tmux-work preview" >&2
+            exit 1
+        fi
+        if ! tmux list-panes -t "$SESSION:0" -F '#{pane_id}' | grep -q "^${preview_id}$"; then
+            # Preview pane is hidden or gone — restore it
+            tmux-work preview
+            # Re-read the ID in case it was re-created
+            raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
+                preview_id="${raw#*=}"
+        fi
+        # Quit any running neovim/viewer, then open the file
+        tmux send-keys -t "$preview_id" ':q' C-m
+        tmux send-keys -t "$preview_id" "nvim \"$filepath\"" C-m
+        exit 0
+        ;;
+    help|-h|--help)
+        echo "Usage: tmux-work [command]"
+        echo ""
+        echo "Commands:"
+        echo "  attach     Reattach to an existing work session"
+        echo "  (no args)  4 Claude agents + preview pane"
+        echo "  duo        2 Claude agents (stacked) + preview pane"
+        echo "  solo       1 Claude agent + preview pane"
+        echo "  focus      1 Claude agent, full screen"
+        echo "  add        Add another Claude agent (splits current pane)"
+        echo "  remove     Remove the currently focused agent pane"
+        echo "  kill       Kill the work session"
+        echo "  preview    Toggle the preview pane on/off"
+        echo "  preview-pane  Print the preview pane index (for scripts)"
+        echo "  open <file>   Open a file in neovim in the preview pane"
+        echo "  help       Show this message"
+        exit 0
+        ;;
+esac
+
+# Check if the session already exists
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+    printf "Session '%s' already exists. Kill it and start fresh? [y/N] " "$SESSION"
+    read -r answer
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        tmux kill-session -t "$SESSION"
+    else
+        echo "Attaching to existing session."
+        exec tmux attach-session -t "$SESSION"
+    fi
+fi
+
+# Create the session (detached) starting in home directory
+tmux new-session -d -s "$SESSION" -c "$HOME"
+
+# Build the layout:
+# 1. Split off the preview column on the right (25% of total width)
+tmux split-window -h -t "$SESSION:0.0" -l 25% -c "$HOME"
+# pane 0 = left (agents), pane 1 = right (preview)
+
+# 2. Split the left column into top and bottom rows
+tmux split-window -v -t "$SESSION:0.0" -l 50% -c "$HOME"
+# pane 0 = top-left, pane 1 = bottom-left, pane 2 = preview
+
+# 3. Split top-left into Agent 1 and Agent 2
+tmux split-window -h -t "$SESSION:0.0" -l 50% -c "$HOME"
+# pane 0 = Agent 1, pane 1 = Agent 2, pane 2 = bottom-left, pane 3 = preview
+
+# 4. Split bottom-left into Agent 3 and Agent 4
+tmux split-window -h -t "$SESSION:0.2" -l 50% -c "$HOME"
+
+# Final pane layout (indices):
+#   pane 0 = Agent 1 (top-left)
+#   pane 1 = Agent 2 (top-centre-left)
+#   pane 2 = Agent 3 (bottom-left)
+#   pane 3 = Agent 4 (bottom-centre-left)
+#   pane 4 = Preview (right, full height)
+
+# Name panes for clarity
+tmux select-pane -t "$SESSION:0.0" -T "Agent 1"
+tmux select-pane -t "$SESSION:0.1" -T "Agent 2"
+tmux select-pane -t "$SESSION:0.2" -T "Agent 3"
+tmux select-pane -t "$SESSION:0.3" -T "Agent 4"
+tmux select-pane -t "$SESSION:0.4" -T "Preview"
+tmux set-environment -t "$SESSION" PREVIEW_PANE_ID \
+    "$(tmux display-message -t "$SESSION:0.4" -p '#{pane_id}')"
+
+# Start Claude Code in each agent pane
+for pane in 0 1 2 3; do
+    tmux send-keys -t "$SESSION:0.$pane" 'claude' C-m
+done
+
+# Leave the preview pane as a plain shell
+# Focus on Agent 1 by default
+tmux select-pane -t "$SESSION:0.0"
+
+# Attach to the session
+exec tmux attach-session -t "$SESSION"
