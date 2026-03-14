@@ -124,7 +124,7 @@ set smartcase                              " Enable smart-case search
 set smartindent                            " Smart indentation
 set smarttab                               " Enable smart-tabs
 set softtabstop=2                          " Tab
-set spelllang=en_gb,pt_br                  " British English
+set spelllang=en_gb                         " British English
 set splitright                             " Always split right
 set tabstop=2                              " Number of spaces per Tab
 set tw=0                                   " Textwidth
@@ -150,7 +150,7 @@ endif
 
 " Spelling
 au FileType rmd,md,markdown,pandoc,tex,latex,quarto syntax spell toplevel
-au FileType rmd,md,markdown,pandoc,tex,latex,bib,bibtex,quarto setl spl=en_gb,pt_br spell
+au FileType rmd,md,markdown,pandoc,tex,latex,bib,bibtex,quarto setl spl=en_gb spell
 map <Leader>ns :set nospell<CR>
 map <Leader>z 1z=
 
