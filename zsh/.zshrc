@@ -101,6 +101,7 @@ alias nn='nvim article.qmd references.bib'
 
 # claude
 alias c='claude'
+alias csp='clear && claude --dangerously-skip-permissions'
 alias tw='tmux-work'
 
 # quarto
