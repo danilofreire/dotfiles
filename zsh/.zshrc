@@ -119,6 +119,7 @@ alias qmetropolis='gh repo clone danilofreire/metropolis-beamer && mv metropolis
 alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm -rf ./_extensions/coatless-quarto/ ./_extensions/quarto-ext/ ./_extensions/r-wasm/ ./_extensions/martinomagnifico/ screenshot.png README.md *.html references.bib && mkdir figures'
 alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
 alias qr='quarto render'
+alias qclean='find . -name "*.quarto_ipynb*" -delete && echo "Cleaned .quarto_ipynb files"'
 export QUARTO_PYTHON=/opt/miniconda3/bin/python3
 
 # radian
@@ -126,7 +127,7 @@ alias r='radian'
 
 # remove images
 alias rmpng='rm ~/Desktop/*.png'
-alias rmj='rm ~/Desktop/*.jpg'
+alias rmj='rm ~/Desktop/*.jp*g'
 
 # Starship
 eval "$(starship init zsh)"
