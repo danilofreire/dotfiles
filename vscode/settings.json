@@ -10,13 +10,54 @@
         "quarto": true
     },
     "terminal.integrated.profiles.osx": {
-        "My Shell (Ghostty Env)": {
-            "path": "/bin/zsh",
-            "args": ["-l"]
+  "My Shell (Ghostty Env)": {
+    "path": "/bin/zsh", 
+    "args": ["-l"] 
+  }
+},
+"terminal.integrated.defaultProfile.osx": "My Shell (Ghostty Env)",
+    "terminal.integrated.fontSize": 14,
+    "chat.tools.urls.autoApprove": {
+        "https://www.bbc.com/news/technology-65388258": true,
+        "https://www.bbc.com/news": true,
+        "https://www.bbc.com": true,
+        "https://*.bbc.com": true,
+        "https://www.nytimes.com/2024/02/16/business/air-canada-chatbot-ruling.html": true,
+        "https://www.nytimes.com/2024/02/16/business": true,
+        "https://www.nytimes.com/2024/02/16": true,
+        "https://www.nytimes.com/2024/02": true,
+        "https://www.nytimes.com/2024": true,
+        "https://www.nytimes.com": true,
+        "https://*.nytimes.com": true,
+        "https://apnews.com/article/chatgpt-ai-failures-mistakes-lawsuits-2024": true,
+        "https://apnews.com/article": true,
+        "https://apnews.com": true,
+        "https://indianexpress.com/article/technology/tech-news-technology/chatgpt-down-december-2024-9730254": true,
+        "https://indianexpress.com/article/technology/tech-news-technology": true,
+        "https://indianexpress.com/article/technology": true,
+        "https://indianexpress.com/article": true,
+        "https://indianexpress.com": true,
+        "https://status.openai.com/incidents/2024": true,
+        "https://status.openai.com/incidents": true,
+        "https://status.openai.com": true,
+        "https://*.openai.com": true,
+        "https://www.theverge.com": {
+            "approveRequest": true,
+            "approveResponse": false
+        },
+        "https://medium.com": {
+            "approveRequest": true,
+            "approveResponse": false
+        },
+        "https://developers.google.com": {
+            "approveRequest": true,
+            "approveResponse": false
+        },
+        "https://www.prefect.io": {
+            "approveRequest": true,
+            "approveResponse": false
         }
     },
-    "terminal.integrated.defaultProfile.osx": "My Shell (Ghostty Env)",
-    "terminal.integrated.fontSize": 14,
     "diffEditor.maxComputationTime": 0,
     "chat.experimental.useSkillAdherencePrompt": true,
     "roo-cline.debug": false,
@@ -126,5 +167,17 @@
     "workbench.startupEditor": "none",
     "chat.viewSessions.orientation": "stacked",
     "explorer.confirmDragAndDrop": false,
-    "claudeCode.preferredLocation": "panel"
+    "claudeCode.preferredLocation": "panel",
+    "claudeCode.selectedModel": "default",
+    "terminal.integrated.commandsToSkipShell": [
+        "kilo-code.new.agentManagerOpen",
+        "kilo-code.new.agentManager.showTerminal",
+        "kilo-code.new.agentManager.runScript"
+    ],
+    "kilo-code.new.autocomplete.enableAutoTrigger": true,
+    "kilo-code.new.autocomplete.enableSmartInlineTaskKeybinding": true,
+    "kilo-code.new.autocomplete.enableChatAutocomplete": true,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "explorer.confirmDelete": false,
+    "git.enableSmartCommit": true
 }

@@ -15,6 +15,10 @@ set -uo pipefail
 
 SESSION="work"
 
+# Suppress tmux-continuum auto-restore for this invocation
+suppress_restore() { touch "$HOME/tmux_no_auto_restore"; }
+unsuppress_restore() { rm -f "$HOME/tmux_no_auto_restore"; }
+
 # Subcommands
 case "${1:-}" in
     attach)
@@ -36,6 +40,7 @@ case "${1:-}" in
         ;;
     solo)
         # One Claude agent + preview pane (side by side)
+        suppress_restore
         if tmux has-session -t "$SESSION" 2>/dev/null; then
             tmux kill-session -t "$SESSION"
         fi
@@ -45,12 +50,14 @@ case "${1:-}" in
         tmux select-pane -t "$SESSION:0.1" -T "Preview"
         tmux set-environment -t "$SESSION" PREVIEW_PANE_ID \
             "$(tmux display-message -t "$SESSION:0.1" -p '#{pane_id}')"
-        tmux send-keys -t "$SESSION:0.0" 'claude' C-m
+        tmux send-keys -t "$SESSION:0.0" 'claude --dangerously-skip-permissions' C-m
         tmux select-pane -t "$SESSION:0.0"
+        unsuppress_restore
         exec tmux attach-session -t "$SESSION"
         ;;
     duo)
         # Two Claude agents (stacked) + preview pane
+        suppress_restore
         if tmux has-session -t "$SESSION" 2>/dev/null; then
             tmux kill-session -t "$SESSION"
         fi
@@ -65,19 +72,22 @@ case "${1:-}" in
         tmux select-pane -t "$SESSION:0.2" -T "Preview"
         tmux set-environment -t "$SESSION" PREVIEW_PANE_ID \
             "$(tmux display-message -t "$SESSION:0.2" -p '#{pane_id}')"
-        tmux send-keys -t "$SESSION:0.0" 'claude' C-m
-        tmux send-keys -t "$SESSION:0.1" 'claude' C-m
+        tmux send-keys -t "$SESSION:0.0" 'claude --dangerously-skip-permissions' C-m
+        tmux send-keys -t "$SESSION:0.1" 'claude --dangerously-skip-permissions' C-m
         tmux select-pane -t "$SESSION:0.0"
+        unsuppress_restore
         exec tmux attach-session -t "$SESSION"
         ;;
     focus)
         # Single Claude agent, full screen
+        suppress_restore
         if tmux has-session -t "$SESSION" 2>/dev/null; then
             tmux kill-session -t "$SESSION"
         fi
         tmux new-session -d -s "$SESSION" -c "$HOME"
         tmux select-pane -t "$SESSION:0.0" -T "Claude"
-        tmux send-keys -t "$SESSION:0.0" 'claude' C-m
+        tmux send-keys -t "$SESSION:0.0" 'claude --dangerously-skip-permissions' C-m
+        unsuppress_restore
         exec tmux attach-session -t "$SESSION"
         ;;
     remove|rm)
@@ -153,7 +163,7 @@ case "${1:-}" in
         ;;
     add)
         # Add a new Claude agent by splitting the current (or first agent) pane
-        # Usage: tw add [h|v|up|down|left|right]
+        # Usage: tw add [h|v]  (h = horizontal/top-bottom, v = vertical/side-by-side)
         # Follows vim convention: h = :split, v = :vsplit. Default is h.
         if ! tmux has-session -t "$SESSION" 2>/dev/null; then
             echo "No '$SESSION' session running." >&2
@@ -202,7 +212,7 @@ case "${1:-}" in
         tmux split-window $split_flag -t "$target" -l 50% -c "$HOME"
         new_id=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
         tmux select-pane -t "$new_id" -T "Agent $new_num"
-        tmux send-keys -t "$new_id" 'claude' C-m
+        tmux send-keys -t "$new_id" 'claude --dangerously-skip-permissions' C-m
         tmux select-pane -t "$active"
         tmux display-message -t "$SESSION" "Agent $new_num added."
         exit 0
@@ -384,7 +394,7 @@ tmux set-environment -t "$SESSION" PREVIEW_PANE_ID \
 
 # Start Claude Code in each agent pane
 for pane in 0 1 2 3; do
-    tmux send-keys -t "$SESSION:0.$pane" 'claude' C-m
+    tmux send-keys -t "$SESSION:0.$pane" 'claude --dangerously-skip-permissions' C-m
 done
 
 # Leave the preview pane as a plain shell
