@@ -100,9 +100,9 @@ alias n='nvim'
 alias nn='nvim article.qmd references.bib'
 
 # claude
-alias c='claude'
-alias c45='claude --model claude-opus-4-5-20251101'
-alias c45s='claude --model claude-opus-4-5-20251101 --dangerously-skip-permissions'
+alias c='clear && claude'
+alias c45='clear && claude --model claude-opus-4-5-20251101 --dangerously-skip-permissions'
+alias c46='clear && claude --model claude-opus-4-6 --dangerously-skip-permissions'
 alias csp='clear && claude --dangerously-skip-permissions'
 alias tw='tmux-work'
 
@@ -136,9 +136,6 @@ eval "$(starship init zsh)"
 
 # Web-UI
 alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788'
-
-# code-insiders
-alias code='code-insiders'
 
 # Lazy-load conda (deferred until first use for faster startup)
 conda() {
