@@ -100,7 +100,7 @@ alias n='nvim'
 alias nn='nvim article.qmd references.bib'
 
 # claude
-alias c='clear && claude'
+alias c='clear && claude --dangerously-skip-permissions'
 alias c45='clear && claude --model claude-opus-4-5-20251101 --dangerously-skip-permissions'
 alias c46='clear && claude --model claude-opus-4-6 --dangerously-skip-permissions'
 alias csp='clear && claude --dangerously-skip-permissions'

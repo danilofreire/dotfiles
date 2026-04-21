@@ -179,5 +179,6 @@
     "kilo-code.new.autocomplete.enableChatAutocomplete": true,
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "explorer.confirmDelete": false,
-    "git.enableSmartCommit": true
+    "git.enableSmartCommit": true,
+    "redhat.telemetry.enabled": false
 }
