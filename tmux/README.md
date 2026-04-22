@@ -103,6 +103,30 @@ Split directions follow vim conventions: `h` = horizontal line (`:split`, top/bo
 
 The `rm` directional commands protect the preview pane and the last remaining agent pane.
 
+### Moving a pane
+
+```bash
+tw move left     # Move focused pane to the left edge of the agent area
+tw move right    # Move to the right edge
+tw move up       # Move to the top
+tw move down     # Move to the bottom
+```
+
+Useful for reshaping the layout without killing and rebuilding. For instance, with two agents stacked top and bottom, `tw move right` from the bottom pane puts them side by side. With three or four panes, the moved pane attaches adjacent to the edge-most agent rather than spanning the full height or width, which follows from how tmux models splits as a tree.
+
+The command refuses to move the preview pane, and needs at least two agent panes to have somewhere to attach.
+
+### Restart
+
+```bash
+tw restart        # Respawn Claude in every agent pane, keeping the layout
+tw restart --hard # Kill the session and rebuild from the stored preset
+```
+
+`tw restart` uses `tmux respawn-pane -k`, which preserves each pane's ID, title, and size while relaunching Claude inside. It does not ask for confirmation.
+
+`tw restart --hard` reads the preset stored when the session was started (`solo`, `duo`, `focus`, or the default 4-agent layout) and rebuilds from scratch. It asks for confirmation before killing the session.
+
 ### Preview pane
 
 ```bash

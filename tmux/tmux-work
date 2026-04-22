@@ -45,6 +45,7 @@ case "${1:-}" in
             tmux kill-session -t "$SESSION"
         fi
         tmux new-session -d -s "$SESSION" -c "$HOME"
+        tmux set-environment -t "$SESSION" TMUX_WORK_PRESET "solo"
         tmux split-window -h -t "$SESSION:0.0" -l 40% -c "$HOME"
         tmux select-pane -t "$SESSION:0.0" -T "Claude"
         tmux select-pane -t "$SESSION:0.1" -T "Preview"
@@ -62,6 +63,7 @@ case "${1:-}" in
             tmux kill-session -t "$SESSION"
         fi
         tmux new-session -d -s "$SESSION" -c "$HOME"
+        tmux set-environment -t "$SESSION" TMUX_WORK_PRESET "duo"
         # Split off preview column on the right (25%)
         tmux split-window -h -t "$SESSION:0.0" -l 25% -c "$HOME"
         # Split left side into top/bottom agents
@@ -85,10 +87,54 @@ case "${1:-}" in
             tmux kill-session -t "$SESSION"
         fi
         tmux new-session -d -s "$SESSION" -c "$HOME"
+        tmux set-environment -t "$SESSION" TMUX_WORK_PRESET "focus"
         tmux select-pane -t "$SESSION:0.0" -T "Claude"
         tmux send-keys -t "$SESSION:0.0" 'claude --dangerously-skip-permissions' C-m
         unsuppress_restore
         exec tmux attach-session -t "$SESSION"
+        ;;
+    restart)
+        # Restart Claude in each agent pane (soft), or rebuild the whole
+        # session from the stored preset (--hard).
+        if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+            echo "No '$SESSION' session running." >&2
+            exit 1
+        fi
+
+        if [[ "${2:-}" == "--hard" ]]; then
+            preset="default"
+            raw=$(tmux show-environment -t "$SESSION" TMUX_WORK_PRESET 2>/dev/null) && \
+                preset="${raw#*=}"
+            printf "Rebuild '%s' session from preset '%s'? This kills all panes. [y/N] " \
+                "$SESSION" "$preset"
+            read -r answer
+            if [[ ! "$answer" =~ ^[Yy]$ ]]; then
+                echo "Cancelled."
+                exit 0
+            fi
+            tmux kill-session -t "$SESSION"
+            case "$preset" in
+                solo|duo|focus) exec tmux-work "$preset" ;;
+                *)              exec tmux-work ;;
+            esac
+        fi
+
+        # Soft restart: respawn Claude in each agent pane, preserve layout
+        preview_id=""
+        raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
+            preview_id="${raw#*=}"
+
+        count=0
+        while read -r pane_id; do
+            if [[ -n "$preview_id" ]] && [[ "$pane_id" == "$preview_id" ]]; then
+                continue
+            fi
+            tmux respawn-pane -k -t "$pane_id" 'claude --dangerously-skip-permissions'
+            count=$((count + 1))
+        done < <(tmux list-panes -t "$SESSION:0" -F '#{pane_id}')
+
+        tmux display-message -t "$SESSION" "Restarted $count agent pane(s)."
+        exit 0
         ;;
     remove|rm)
         # Remove an agent pane
@@ -217,6 +263,87 @@ case "${1:-}" in
         tmux display-message -t "$SESSION" "Agent $new_num added."
         exit 0
         ;;
+    move)
+        # Move the focused pane to the outer edge of the agent area.
+        # Usage: tw move [left|right|up|down]
+        # Works cleanly when you have two stacked agents and want them side by
+        # side (or vice versa). With more panes, the moved pane attaches to the
+        # edge-most agent pane rather than spanning full height or width.
+        if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+            echo "No '$SESSION' session running." >&2
+            exit 1
+        fi
+        direction="${2:-}"
+        case "$direction" in
+            left|right|up|down) ;;
+            *)
+                echo "Usage: tmux-work move [left|right|up|down]" >&2
+                exit 1
+                ;;
+        esac
+
+        preview_id=""
+        raw=$(tmux show-environment -t "$SESSION" PREVIEW_PANE_ID 2>/dev/null) && \
+            preview_id="${raw#*=}"
+
+        focused=$(tmux display-message -t "$SESSION:0" -p '#{pane_id}')
+        if [[ -n "$preview_id" ]] && [[ "$focused" == "$preview_id" ]]; then
+            tmux display-message -t "$SESSION" "Can't move the preview pane."
+            exit 1
+        fi
+
+        # Need at least 2 agent panes to move anywhere
+        if [[ -n "$preview_id" ]]; then
+            agent_count=$(tmux list-panes -t "$SESSION:0" -F '#{pane_id}' \
+                | grep -cv "^${preview_id}$")
+        else
+            agent_count=$(tmux list-panes -t "$SESSION:0" | wc -l | tr -d ' ')
+        fi
+        if [[ "$agent_count" -lt 2 ]]; then
+            tmux display-message -t "$SESSION" "Need at least 2 agent panes to move."
+            exit 1
+        fi
+
+        # Find the edge agent pane in the target direction (excluding focused
+        # and preview). For right/down we want the max outer coordinate; for
+        # left/up we want the min, which we get by negating.
+        edge_pane=""
+        edge_val=""
+        while read -r pid pleft ptop pwidth pheight; do
+            if [[ "$pid" == "$focused" ]]; then continue; fi
+            if [[ -n "$preview_id" ]] && [[ "$pid" == "$preview_id" ]]; then continue; fi
+            case "$direction" in
+                right) val=$((pleft + pwidth)) ;;
+                left)  val=$((0 - pleft)) ;;
+                down)  val=$((ptop + pheight)) ;;
+                up)    val=$((0 - ptop)) ;;
+            esac
+            if [[ -z "$edge_val" ]] || [[ "$val" -gt "$edge_val" ]]; then
+                edge_val="$val"
+                edge_pane="$pid"
+            fi
+        done < <(tmux list-panes -t "$SESSION:0" \
+            -F '#{pane_id} #{pane_left} #{pane_top} #{pane_width} #{pane_height}')
+
+        if [[ -z "$edge_pane" ]]; then
+            tmux display-message -t "$SESSION" "No target pane found."
+            exit 1
+        fi
+
+        # Detach the focused pane to a hidden window, then re-attach adjacent
+        # to the edge pane in the requested direction.
+        tmux break-pane -d -s "$focused"
+        case "$direction" in
+            right) tmux join-pane -h    -s "$focused" -t "$edge_pane" ;;
+            left)  tmux join-pane -h -b -s "$focused" -t "$edge_pane" ;;
+            down)  tmux join-pane -v    -s "$focused" -t "$edge_pane" ;;
+            up)    tmux join-pane -v -b -s "$focused" -t "$edge_pane" ;;
+        esac
+
+        tmux select-pane -t "$focused"
+        tmux display-message -t "$SESSION" "Pane moved $direction."
+        exit 0
+        ;;
     preview)
         if ! tmux has-session -t "$SESSION" 2>/dev/null; then
             echo "No '$SESSION' session running." >&2
@@ -331,11 +458,14 @@ case "${1:-}" in
         echo "  solo       1 Claude agent + preview pane"
         echo "  focus      1 Claude agent, full screen"
         echo "  add [h|v|up|down|left|right]  Add another agent"
-        echo "             h/up/down — top/bottom (default)"
-        echo "             v/left/right — side by side"
+        echo "             h/up/down, top/bottom (default)"
+        echo "             v/left/right, side by side"
         echo "  remove/rm  Remove the focused agent pane"
-        echo "             rm h/v — remove horizontal/vertical neighbour"
-        echo "             rm up/down/left/right — remove pane in direction"
+        echo "             rm h/v, remove horizontal/vertical neighbour"
+        echo "             rm up/down/left/right, remove pane in direction"
+        echo "  move <left|right|up|down>  Move focused pane to the given edge"
+        echo "  restart    Respawn Claude in every agent pane (layout kept)"
+        echo "  restart --hard  Kill and rebuild from the stored preset"
         echo "  kill       Kill the work session"
         echo "  preview    Toggle the preview pane on/off"
         echo "  preview-pane  Print the preview pane index (for scripts)"
@@ -359,6 +489,7 @@ fi
 
 # Create the session (detached) starting in home directory
 tmux new-session -d -s "$SESSION" -c "$HOME"
+tmux set-environment -t "$SESSION" TMUX_WORK_PRESET "default"
 
 # Build the layout:
 # 1. Split off the preview column on the right (25% of total width)
