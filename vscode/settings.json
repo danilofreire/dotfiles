@@ -16,7 +16,7 @@
   }
 },
 "terminal.integrated.defaultProfile.osx": "My Shell (Ghostty Env)",
-    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontSize": 15,
     "chat.tools.urls.autoApprove": {
         "https://www.bbc.com/news/technology-65388258": true,
         "https://www.bbc.com/news": true,

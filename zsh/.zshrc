@@ -122,7 +122,7 @@ alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentati
 alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
 alias qr='quarto render'
 alias qclean='find . -name "*.quarto_ipynb*" -delete && echo "Cleaned .quarto_ipynb files"'
-export QUARTO_PYTHON=/opt/miniconda3/bin/python3
+export QUARTO_PYTHON=$HOME/miniconda3/bin/python3
 
 # radian
 alias r='radian'
@@ -140,14 +140,14 @@ alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python web
 # Lazy-load conda (deferred until first use for faster startup)
 conda() {
   unfunction conda
-  __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+  __conda_setup="$("$HOME/miniconda3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
   if [ $? -eq 0 ]; then
     eval "$__conda_setup"
   else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-      . "/opt/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+# . "$HOME/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
     else
-      export PATH="/opt/miniconda3/bin:$PATH"
+# export PATH="$HOME/miniconda3/bin:$PATH"  # commented out by conda initialize
     fi
   fi
   unset __conda_setup
@@ -159,6 +159,7 @@ path=(
   $HOME/.local/bin
   $HOME/.opencode/bin
   $HOME/.lmstudio/bin
+  $HOME/Library/TinyTeX/bin/universal-darwin
   $path
 )
 typeset -U path
@@ -168,3 +169,8 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/dafreir/.lmstudio/bin"
+# End of LM Studio CLI section
+
