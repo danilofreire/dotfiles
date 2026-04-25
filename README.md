@@ -12,6 +12,7 @@ dotfiles/
 ├── latex/               # LaTeX configuration (.latexmkrc)
 ├── nano/                # Nano editor configuration
 ├── neovim/              # Neovim/Vim configuration and plugins
+├── orbstack/            # Ubuntu-on-macOS via OrbStack: setup guide
 ├── roo-code/            # Roo Code MCP settings and custom modes
 ├── tmux/                # tmux config and multi-agent workspace launcher
 ├── vscode/              # VS Code settings and extensions list
@@ -124,3 +125,7 @@ cat vscode/vscode-extensions.txt | xargs -L 1 code --install-extension
 ## Zsh
 
 The `zsh/` folder contains my `.zshrc` with aliases, plugins, and shell options. It also includes a Git/Oh My Zsh cheatsheet. I use [Starship](https://starship.rs/) as my prompt and [autojump](https://github.com/wting/autojump) for quick directory navigation.
+
+## OrbStack
+
+The `orbstack/` folder contains a guide to setting up an Ubuntu 24.04 development environment alongside macOS using [OrbStack](https://orbstack.dev/). It covers the full toolchain (zsh, Neovim, R, Python, Quarto, Claude Code), VS Code Remote-SSH, GitHub setup, and how to share files between macOS and the Linux side. See [orbstack/README.md](orbstack/README.md).
