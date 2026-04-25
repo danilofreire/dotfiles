@@ -93,6 +93,8 @@ sudo apt install -y zsh
 chsh -s $(which zsh)
 ```
 
+(Some recent OrbStack Ubuntu images already have zsh installed and set as the default for the user. Run `echo $SHELL`, and if you see `/usr/bin/zsh` you can skip this step.)
+
 The `chsh` change writes to `/etc/passwd`, but only login programs read it. Your current bash process keeps running until you exit, so the new shell will only take effect on a fresh login.
 
 To pick it up:
@@ -241,9 +243,21 @@ I recommend Option A: one source of truth, edits on either side propagate, and y
 
 ---
 
-## 6. Install R from CRAN
+## 6. Install R
 
-Ubuntu's default R is often outdated. Add the official CRAN repository for the current release:
+Ubuntu's default R is sometimes outdated, but on recent releases (24.04 noble onwards) it's current enough for most academic work. Check what apt offers first:
+
+```bash
+apt-cache policy r-base | head -5
+```
+
+If the candidate version is recent (4.4+ in 2026), install from Ubuntu directly and skip the CRAN repo:
+
+```bash
+sudo apt install -y r-base r-base-dev
+```
+
+If you want the very latest R or your Ubuntu version is too old, add the official CRAN repository:
 
 ```bash
 wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc \
@@ -257,7 +271,7 @@ sudo apt update
 sudo apt install -y r-base r-base-dev
 ```
 
-(`noble` is the codename for Ubuntu 24.04. If you're on a different version, replace it accordingly: `jammy` for 22.04, etc.)
+(`noble` is the codename for Ubuntu 24.04. Replace with `jammy` for 22.04. CRAN typically only publishes for LTS releases, so on non-LTS Ubuntu (`questing` 25.10, `plucky` 25.04, etc.) you'll need to fall back to apt's own `r-base`.)
 
 A few common system dependencies that R packages tend to want:
 
@@ -265,7 +279,7 @@ A few common system dependencies that R packages tend to want:
 sudo apt install -y \
     libcurl4-openssl-dev libxml2-dev libfontconfig1-dev \
     libharfbuzz-dev libfribidi-dev libfreetype6-dev \
-    libpng-dev libtiff5-dev libjpeg-dev
+    libpng-dev libtiff-dev libjpeg-dev
 ```
 
 For VS Code integration, install `languageserver` from inside R:
@@ -281,7 +295,7 @@ install.packages("languageserver")
 Quarto's `.deb` releases are on GitHub. On Apple Silicon you want the `arm64` build:
 
 ```bash
-QUARTO_VERSION="1.7.32"   # check github.com/quarto-dev/quarto-cli/releases
+QUARTO_VERSION="1.9.37"   # check github.com/quarto-dev/quarto-cli/releases
 wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-arm64.deb
 sudo dpkg -i quarto-${QUARTO_VERSION}-linux-arm64.deb
 rm quarto-${QUARTO_VERSION}-linux-arm64.deb
@@ -329,16 +343,22 @@ OrbStack forwards the port automatically. Open `http://localhost:8888` in Safari
 
 ## 9. Install Claude Code
 
-The simplest method now is the native installer (no Node.js dependency):
+The simplest method now is the native installer (no Node.js dependency). Pipe to `bash`, not `sh`: on Ubuntu, `/bin/sh` is `dash`, which doesn't accept the bash-specific syntax used by the installer.
 
 ```bash
-curl -fsSL https://claude.ai/install.sh | sh
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 Verify:
 
 ```bash
 claude --version
+```
+
+The installer drops the binary in `~/.local/bin/`. If that's not on your `PATH`, add it:
+
+```bash
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 ```
 
 On first run, you'll be prompted to authenticate.
