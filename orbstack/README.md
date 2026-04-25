@@ -65,6 +65,34 @@ ssh mydev@orb
 
 From this point on, all commands go inside the Ubuntu machine unless I say otherwise.
 
+### Terminal compatibility note
+
+If you use Ghostty, kitty, WezTerm, or another terminal that advertises a custom `TERM` value, Ubuntu won't recognise it the first time you SSH in. The shell falls back to a generic profile and prompt redraws break: doubled keystrokes, garbled output, the cursor jumping around. The fix is to install the terminal's terminfo on the Ubuntu side.
+
+For Ghostty, OrbStack's filesystem mount makes the Ghostty bundle visible inside Ubuntu, so one SSH command does it:
+
+```bash
+ssh mydev@orb 'mkdir -p ~/.terminfo/x && \
+  cp /Applications/Ghostty.app/Contents/Resources/terminfo/78/xterm-ghostty \
+     ~/.terminfo/x/xterm-ghostty'
+```
+
+Verify:
+
+```bash
+ssh mydev@orb 'infocmp xterm-ghostty | head -1'
+```
+
+For other terminals, the same pattern applies: locate the binary terminfo file inside the app bundle and drop it into `~/.terminfo/x/<terminal-name>` on the remote. Some terminals (kitty's `kitten ssh`) bundle a built-in fix.
+
+As a belt-and-braces fallback, add this near the top of Ubuntu's `~/.zshrc` so any unrecognised `TERM` gracefully degrades:
+
+```bash
+if [[ -n "$TERM" ]] && ! infocmp "$TERM" >/dev/null 2>&1; then
+  export TERM=xterm-256color
+fi
+```
+
 ---
 
 ## 3. Update the system and install essentials
