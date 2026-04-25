@@ -56,7 +56,7 @@ bindkey -v
 # fzf
 alias nfzf='nvim $(fzf)'
 alias ofzf='open $(fzf)'
-export FZF_BASE=/usr/local/bin/fzf
+[[ "$OSTYPE" == "darwin"* ]] && export FZF_BASE=/usr/local/bin/fzf
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 
 # git
@@ -164,13 +164,17 @@ path=(
 )
 typeset -U path
 
-# zsh-autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh-autosuggestions (macOS only)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/dafreir/.lmstudio/bin"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PATH="$PATH:/Users/dafreir/.lmstudio/bin"
+fi
 # End of LM Studio CLI section
 

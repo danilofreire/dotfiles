@@ -3,6 +3,7 @@ davidanson.vscode-markdownlint
 formulahendry.code-runner
 formulahendry.code-runner-copilot
 genaiscript.genaiscript-vscode
+github.copilot-chat
 github.vscode-pull-request-github
 james-yu.latex-workshop
 kilocode.kilo-code
