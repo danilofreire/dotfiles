@@ -5,7 +5,6 @@ formulahendry.code-runner-copilot
 genaiscript.genaiscript-vscode
 github.vscode-pull-request-github
 james-yu.latex-workshop
-kilocode.kilo-code
 monokai.theme-monokai-pro-vscode
 ms-azuretools.vscode-azureresourcegroups
 ms-azuretools.vscode-containers
