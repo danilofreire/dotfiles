@@ -34,6 +34,7 @@ rooveterinaryinc.roo-cline
 shd101wyy.markdown-preview-enhanced
 sst-dev.opencode
 tecosaur.latex-utilities
+tomoki1207.pdf
 vscodevim.vim
 wassimdev.wassimdev-vscode-deepseek
 yy0931.vscode-sqlite3-editor
