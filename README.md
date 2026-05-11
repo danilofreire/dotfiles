@@ -2,6 +2,15 @@
 
 Configuration files for my development environment. I use [Neovim](https://neovim.io/) and [VS Code](https://code.visualstudio.com/) as text editors, [Zsh](https://www.zsh.org/) as my shell, and [Ghostty](https://ghostty.org/) as my terminal.
 
+## Cross-platform notes
+
+These files are shared between a macOS laptop and an Ubuntu VPS. A few sections auto-detect the platform so the same source works on both:
+
+- `zsh/.zshrc`: the lazy-load `conda` function looks for `miniconda3` (Mac) or `miniforge3` (Linux) and sources whichever exists. `QUARTO_PYTHON` is set the same way.
+- `tmux/tmux.conf`: `copy-command` is chosen at tmux start time from `pbcopy` (macOS), `wl-copy` (Wayland Linux), or `xclip` (X11 Linux), whichever is on `PATH`. The TPM `run` line only fires if TPM is installed, so machines without it start cleanly.
+
+Anything Mac-only that isn't behind a guard (some Oh My Zsh plugins, the iTerm2 shell integration, the `$HOME/Library/TinyTeX/bin/universal-darwin` PATH entry) is intentionally inert on Linux — the file checks (`[ -f ... ] &&`) or `path` deduplication keep it harmless.
+
 ## Repository structure
 
 ```

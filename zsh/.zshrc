@@ -122,7 +122,15 @@ alias qp='gh repo clone danilofreire/quarto-presentation && mv quarto-presentati
 alias qpresentation='gh repo clone danilofreire/quarto-presentation && mv quarto-presentation/* ./ && rm -rf .git quarto-presentation figures && rm screenshot.png README.md *.html && mkdir figures'
 alias qr='quarto render'
 alias qclean='find . -name "*.quarto_ipynb*" -delete && echo "Cleaned .quarto_ipynb files"'
-export QUARTO_PYTHON=$HOME/miniconda3/bin/python3
+# QUARTO_PYTHON: point at whichever conda flavour exists on this machine
+# (miniconda3 on the Mac, miniforge3 on the Linux VPS).
+for _conda_root in "$HOME/miniconda3" "$HOME/miniforge3"; do
+  if [ -x "$_conda_root/bin/python3" ]; then
+    export QUARTO_PYTHON="$_conda_root/bin/python3"
+    break
+  fi
+done
+unset _conda_root
 
 # radian
 alias r='radian'
@@ -137,20 +145,28 @@ eval "$(starship init zsh)"
 # Web-UI
 alias webui='cd /Users/dafreir/Documents/github/web-ui && ./.venv/bin/python webui.py --ip 127.0.0.1 --port 7788'
 
-# Lazy-load conda (deferred until first use for faster startup)
+# Lazy-load conda (deferred until first use for faster startup; cross-platform:
+# detects miniconda3 on Mac and miniforge3 on Linux).
 conda() {
   unfunction conda
-  __conda_setup="$("$HOME/miniconda3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
-  if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-  else
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-# . "$HOME/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
-    else
-# export PATH="$HOME/miniconda3/bin:$PATH"  # commented out by conda initialize
+  local _conda_root=""
+  for _candidate in "$HOME/miniconda3" "$HOME/miniforge3"; do
+    if [ -x "$_candidate/bin/conda" ]; then
+      _conda_root="$_candidate"
+      break
     fi
+  done
+  if [ -n "$_conda_root" ]; then
+    __conda_setup="$("$_conda_root/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
+    if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+    elif [ -f "$_conda_root/etc/profile.d/conda.sh" ]; then
+      . "$_conda_root/etc/profile.d/conda.sh"
+    else
+      export PATH="$_conda_root/bin:$PATH"
+    fi
+    unset __conda_setup
   fi
-  unset __conda_setup
   conda "$@"
 }
 
