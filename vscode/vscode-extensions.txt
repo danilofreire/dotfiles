@@ -1,12 +1,9 @@
 anthropic.claude-code
 davidanson.vscode-markdownlint
 formulahendry.code-runner
-formulahendry.code-runner-copilot
-genaiscript.genaiscript-vscode
 github.vscode-pull-request-github
 james-yu.latex-workshop
 monokai.theme-monokai-pro-vscode
-ms-azuretools.vscode-azureresourcegroups
 ms-azuretools.vscode-containers
 ms-python.debugpy
 ms-python.python
@@ -32,10 +29,8 @@ reditorsupport.r
 reditorsupport.r-syntax
 rooveterinaryinc.roo-cline
 shd101wyy.markdown-preview-enhanced
-sst-dev.opencode
 tecosaur.latex-utilities
 tomoki1207.pdf
 vscodevim.vim
-wassimdev.wassimdev-vscode-deepseek
 yy0931.vscode-sqlite3-editor
 yzhang.markdown-all-in-one
