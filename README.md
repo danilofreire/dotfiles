@@ -95,6 +95,28 @@ cp dotfiles/ghostty/config ~/.config/ghostty/config
 
 Ghostty hot-reloads its configuration, so changes take effect immediately. The config file is at `~/.config/ghostty/config`.
 
+### Terminfo entry for SSH targets
+
+Ghostty advertises its own terminal type (`TERM=xterm-ghostty`) so it can expose features beyond stock xterm (true colour, hyperlinks, advanced underline styles). The terminfo entry that describes those features ships with the Ghostty app, but is not present on remote machines you SSH into. tmux on a fresh Ubuntu VPS will fail with `missing or unsuitable terminal: xterm-ghostty` until the entry is installed.
+
+The file `ghostty/xterm-ghostty.terminfo` in this repo is the source form (text, ~80 lines). On any new Linux machine, compile and install it once:
+
+```bash
+tic -x ~/dotfiles/ghostty/xterm-ghostty.terminfo
+```
+
+That writes the compiled entry under `~/.terminfo/` for your user. For a system-wide install (covers every user on the box), prefix with `sudo` and target `/usr/share/terminfo`:
+
+```bash
+sudo tic -x -o /usr/share/terminfo ~/dotfiles/ghostty/xterm-ghostty.terminfo
+```
+
+When Ghostty updates, regenerate the source from your Mac to keep this file fresh:
+
+```bash
+infocmp -x xterm-ghostty > ~/dotfiles/ghostty/xterm-ghostty.terminfo
+```
+
 ## tmux
 
 The `tmux/` folder contains my tmux configuration and `tmux-work`, a script that launches multi-agent [Claude Code](https://claude.com/claude-code) workspaces with a shared preview pane. Install tmux with Homebrew:
