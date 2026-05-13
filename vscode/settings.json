@@ -180,5 +180,8 @@
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "explorer.confirmDelete": false,
     "git.enableSmartCommit": true,
-    "redhat.telemetry.enabled": false
+    "redhat.telemetry.enabled": false,
+    "remote.SSH.connectTimeout": 59,
+    "python.terminal.activateEnvironment": false,
+    "python.terminal.activateEnvInCurrentTerminal": false
 }
