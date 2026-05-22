@@ -40,7 +40,9 @@ setopt INTERACTIVE_COMMENTS # Allow comments in interactive shells
 # oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""  # Using Starship for prompt
-plugins=(aliases autojump brew common-aliases conda docker gh git gitignore iterm2 macos pip python vi-mode web-search)
+plugins=(aliases autojump conda docker gh git gitignore pip python vi-mode web-search)
+# Mac-only plugins (harmless to skip on Linux)
+[[ "$OSTYPE" == "darwin"* ]] && plugins+=(brew iterm2 macos)
 source "$ZSH/oh-my-zsh.sh"
 
 # Auto-quote special characters in URLs or filenames with spaces
