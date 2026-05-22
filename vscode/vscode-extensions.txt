@@ -1,6 +1,5 @@
 anthropic.claude-code
 davidanson.vscode-markdownlint
-github.copilot-chat
 github.vscode-pull-request-github
 james-yu.latex-workshop
 monokai.theme-monokai-pro-vscode
