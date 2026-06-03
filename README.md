@@ -15,7 +15,6 @@ Anything Mac-only that isn't behind a guard (some Oh My Zsh plugins, the iTerm2 
 
 ```
 dotfiles/
-├── gemini/              # Gemini MCP settings
 ├── ghostty/             # Ghostty terminal configuration
 ├── iterm2-themes/       # iTerm2 colour schemes
 ├── latex/               # LaTeX configuration (.latexmkrc)
