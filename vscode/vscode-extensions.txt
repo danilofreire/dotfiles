@@ -1,4 +1,5 @@
 anthropic.claude-code
+continue.continue
 davidanson.vscode-markdownlint
 github.vscode-pull-request-github
 james-yu.latex-workshop
