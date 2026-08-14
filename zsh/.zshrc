@@ -176,7 +176,6 @@ conda() {
 path=(
   $HOME/.local/bin
   $HOME/.opencode/bin
-  $HOME/.lmstudio/bin
   $HOME/Library/TinyTeX/bin/universal-darwin
   $path
 )
@@ -189,10 +188,4 @@ fi
 
 # iTerm2 shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# Added by LM Studio CLI (lms)
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  export PATH="$PATH:/Users/dafreir/.lmstudio/bin"
-fi
-# End of LM Studio CLI section
 

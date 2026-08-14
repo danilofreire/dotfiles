@@ -196,5 +196,14 @@
         "file:///Users/dafreir/.vscode/extensions/continue.continue-2.0.0-darwin-arm64/config-yaml-schema.json": [
             ".continue/**/*.yaml"
         ]
+    },
+    "extensions.supportAgentsWindow": {
+        "monokai.theme-monokai-pro-vscode": true
+    },
+    "emmet.useInlineCompletions": true,
+    "terminal.integrated.suggest.quickSuggestions": {
+        "commands": "on",
+        "arguments": "on",
+        "unknown": "on"
     }
 }
