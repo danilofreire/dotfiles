@@ -24,7 +24,6 @@ quarto.quarto
 redhat.vscode-yaml
 reditorsupport.r
 reditorsupport.r-syntax
-rooveterinaryinc.roo-cline
 shd101wyy.markdown-preview-enhanced
 tecosaur.latex-utilities
 tomoki1207.pdf
