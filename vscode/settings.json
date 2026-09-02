@@ -1,4 +1,6 @@
 {
+    "continue.enableTabAutocomplete": false,
+    "continue.enableNextEdit": false,
     "chat.tools.terminal.outputLocation": "chat",
     "workbench.colorTheme": "Monokai Pro (Filter Ristretto)",
     "workbench.iconTheme": "Monokai Pro (Filter Ristretto) Icons",
@@ -205,5 +207,13 @@
         "commands": "on",
         "arguments": "on",
         "unknown": "on"
-    }
+    },
+    "yaml.disableSchemaDetection": [
+        "**/.github/workflows/*.yml",
+        "**/.github/workflows/*.yaml",
+        "**/.gitea/workflows/*.yml",
+        "**/.gitea/workflows/*.yaml",
+        "**/.forgejo/workflows/*.yml",
+        "**/.forgejo/workflows/*.yaml"
+    ]
 }
