@@ -2,7 +2,6 @@ anthropic.claude-code
 continue.continue
 davidanson.vscode-markdownlint
 github.vscode-github-actions
-github.vscode-pull-request-github
 james-yu.latex-workshop
 mechatroner.rainbow-csv
 monokai.theme-monokai-pro-vscode

@@ -192,13 +192,30 @@ lua << MONOKAI
   })
 MONOKAI
   colorscheme monokai-pro
+  " Lightline: swap yellow and pink; git signs in Ristretto colours
+lua << LIGHTLINE
+  local palette = vim.deepcopy(require("lightline.colorscheme.monokai-pro"))
+  local base = require("monokai-pro").get_scheme().base
+  local swap = { [base.yellow] = base.red, [base.red] = base.yellow }
+  for _, mode in pairs(palette) do
+    for _, part in pairs(mode) do
+      for _, pair in ipairs(part) do
+        for i, colour in ipairs(pair) do pair[i] = swap[colour] or colour end
+      end
+    end
+  end
+  vim.g["lightline#colorscheme#monokaipro_pink#palette"] = vim.fn["lightline#colorscheme#fill"](palette)
+  vim.api.nvim_set_hl(0, "GitGutterAdd", { fg = base.green })
+  vim.api.nvim_set_hl(0, "GitGutterChange", { fg = base.cyan })
+  vim.api.nvim_set_hl(0, "GitGutterDelete", { fg = base.red })
+LIGHTLINE
 else
   colors sonokai
 endif
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'monokaipro',
+      \ 'colorscheme': has('nvim') ? 'monokaipro_pink' : 'sonokai',
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
       \   'right': [ ['close'] ]
@@ -218,8 +235,8 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileformat': 'MyFileformat',
       \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
+      \ 'separator': { 'left': "", 'right': "" },
+      \ 'subseparator': { 'left': "", 'right': "" }
       \ }
 
 function! MyFiletype()

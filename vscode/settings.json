@@ -19,6 +19,7 @@
 },
 "terminal.integrated.defaultProfile.osx": "My Shell (Ghostty Env)",
     "terminal.integrated.fontSize": 15,
+    "terminal.integrated.fontFamily": "FiraCode Nerd Font",
     "chat.tools.urls.autoApprove": {
         "https://www.bbc.com/news/technology-65388258": true,
         "https://www.bbc.com/news": true,
@@ -215,5 +216,6 @@
         "**/.gitea/workflows/*.yaml",
         "**/.forgejo/workflows/*.yml",
         "**/.forgejo/workflows/*.yaml"
-    ]
+    ],
+    "claudeCode.hideOnboarding": true
 }
