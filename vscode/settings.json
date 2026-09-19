@@ -217,5 +217,6 @@
         "**/.forgejo/workflows/*.yml",
         "**/.forgejo/workflows/*.yaml"
     ],
-    "claudeCode.hideOnboarding": true
+    "claudeCode.hideOnboarding": true,
+    "window.confirmSaveUntitledWorkspace": false
 }
