@@ -278,8 +278,8 @@ let g:rainbow_active = 1
 " Use conda environment ml:
 " conda create --name ml
 " conda activate ml
-let g:python3_host_prog = '/opt/miniconda3/bin/python'
-let g:python_host_prog = '/opt/miniconda3/bin/python'
+let g:python3_host_prog = expand('~/miniconda3/bin/python3')
+let g:python_host_prog = expand('~/miniconda3/bin/python3')
 
 " Floaterm
 nmap <Leader>t :FloatermNew --position=center<CR>

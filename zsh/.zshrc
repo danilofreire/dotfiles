@@ -174,6 +174,8 @@ conda() {
 
 # Tool paths
 path=(
+  $HOME/miniconda3/bin
+  $HOME/miniforge3/bin
   $HOME/.local/bin
   $HOME/.opencode/bin
   $HOME/Library/TinyTeX/bin/universal-darwin
