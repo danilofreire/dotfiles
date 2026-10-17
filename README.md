@@ -29,7 +29,7 @@ dotfiles/
 
 ## Neovim
 
-The `neovim/` folder contains `.vimrc`, `init.vim`, `coc-settings.json`, a command reference (`useful-commands.md`), and a screenshot. These files work with both Neovim and regular [Vim](http://www.vim.org).
+The `neovim/` folder contains `.vimrc`, `init.vim`, a command reference (`useful-commands.md`), and a screenshot. These files work with both Neovim and regular [Vim](http://www.vim.org).
 
 ### Setup
 

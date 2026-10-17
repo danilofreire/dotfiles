@@ -200,12 +200,6 @@ A reference of Vim commands I regularly use. Many are custom mappings from my `.
 * `<Leader>as` toggle AutoSave
 * `<Leader>rn` toggle relative line numbers
 
-### Coc-Nvim (custom)
-
-* `<Leader>cc` open `:CocCommand`
-* `<Leader>cl` open coc-lists
-* `<Leader>cm` open coc-marketplace
-
 ### GitHub Copilot
 
 * `<Ctrl-]>` dismiss suggestion

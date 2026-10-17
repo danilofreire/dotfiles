@@ -6,7 +6,6 @@ Configuration for [Neovim](https://neovim.io/) (also works with regular Vim).
 
 - `.vimrc` - main configuration (plugins, keybindings, settings)
 - `init.vim` - Neovim init file that sources `.vimrc`
-- `coc-settings.json` - [coc.nvim](https://github.com/neoclide/coc.nvim) language server settings
 - `useful-commands.md` - command reference and cheatsheet
 - `neovim.png` - screenshot
 
@@ -28,7 +27,7 @@ After installation, follow the instructions printed in the terminal to add Homeb
 brew install neovim node npm
 ```
 
-Node and npm are needed by [coc.nvim](https://github.com/neoclide/coc.nvim) for language server support. You will also want a Nerd Font for icons in the status bar and file tree:
+Node and npm are needed by [GitHub Copilot](https://github.com/github/copilot.vim). You will also want a Nerd Font for icons in the status bar and file tree:
 
 ```bash
 brew install --cask font-fira-code-nerd-font
@@ -53,7 +52,6 @@ From the root of this repository:
 cp neovim/.vimrc ~/
 mkdir -p ~/.config/nvim
 cp neovim/init.vim ~/.config/nvim/
-cp neovim/coc-settings.json ~/.config/nvim/
 ```
 
 ### 5. Install plugins
