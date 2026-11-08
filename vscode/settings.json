@@ -12,12 +12,41 @@
         "quarto": true
     },
     "terminal.integrated.profiles.osx": {
-  "My Shell (Ghostty Env)": {
-    "path": "/bin/zsh", 
-    "args": ["-l"] 
-  }
-},
-"terminal.integrated.defaultProfile.osx": "My Shell (Ghostty Env)",
+        "bash": {
+            "path": "bash",
+            "args": [
+                "-l"
+            ],
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "/bin/zsh",
+            "args": [
+                "-l"
+            ]
+        },
+        "fish": {
+            "path": "fish",
+            "args": [
+                "-l"
+            ]
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        },
+        "My Shell (Ghostty Env)": {
+            "path": "/bin/zsh",
+            "args": [
+                "-l"
+            ]
+        }
+    },
+"terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.fontSize": 15,
     "terminal.integrated.fontFamily": "FiraCode Nerd Font",
     "chat.tools.urls.autoApprove": {
